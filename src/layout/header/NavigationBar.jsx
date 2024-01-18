@@ -1,22 +1,16 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import MainLinks from "./ui/MainLinks";
 
 const NavigationBar = () => {
   return (
-    <Box sx={{ flexGrow: 1, m: 3, opacity: 0.5 }}>
+    <Box sx={{ flexGrow: 1, m: 3 }}>
       <AppBar position="static" sx={{ borderRadius: "10px" }}>
         <Toolbar>
-          <img
-            alt="logo"
-            src="../../../public/assets/img/profile.png"
-            style={{
-              width: 65,
-              height: 65,
-              padding: "10px",
-              borderRadius: "50%",
-            }}
-          />
+          <Typography variant="h4">Gamming Store</Typography>
+          <MainLinks />
         </Toolbar>
       </AppBar>
     </Box>

@@ -1,13 +1,11 @@
 import "./App.css";
 import Layout from "./layout/Layout";
-import HomePage from "./pages/home/HomePage";
-import ShopPage from "./pages/shop/ShopPage";
+import Router from "./routes/Router";
 
 function App() {
   return (
     <Layout>
-      {/* <HomePage /> */}
-      <ShopPage />
+      <Router />
     </Layout>
   );
 }

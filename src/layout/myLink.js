@@ -8,19 +8,19 @@ const categories = [
     {
         to: "/",
         name: "PlayStation",
-        image: "../../../public/assets/img/categories/Playstation.jpg",
+        image: "../../../assets/img/categories/Playstation.jpg",
         alt: "PlayStation image",
     },
     {
         to: "/",
         name: "Xbox",
-        image: "../../../public/assets/img/categories/Xbox.jpg",
+        image: "../../../assets/img/categories/Xbox.jpg",
         alt: "Xbox image",
     },
     {
         to: "/",
         name: "Pc",
-        image: "../../../public/assets/img/categories/Pc.jpg",
+        image: "../../../assets/img/categories/Pc.jpg",
         alt: "Pc image",
     },
 ];

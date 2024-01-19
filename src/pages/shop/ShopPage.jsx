@@ -8,7 +8,7 @@ const post = {
   title: "aaa",
   date: "aaa",
   description: "aaa",
-  image: "../../../public/assets/img/categories/Playstation.jpg",
+  image: "../../../assets/img/categories/Playstation.jpg",
   alt: "aaa",
 };
 
@@ -19,7 +19,7 @@ const ShopPage = () => {
         sx={{
           width: "100%",
           height: "200px",
-          backgroundImage: `url(${"../../../public/assets/img/PlaystationBG.jpg"})`,
+          backgroundImage: `url(${"../../../assets/img/PlaystationBG.jpg"})`,
           paddingTop: "1rem",
           paddingBottom: "1rem",
           flexGrow: 1,

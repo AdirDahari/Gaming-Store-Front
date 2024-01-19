@@ -4,10 +4,25 @@ const testMainLink = [
     { to: "/", children: "Account" },
 ];
 
-const testGameLink = [
-    { to: "/", children: "Game1" },
-    { to: "/", children: "Game2" },
-    { to: "/", children: "Game3" },
+const categories = [
+    {
+        to: "/",
+        name: "PlayStation",
+        image: "../../../public/assets/img/categories/Playstation.jpg",
+        alt: "PlayStation image",
+    },
+    {
+        to: "/",
+        name: "Xbox",
+        image: "../../../public/assets/img/categories/Xbox.jpg",
+        alt: "Xbox image",
+    },
+    {
+        to: "/",
+        name: "Pc",
+        image: "../../../public/assets/img/categories/Pc.jpg",
+        alt: "Pc image",
+    },
 ];
 
-export { testMainLink, testGameLink };
+export { testMainLink, categories };

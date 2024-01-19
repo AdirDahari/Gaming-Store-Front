@@ -1,15 +1,20 @@
+import Footer from "./footer/Footer";
 import NavigationBar from "./header/NavigationBar";
 import Main from "./main/Main";
-import Typography from "@mui/material/Typography";
+import PropTypes from "prop-types";
 
-const Layout = () => {
+const Layout = ({ children }) => {
   return (
     <>
       <NavigationBar />
-      <Main>
-        <Typography>Main</Typography>
-      </Main>
+      <Main>{children}</Main>
+      <Footer />
     </>
   );
 };
+
+Layout.propTypes = {
+  children: PropTypes.any,
+};
+
 export default Layout;

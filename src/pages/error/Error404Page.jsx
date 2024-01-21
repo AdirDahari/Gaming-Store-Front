@@ -1,7 +1,7 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
-import ROUTES from "../../routes/ROUTES";
+import ROUTES from "../../routes/ROUTES.js";
 
 const Error404Page = () => {
   const navigate = useNavigate();

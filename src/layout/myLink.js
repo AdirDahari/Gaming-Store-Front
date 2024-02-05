@@ -1,25 +1,28 @@
+import ROUTES from "../routes/ROUTES";
+
 const testMainLink = [
+    { to: "/", children: "Home" },
     { to: "/", children: "About" },
-    { to: "/", children: "Shop" },
-    { to: "/", children: "Account" },
+    { to: ROUTES.LOGIN, children: "Login" },
+    { to: ROUTES.REGISTER, children: "Register" }
 ];
 
 const categories = [
     {
         to: "/",
-        name: "PlayStation",
+        name: "playStation",
         image: "../../../assets/img/categories/Playstation.jpg",
         alt: "PlayStation image",
     },
     {
         to: "/",
-        name: "Xbox",
+        name: "xbox",
         image: "../../../assets/img/categories/Xbox.jpg",
         alt: "Xbox image",
     },
     {
         to: "/",
-        name: "Pc",
+        name: "pc",
         image: "../../../assets/img/categories/Pc.jpg",
         alt: "Pc image",
     },

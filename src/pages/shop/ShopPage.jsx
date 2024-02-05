@@ -1,18 +1,23 @@
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import { CardMedia, CardContent, Box, Typography } from "@mui/material";
-import { Fragment } from "react";
-
-const post = {
-  title: "aaa",
-  date: "aaa",
-  description: "aaa",
-  image: "../../../assets/img/categories/Playstation.jpg",
-  alt: "aaa",
-};
+import { Box, Typography } from "@mui/material";
+import { Fragment, useEffect, useState } from "react";
+import axios from "axios";
+import PostComponent from "../../components/PostComponent";
 
 const ShopPage = () => {
+  const [dataFromServer, setDataFromServer] = useState([]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await axios.get("http://localhost:8080/api/v1/posts");
+        console.log(data);
+        setDataFromServer(data);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
+
   return (
     <Fragment>
       <Box
@@ -39,84 +44,18 @@ const ShopPage = () => {
         </Typography>
       </Box>
       <Grid container spacing={2} sx={{ maxWidth: 1000, m: "30px auto" }}>
-        <Grid item xs={12} sx={{ m: "0 auto" }}>
-          <CardActionArea component="a" href="#">
-            <Card sx={{ display: "flex" }}>
-              <CardContent sx={{ flex: 1 }}>
-                <Typography component="h2" variant="h5">
-                  {post.title}
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary">
-                  {post.date}
-                </Typography>
-                <Typography variant="subtitle1" paragraph>
-                  {post.description}
-                </Typography>
-                <Typography variant="subtitle1" color="primary">
-                  More details...
-                </Typography>
-              </CardContent>
-              <CardMedia
-                component="img"
-                sx={{ width: 160, display: { xs: "none", sm: "block" } }}
-                image={post.image}
-                alt={post.alt}
-              />
-            </Card>
-          </CardActionArea>
-        </Grid>
-        <Grid item xs={12} sx={{ m: "0 auto" }}>
-          <CardActionArea component="a" href="#">
-            <Card sx={{ display: "flex" }}>
-              <CardContent sx={{ flex: 1 }}>
-                <Typography component="h2" variant="h5">
-                  {post.title}
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary">
-                  {post.date}
-                </Typography>
-                <Typography variant="subtitle1" paragraph>
-                  {post.description}
-                </Typography>
-                <Typography variant="subtitle1" color="primary">
-                  More details...
-                </Typography>
-              </CardContent>
-              <CardMedia
-                component="img"
-                sx={{ width: 160, display: { xs: "none", sm: "block" } }}
-                image={post.image}
-                alt={post.alt}
-              />
-            </Card>
-          </CardActionArea>
-        </Grid>
-        <Grid item xs={12} sx={{ m: "0 auto" }}>
-          <CardActionArea component="a" href="#">
-            <Card sx={{ display: "flex" }}>
-              <CardContent sx={{ flex: 1 }}>
-                <Typography component="h2" variant="h5">
-                  {post.title}
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary">
-                  {post.date}
-                </Typography>
-                <Typography variant="subtitle1" paragraph>
-                  {post.description}
-                </Typography>
-                <Typography variant="subtitle1" color="primary">
-                  More details...
-                </Typography>
-              </CardContent>
-              <CardMedia
-                component="img"
-                sx={{ width: 160, display: { xs: "none", sm: "block" } }}
-                image={post.image}
-                alt={post.alt}
-              />
-            </Card>
-          </CardActionArea>
-        </Grid>
+        {dataFromServer.map((post) => (
+          <Grid item key={post._id} xs={12} sm={6} md={4} lg={3}>
+            <PostComponent
+              category={post.game.category}
+              description={post.game.description}
+              title={post.game.name}
+              phone={post.seller.phone}
+              img={post.game.images[0].url}
+              alt={post.game.images[0].alt}
+            />
+          </Grid>
+        ))}
       </Grid>
     </Fragment>
   );

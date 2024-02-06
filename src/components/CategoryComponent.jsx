@@ -4,15 +4,11 @@ import { CardActionArea } from "@mui/material";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../routes/ROUTES";
-import { useDispatch } from "react-redux";
-import { categoryAction } from "../store/category";
 
 const CategoryComponent = ({ children }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(categoryAction.pickCategory(children));
-    navigate(ROUTES.SHOP);
+    navigate(ROUTES.SHOP, { state: children });
   };
   return (
     <Card sx={{ maxWidth: 305, maxHeight: 305, borderRadius: "50%" }}>

@@ -3,11 +3,11 @@ import { Box, Typography } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import PostComponent from "../../components/PostComponent";
-import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const ShopPage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
-  const pickedCategory = useSelector((bigPie) => bigPie.categorySlice.category);
+  const { state } = useLocation();
 
   useEffect(() => {
     (async () => {
@@ -27,7 +27,7 @@ const ShopPage = () => {
         sx={{
           width: "100%",
           height: "200px",
-          backgroundImage: `url(${pickedCategory.image})`,
+          backgroundImage: `url(${state.image})`,
           paddingTop: "1rem",
           paddingBottom: "1rem",
           flexGrow: 1,

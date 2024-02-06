@@ -13,17 +13,55 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import ROUTES from "../../routes/ROUTES.js";
 import { Alert } from "@mui/material";
+import axios from "axios";
+import { validateLogin } from "../../validation/loginValidation.js";
+import { storeToken } from "../../service/storeService.js";
+import { useNavigate } from "react-router-dom";
+import useAutoLogin from "../../hooks/useAutoLogin.jsx";
 
 const LoginPage = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [errorsState, setErrorsState] = useState(null);
+  const navigate = useNavigate();
+  const autoLogin = useAutoLogin();
 
   const handleEmailInputChange = (e) => {
     setEmailValue(e.target.value);
   };
   const handlePasswordInputChange = (e) => {
     setPasswordValue(e.target.value);
+  };
+  const handleRememberMe = (e) => {
+    setRememberMe(e.target.checked);
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const joiResponse = validateLogin({
+        email: emailValue,
+        password: passwordValue,
+      });
+      if (joiResponse) {
+        setErrorsState(joiResponse);
+        return;
+      }
+
+      let { data } = await axios.post("/users/login", {
+        email: emailValue,
+        password: passwordValue,
+      });
+      console.log("rememberMe", rememberMe);
+      console.log("data", data.jwt);
+      storeToken(data.jwt, rememberMe);
+      autoLogin();
+      navigate(ROUTES.HOME);
+    } catch (err) {
+      console.log("Error from Submit", err);
+    }
+    e.preventDefault();
   };
 
   return (
@@ -94,7 +132,12 @@ const LoginPage = () => {
             )}
             <FormControlLabel
               control={
-                <Checkbox value="remember" color="primary" checked={false} />
+                <Checkbox
+                  value="remember"
+                  color="primary"
+                  checked={rememberMe}
+                  onChange={handleRememberMe}
+                />
               }
               label="Remember me"
             />
@@ -102,6 +145,7 @@ const LoginPage = () => {
               type="submit"
               fullWidth
               variant="contained"
+              onClick={handleSubmit}
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In

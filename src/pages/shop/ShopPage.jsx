@@ -3,9 +3,12 @@ import { Box, Typography } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import PostComponent from "../../components/PostComponent";
+import { useSelector } from "react-redux";
 
 const ShopPage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
+  const pickedCategory = useSelector((bigPie) => bigPie.categorySlice.category);
+
   useEffect(() => {
     (async () => {
       try {
@@ -24,7 +27,7 @@ const ShopPage = () => {
         sx={{
           width: "100%",
           height: "200px",
-          backgroundImage: `url(${"../../../assets/img/PlaystationBG.jpg"})`,
+          backgroundImage: `url(${pickedCategory.image})`,
           paddingTop: "1rem",
           paddingBottom: "1rem",
           flexGrow: 1,

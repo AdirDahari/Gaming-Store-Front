@@ -2,17 +2,25 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../routes/ROUTES";
+import { useDispatch } from "react-redux";
+import { categoryAction } from "../store/category";
 
-const CategoryComponent = ({ category, image, alt }) => {
-  const handleCateClick = () => {};
-
+const CategoryComponent = ({ children }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(categoryAction.pickCategory(children));
+    navigate(ROUTES.SHOP);
+  };
   return (
     <Card sx={{ maxWidth: 305, maxHeight: 305, borderRadius: "50%" }}>
-      <CardActionArea onClick={handleCateClick}>
+      <CardActionArea onClick={handleClick}>
         <CardMedia
           component="img"
-          image={image}
-          alt={alt}
+          image={children.image}
+          alt={children.alt}
           width={305}
           height={305}
         />
@@ -22,9 +30,7 @@ const CategoryComponent = ({ category, image, alt }) => {
 };
 
 CategoryComponent.propTypes = {
-  category: PropTypes.string,
-  image: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
+  children: PropTypes.object.isRequired,
 };
 
 export default CategoryComponent;

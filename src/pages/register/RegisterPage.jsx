@@ -5,14 +5,16 @@ import {
   Button,
   TextField,
   Alert,
-  Checkbox,
-  FormControlLabel,
   Box,
   Avatar,
   Container,
 } from "@mui/material";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import ROUTES from "../../routes/ROUTES";
+import { validateRegister } from "../../validation/registerValidation";
+import { registerNormalization } from "./registerNormalization";
+import axios from "axios";
 
 const RegisterPage = () => {
   const [inputsValue, setInputsValue] = useState({
@@ -32,12 +34,30 @@ const RegisterPage = () => {
     zip: "",
   });
   const [errorsState, setErrorsState] = useState(null);
+  const navigate = useNavigate();
 
   const handleInputsChange = (e) => {
     setInputsValue((currentState) => ({
       ...currentState,
       [e.target.id]: e.target.value,
     }));
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      const joiResponse = validateRegister(inputsValue);
+      if (joiResponse) {
+        setErrorsState(joiResponse);
+        return;
+      }
+      const requestBody = registerNormalization(inputsValue);
+      await axios.post("/users", requestBody);
+      navigate(ROUTES.HOME);
+    } catch (err) {
+      console.log("Error from submit", err);
+    }
   };
 
   return (
@@ -58,7 +78,7 @@ const RegisterPage = () => {
       </Typography>
       <Box component="form" noValidate sx={{ mt: 3 }}>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6}>
             <TextField
               autoComplete="given-name"
               name="first"
@@ -74,7 +94,7 @@ const RegisterPage = () => {
               <Alert severity="warning">{errorsState.first}</Alert>
             )}
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6}>
             <TextField
               autoComplete="given-name"
               name="middle"
@@ -86,7 +106,7 @@ const RegisterPage = () => {
               onChange={handleInputsChange}
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6}>
             <TextField
               required
               fullWidth
@@ -251,26 +271,21 @@ const RegisterPage = () => {
               onChange={handleInputsChange}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControlLabel
-              control={<Checkbox value={false} color="primary" />}
-              label="Business Account"
-            />
-          </Grid>
         </Grid>
         <Button
           type="submit"
           fullWidth
           variant="contained"
+          onClick={handleSubmit}
           sx={{ mt: 3, mb: 2 }}
         >
           Sign Up
         </Button>
         <Grid container justifyContent="flex-end" pb={5}>
           <Grid item>
-            {/* <NavLink to={ROUTES.LOGIN} variant="body2">
+            <NavLink to={ROUTES.LOGIN} variant="body2">
               Already have an account? Sign in
-            </NavLink> */}
+            </NavLink>
           </Grid>
         </Grid>
       </Box>

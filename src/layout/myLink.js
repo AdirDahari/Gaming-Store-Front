@@ -9,19 +9,16 @@ const testMainLink = [
 
 const categories = [
     {
-        to: "/",
         name: "playStation",
         image: "../../../assets/img/categories/Playstation.jpg",
         alt: "PlayStation image",
     },
     {
-        to: "/",
         name: "xbox",
         image: "../../../assets/img/categories/Xbox.jpg",
         alt: "Xbox image",
     },
     {
-        to: "/",
         name: "pc",
         image: "../../../assets/img/categories/Pc.jpg",
         alt: "Pc image",

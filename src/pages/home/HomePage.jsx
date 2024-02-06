@@ -14,11 +14,7 @@ const HomePage = () => {
       <Grid container spacing={2} m="0 auto" maxWidth={1000}>
         {categories.map((cate, index) => (
           <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
-            <CategoryComponent
-              category={cate.name}
-              alt={cate.alt}
-              image={cate.image}
-            />
+            <CategoryComponent>{cate}</CategoryComponent>
           </Grid>
         ))}
       </Grid>

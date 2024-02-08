@@ -15,8 +15,10 @@ import store from "./store/bigPie";
 axios.defaults.baseURL = "http://localhost:8080/api/v1";
 axios.interceptors.request.use((config) => {
   const token = getToken();
+  console.log(token);
   if (token) {
-    config.headers["bearer"] = token;
+    config.headers.Authorization = `bearer ${token}`;
+    // config.headers["bearer"] = token;
   }
   return config;
 });

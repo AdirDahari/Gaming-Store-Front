@@ -1,29 +1,36 @@
 import GameForm from "./ui/GameForm";
-import AddressForm from "./ui/UserForm";
 import Review from "./ui/Review";
 import CssBaseline from "@mui/material/CssBaseline";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Toolbar from "@mui/material/Toolbar";
 import Paper from "@mui/material/Paper";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Fragment, useState } from "react";
+import axios from "axios";
 
-const steps = ["Game details", "User details", "Review your post"];
+const steps = ["Game details", "Review your post"];
 
-const getStepContent = (step, funcNext, funcBack) => {
+const getStepContent = (
+  step,
+  funcNext,
+  funcSubmit,
+  userDetails,
+  gameDetails
+) => {
   switch (step) {
     case 0:
       return <GameForm handleNext={funcNext} />;
     case 1:
-      return <AddressForm />;
-    case 2:
-      return <Review />;
+      return (
+        <Review
+          funcSubmit={funcSubmit}
+          userDetails={userDetails}
+          gameDetails={gameDetails}
+          handleSubmit={funcSubmit}
+        />
+      );
     default:
       throw new Error("Unknown step");
   }
@@ -31,16 +38,28 @@ const getStepContent = (step, funcNext, funcBack) => {
 
 const CreatePostPage = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [userDetails, setUserDetails] = useState(null);
   const [gameDetails, setGameDetails] = useState(null);
 
-  const handleNext = (gameDetailsValues) => {
-    setActiveStep(activeStep + 1);
-    console.log(gameDetailsValues);
-    setGameDetails(gameDetailsValues);
+  const handleNext = async (gameDetailsValues) => {
+    try {
+      const { data: myUser } = await axios.get("users/my-user");
+      console.log("myUser", myUser);
+      setUserDetails(myUser);
+      console.log("gameDetailsValues", gameDetailsValues);
+      setGameDetails(gameDetailsValues);
+      setActiveStep(activeStep + 1);
+    } catch (err) {
+      console.log("handleNext", err);
+    }
   };
 
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
+  const handleSubmit = async () => {
+    try {
+      // axios post -> normalize data to sent
+    } catch (err) {
+      console.log("handleSubmit", err);
+    }
   };
 
   return (
@@ -74,7 +93,13 @@ const CreatePostPage = () => {
             </Fragment>
           ) : (
             <Fragment>
-              {getStepContent(activeStep, handleNext, handleBack)}
+              {getStepContent(
+                activeStep,
+                handleNext,
+                handleSubmit,
+                userDetails,
+                gameDetails
+              )}
               {/* <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>

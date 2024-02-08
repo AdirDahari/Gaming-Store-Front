@@ -1,31 +1,57 @@
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 import { Fragment, useState } from "react";
-import NumberInput from "./NumberInput";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import {
+  Button,
+  Box,
+  TextField,
+  Typography,
+  Grid,
+  Alert,
+  MenuItem,
+} from "@mui/material";
+import PropTypes from "prop-types";
+import { validateGameDetails } from "../../../validation/createPost/gameDetails";
+
+const platforms = ["xbox", "playstation", "pc"];
+const status = ["new", "like new", "used"];
 
 const GameForm = ({ handleNext }) => {
   const [gameDetails, setGameDetails] = useState({
-    platform: "",
+    platform: "xbox",
     name: "",
     description: "",
     cate0: "",
     cate1: "",
     cate2: "",
-    productStatus: "",
+    productStatus: "new",
     url0: "",
-    alt0: "",
     url1: "",
-    alt1: "",
     url2: "",
-    alt2: "",
+    price: 0,
   });
-  const [price, setPrice] = useState(null);
+  const [errorsState, setErrorsState] = useState(null);
 
   const handleNextClick = () => {
+    const joiResponse = validateGameDetails(gameDetails);
+    if (joiResponse) {
+      setErrorsState(joiResponse);
+      return;
+    }
+
     handleNext(gameDetails);
+  };
+
+  const handleInputsChange = (e) => {
+    setGameDetails((currentState) => ({
+      ...currentState,
+      [e.target.id]: e.target.value,
+    }));
+  };
+
+  const handleSelectChange = (e) => {
+    setGameDetails((currentState) => ({
+      ...currentState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   return (
@@ -34,7 +60,7 @@ const GameForm = ({ handleNext }) => {
         Game Details
       </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <TextField
             required
             id="name"
@@ -43,20 +69,53 @@ const GameForm = ({ handleNext }) => {
             fullWidth
             autoComplete="platform-name"
             variant="standard"
+            onChange={handleInputsChange}
           />
+          {errorsState && errorsState.name && (
+            <Alert severity="warning">{errorsState.name}</Alert>
+          )}
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
-            id="name"
-            name="name"
+            name="platform"
+            select
             label="Platform"
             fullWidth
-            autoComplete="game-name"
-            variant="standard"
-          />
+            helperText="Please select your platform"
+            defaultValue="xbox"
+            onChange={handleSelectChange}
+          >
+            {platforms.map((option) => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
+          {errorsState && errorsState.platform && (
+            <Alert severity="warning">{errorsState.platform}</Alert>
+          )}
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            name="productStatus"
+            select
+            label="Product status"
+            fullWidth
+            helperText="Please select product status"
+            defaultValue="new"
+            onChange={handleSelectChange}
+          >
+            {status.map((option, index) => (
+              <MenuItem key={index} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
+          {errorsState && errorsState.productStatus && (
+            <Alert severity="warning">{errorsState.productStatus}</Alert>
+          )}
+        </Grid>
+        <Grid item xs={12} sm={4}>
           <TextField
             required
             id="cate0"
@@ -65,9 +124,13 @@ const GameForm = ({ handleNext }) => {
             fullWidth
             autoComplete="category-1"
             variant="standard"
+            onChange={handleInputsChange}
           />
+          {errorsState && errorsState.cate0 && (
+            <Alert severity="warning">{errorsState.cate0}</Alert>
+          )}
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={4}>
           <TextField
             id="cate1"
             name="cate1"
@@ -75,9 +138,10 @@ const GameForm = ({ handleNext }) => {
             fullWidth
             autoComplete="category-2"
             variant="standard"
+            onChange={handleInputsChange}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={4}>
           <TextField
             id="cate2"
             name="cate2"
@@ -85,9 +149,10 @@ const GameForm = ({ handleNext }) => {
             fullWidth
             autoComplete="category-3"
             variant="standard"
+            onChange={handleInputsChange}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={4}>
           <TextField
             required
             id="url0"
@@ -95,33 +160,51 @@ const GameForm = ({ handleNext }) => {
             label="Image URL"
             fullWidth
             variant="standard"
+            onChange={handleInputsChange}
           />
+          {errorsState && errorsState.url0 && (
+            <Alert severity="warning">{errorsState.url0}</Alert>
+          )}
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={4}>
           <TextField
             id="url1"
             name="url1"
             label="Image URL"
             fullWidth
             variant="standard"
+            onChange={handleInputsChange}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={4}>
           <TextField
             id="url2"
             name="url2"
             label="Image URL"
             fullWidth
             variant="standard"
+            onChange={handleInputsChange}
           />
         </Grid>
+        <Grid item xs={12} sm={6} sx={{ mt: 2 }}>
+          <TextField
+            id="price"
+            label="Price"
+            type="number"
+            onChange={handleInputsChange}
+          />
+          {errorsState && errorsState.price && (
+            <Alert severity="warning">{errorsState.price}</Alert>
+          )}
+        </Grid>
         <Grid item xs={12} sm={6}>
-          <Typography sx={{ p: 1 }}>Price:</Typography>
-          <NumberInput
-            aria-label="Demo number input"
-            placeholder="Type a number…"
-            value={price}
-            onChange={(event, val) => setPrice(val)}
+          <TextField
+            id="description"
+            label="Description"
+            multiline
+            rows={2}
+            variant="standard"
+            onChange={handleInputsChange}
           />
         </Grid>
       </Grid>
@@ -136,6 +219,10 @@ const GameForm = ({ handleNext }) => {
       </Box>
     </Fragment>
   );
+};
+
+GameForm.propTypes = {
+  handleNext: PropTypes.func.isRequired,
 };
 
 export default GameForm;

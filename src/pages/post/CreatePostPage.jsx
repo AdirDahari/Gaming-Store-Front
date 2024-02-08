@@ -1,5 +1,5 @@
 import GameForm from "./ui/GameForm";
-import AddressForm from "./ui/ImageForm";
+import AddressForm from "./ui/UserForm";
 import Review from "./ui/Review";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
@@ -33,9 +33,10 @@ const CreatePostPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [gameDetails, setGameDetails] = useState(null);
 
-  const handleNext = (gameDetails) => {
+  const handleNext = (gameDetailsValues) => {
     setActiveStep(activeStep + 1);
-    setGameDetails(gameDetails);
+    console.log(gameDetailsValues);
+    setGameDetails(gameDetailsValues);
   };
 
   const handleBack = () => {

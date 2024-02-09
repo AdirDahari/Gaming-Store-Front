@@ -1,7 +1,7 @@
 import ROUTES from "../routes/ROUTES";
 
 const testMainLink = [
-    { to: "/", children: "Home" },
+    { to: ROUTES.HOME, children: "Home" },
     { to: "/", children: "About" },
     { to: ROUTES.LOGIN, children: "Login" },
     { to: ROUTES.REGISTER, children: "Register" }
@@ -9,17 +9,17 @@ const testMainLink = [
 
 const categories = [
     {
-        name: "playStation",
+        name: "PlayStation",
         image: "../../../assets/img/categories/Playstation.jpg",
         alt: "PlayStation image",
     },
     {
-        name: "xbox",
+        name: "Xbox",
         image: "../../../assets/img/categories/Xbox.jpg",
         alt: "Xbox image",
     },
     {
-        name: "pc",
+        name: "Pc",
         image: "../../../assets/img/categories/Pc.jpg",
         alt: "Pc image",
     },

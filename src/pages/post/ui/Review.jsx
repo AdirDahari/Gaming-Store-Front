@@ -3,7 +3,7 @@ import { Grid, Box, Button, CardMedia, Divider } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-const Review = ({ handleSubmit, userDetails, gameDetails }) => {
+const Review = ({ handleBack, handleSubmit, userDetails, gameDetails }) => {
   const [urls, setUrls] = useState([]);
   useEffect(() => {
     if (urls.length > 0) {
@@ -20,6 +20,10 @@ const Review = ({ handleSubmit, userDetails, gameDetails }) => {
 
   const handleSubmitClick = () => {
     handleSubmit();
+  };
+
+  const handleBackClick = () => {
+    handleBack();
   };
 
   return (
@@ -129,10 +133,12 @@ const Review = ({ handleSubmit, userDetails, gameDetails }) => {
       ) : (
         <></>
       )}
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Button onClick={handleBackClick} sx={{ mt: 3, ml: 1 }}>
+          Back
+        </Button>
         <Button
           variant="contained"
-          type="submit"
           onClick={handleSubmitClick}
           sx={{ mt: 3, ml: 1 }}
         >
@@ -144,6 +150,7 @@ const Review = ({ handleSubmit, userDetails, gameDetails }) => {
 };
 
 Review.propTypes = {
+  handleBack: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   userDetails: PropTypes.object.isRequired,
   gameDetails: PropTypes.object.isRequired,

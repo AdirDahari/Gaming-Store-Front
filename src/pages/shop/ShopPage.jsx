@@ -12,8 +12,11 @@ const ShopPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get("http://localhost:8080/api/v1/posts");
+        const { data } = await axios.get(
+          `/posts/${state.name}`.toLocaleLowerCase()
+        );
         console.log(data);
+        console.log("state", state);
         setDataFromServer(data);
       } catch (err) {
         console.log(err);

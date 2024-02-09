@@ -9,12 +9,16 @@ import StepLabel from "@mui/material/StepLabel";
 import Typography from "@mui/material/Typography";
 import { Fragment, useState } from "react";
 import axios from "axios";
+import { createPostNormalization } from "./createPostNoramalization";
+import { useNavigate } from "react-router-dom";
+import ROUTE from "../../routes/ROUTES.js";
 
 const steps = ["Game details", "Review your post"];
 
 const getStepContent = (
   step,
   funcNext,
+  funcBack,
   funcSubmit,
   userDetails,
   gameDetails
@@ -25,7 +29,7 @@ const getStepContent = (
     case 1:
       return (
         <Review
-          funcSubmit={funcSubmit}
+          handleBack={funcBack}
           userDetails={userDetails}
           gameDetails={gameDetails}
           handleSubmit={funcSubmit}
@@ -40,6 +44,7 @@ const CreatePostPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [userDetails, setUserDetails] = useState(null);
   const [gameDetails, setGameDetails] = useState(null);
+  const navigate = useNavigate();
 
   const handleNext = async (gameDetailsValues) => {
     try {
@@ -54,9 +59,15 @@ const CreatePostPage = () => {
     }
   };
 
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
+
   const handleSubmit = async () => {
     try {
-      // axios post -> normalize data to sent
+      const request = createPostNormalization(gameDetails, userDetails);
+      await axios.post("/posts", request);
+      navigate(ROUTE.HOME);
     } catch (err) {
       console.log("handleSubmit", err);
     }
@@ -96,6 +107,7 @@ const CreatePostPage = () => {
               {getStepContent(
                 activeStep,
                 handleNext,
+                handleBack,
                 handleSubmit,
                 userDetails,
                 gameDetails

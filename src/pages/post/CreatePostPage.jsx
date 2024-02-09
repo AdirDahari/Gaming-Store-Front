@@ -49,9 +49,7 @@ const CreatePostPage = () => {
   const handleNext = async (gameDetailsValues) => {
     try {
       const { data: myUser } = await axios.get("users/my-user");
-      console.log("myUser", myUser);
       setUserDetails(myUser);
-      console.log("gameDetailsValues", gameDetailsValues);
       setGameDetails(gameDetailsValues);
       setActiveStep(activeStep + 1);
     } catch (err) {
@@ -112,20 +110,6 @@ const CreatePostPage = () => {
                 userDetails,
                 gameDetails
               )}
-              {/* <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                {activeStep !== 0 && (
-                  <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                    Back
-                  </Button>
-                )}
-                <Button
-                  variant="contained"
-                  onClick={handleNext}
-                  sx={{ mt: 3, ml: 1 }}
-                >
-                  {activeStep === steps.length - 1 ? "Place order" : "Next"}
-                </Button>
-              </Box> */}
             </Fragment>
           )}
         </Paper>

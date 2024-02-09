@@ -15,8 +15,6 @@ const ShopPage = () => {
         const { data } = await axios.get(
           `/posts/${state.name}`.toLocaleLowerCase()
         );
-        console.log(data);
-        console.log("state", state);
         setDataFromServer(data);
       } catch (err) {
         console.log(err);
@@ -51,7 +49,7 @@ const ShopPage = () => {
       </Box>
       <Grid container spacing={2} sx={{ maxWidth: 1000, m: "30px auto" }}>
         {dataFromServer.map((post) => (
-          <Grid item key={post._id} xs={12} sm={6} md={4} lg={3}>
+          <Grid item key={post._id} xs={12} sm={6} md={4}>
             <PostComponent
               category={post.game.category}
               description={post.game.description}

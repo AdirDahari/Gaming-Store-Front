@@ -47,16 +47,18 @@ const ShopPage = () => {
           Sort items
         </Typography>
       </Box>
-      <Grid container spacing={2} sx={{ maxWidth: 1000, m: "30px auto" }}>
+      <Grid container spacing={2} sx={{ m: 2, p: 2 }}>
         {dataFromServer.map((post) => (
-          <Grid item key={post._id} xs={12} sm={6} md={4}>
+          <Grid item key={post._id} xs={12} sm={6} md={4} lg={3}>
             <PostComponent
-              category={post.game.category}
-              description={post.game.description}
-              title={post.game.name}
-              phone={post.seller.phone}
-              img={post.game.images[0].url}
-              alt={post.game.images[0].alt}
+              // category={post.game.category}
+              // description={post.game.description}
+              // title={post.game.name}
+              // phone={post.seller.phone}
+              // img={post.game.images[0].url}
+              // alt={post.game.images[0].alt}
+              color={state.color}
+              post={post}
             />
           </Grid>
         ))}

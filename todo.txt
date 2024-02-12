@@ -1,0 +1,16 @@
+Pages: about, profile, update post, management
+
+Style: home, post, register, login
+
+Components: post
+
+Dianamic: navbar
+
+Guard: management(admin), profile(user), login and register(guest)
+
+myLinks: state setting
+
+Messages: add interactive massages
+
+!Responsive web
+

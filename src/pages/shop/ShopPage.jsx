@@ -23,7 +23,7 @@ const ShopPage = () => {
   }, []);
 
   return (
-    <Fragment>
+    <Box>
       <Box
         sx={{
           width: "100%",
@@ -47,23 +47,18 @@ const ShopPage = () => {
           Sort items
         </Typography>
       </Box>
-      <Grid container spacing={2} sx={{ m: 2, p: 2 }}>
+      <Grid
+        container
+        spacing={2}
+        sx={{ m: 2, p: 2, width: "100%", margin: "0 auto" }}
+      >
         {dataFromServer.map((post) => (
           <Grid item key={post._id} xs={12} sm={6} md={4} lg={3}>
-            <PostComponent
-              // category={post.game.category}
-              // description={post.game.description}
-              // title={post.game.name}
-              // phone={post.seller.phone}
-              // img={post.game.images[0].url}
-              // alt={post.game.images[0].alt}
-              color={state.color}
-              post={post}
-            />
+            <PostComponent color={state.color} post={post} />
           </Grid>
         ))}
       </Grid>
-    </Fragment>
+    </Box>
   );
 };
 export default ShopPage;

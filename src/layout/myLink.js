@@ -24,7 +24,7 @@ const categories = [
         name: "Pc",
         image: "../../../assets/img/categories/Pc.jpg",
         alt: "Pc image",
-        color: "grey"
+        color: "purple"
     },
     {
         name: "Nintendo",

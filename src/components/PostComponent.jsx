@@ -11,31 +11,60 @@ import "../style/PostComponent.css";
 
 const PostComponent = ({ post, color }) => {
   return (
-    <Card sx={{ border: `1px solid ${color}`, p: 1, minHeight: 450 }}>
-      <CardContent>
-        <CardContent sx={{ margin: "0 auto" }}>
-          <CardMedia
-            className="image"
+    <Card
+      sx={{
+        border: `1px solid ${color}`,
+        borderRadius: "15px",
+        p: 1,
+        minHeight: 550,
+        maxHeight: 550,
+      }}
+    >
+      <CardContent sx={{ height: 350 }}>
+        <CardContent sx={{ maxHeight: 350 }}>
+          <CardContent
             sx={{
-              p: 2,
-              overflow: "hidden",
-              maxWidth: 200,
               margin: "0 auto",
+              minHeight: 300,
+              maxHeight: 350,
+              maxWidth: 300,
+              display: "flex",
+              borderRadius: "10px",
+              overflow: "hidden",
             }}
-            component="img"
-            image={post.game.images[0].url}
-            alt={post.game.images[0].alt}
-          />
-
-          <Typography variant="h5" noWrap sx={{ textAlign: "center" }}>
-            {post.game.name}
-          </Typography>
+          >
+            <CardMedia
+              className="image"
+              component="img"
+              sx={{
+                borderRadius: "10px",
+                width: "100%",
+                m: "0 auto",
+              }}
+              image={post.game.images[0].url}
+              alt={post.game.images[0].alt}
+            />
+          </CardContent>
         </CardContent>
-        <CardContent sx={{ display: "flex", justifyContent: "space-around" }}>
+        <Typography
+          variant="h5"
+          noWrap
+          sx={{ textAlign: "center", fontWeight: "500", p: 2 }}
+        >
+          {post.game.name}
+        </Typography>
+        <CardContent
+          sx={{
+            display: "flex",
+            justifyContent: "space-around",
+          }}
+        >
           <CardActions>
-            <Button variant="contained">Buy now</Button>
+            <Button sx={{ minWidth: 110 }} variant="contained">
+              Buy now
+            </Button>
           </CardActions>
-          <Typography sx={{ fontWeight: "600", p: 2 }} variant="h5">
+          <Typography sx={{ fontWeight: "600", p: 1 }} variant="h5">
             &#8362; {post.game.price}
           </Typography>
         </CardContent>

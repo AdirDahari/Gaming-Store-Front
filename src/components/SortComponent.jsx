@@ -1,70 +1,152 @@
+import { styled, alpha } from "@mui/material/styles";
 import {
+  Box,
   TextField,
+  Typography,
+  AppBar,
+  Toolbar,
+  IconButton,
+  InputBase,
+  Collapse,
   Grid,
   MenuItem,
-  Slider,
-  Typography,
-  Box,
 } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import RangeSlider from "./RangeSlider";
 
-const categories = ["all", "xbox", "playstation", "pc"];
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+    width: "auto",
+  },
+}));
 
-const priceText = (value) => {
-  return `${value}`;
-};
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  width: "100%",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
+    },
+  },
+}));
+
+const status = ["new", "like new", "used"];
 
 const SortComponent = () => {
-  const [priceRange, setPriceRange] = useState([0, 999]);
+  const [isFilterOpen, setisFilterOpen] = useState(false);
+  const [categoriesFilter, setCategoriesFilter] = useState([
+    "aaa",
+    "bbb",
+    "ccc",
+  ]);
 
-  const handlePriceChange = (e, newValue) => {
-    setPriceRange(newValue);
+  const handleFilterClick = () => {
+    setisFilterOpen(!isFilterOpen);
   };
 
   return (
-    <Grid
-      container
-      sx={{ m: 2, p: 2, margin: "0 auto" }}
-      item
-      xs={12}
-      sm={12}
-      md={12}
-      lg={6}
-    >
-      <Grid item xs={3}>
-        <TextField
-          name="category"
-          select
-          label="Category"
-          defaultValue="all"
-          fullWidth
-        >
-          {categories.map((option) => (
-            <MenuItem key={option} value={option}>
-              {option}
-            </MenuItem>
-          ))}
-        </TextField>
-      </Grid>
-      <Grid item xs={3}>
-        <TextField label="Category" fullWidth name="category" />
-      </Grid>
-      <Grid item xs={3}>
-        <TextField label="Category" fullWidth name="category" />
-      </Grid>
-      <Grid item xs={3}>
-        <Typography sx={{ textAlign: "center", ml: 1 }}>Price:</Typography>
-        <Box sx={{ width: "80%", ml: 4 }}>
-          <Slider
-            getAriaLabel={() => "Temperature range"}
-            value={priceRange}
-            onChange={handlePriceChange}
-            valueLabelDisplay="auto"
-            getAriaValueText={priceText}
-          />
-        </Box>
-      </Grid>
-    </Grid>
+    <Box sx={{ flexGrow: 1, maxWidth: 600, m: "0 auto", mt: 2 }}>
+      <AppBar
+        position="static"
+        sx={{ borderRadius: "15px", backgroundColor: "lightgray" }}
+      >
+        <Toolbar>
+          {/* <FilterIconComponent /> */}
+          <IconButton onClick={handleFilterClick}>
+            <FilterListIcon fontSize="large" />
+          </IconButton>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{
+              ml: 2,
+              flexGrow: 1,
+              display: { xs: "none", sm: "block", color: "black" },
+            }}
+          >
+            Filter
+          </Typography>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon sx={{ color: "black" }} />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
+        </Toolbar>
+        <Collapse in={isFilterOpen}>
+          <Toolbar>
+            <Grid container spacing={1} sx={{ pt: 1, pb: 1 }}>
+              <Grid item xs={4} sx={{ mt: 1.5 }}>
+                <TextField
+                  size="small"
+                  name="productStatus"
+                  select
+                  label="Categoties"
+                  fullWidth
+                  defaultValue="all"
+                >
+                  {categoriesFilter.map((option, index) => (
+                    <MenuItem key={index} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={4} sx={{ mt: 1.5 }}>
+                <TextField
+                  size="small"
+                  name="productStatus"
+                  select
+                  label="Status"
+                  fullWidth
+                  defaultValue="all"
+                >
+                  {status.map((option, index) => (
+                    <MenuItem key={index} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={4}>
+                <RangeSlider />
+              </Grid>
+            </Grid>
+          </Toolbar>
+        </Collapse>
+      </AppBar>
+    </Box>
   );
 };
-// export default SortComponent;
+
+export default SortComponent;

@@ -14,3 +14,4 @@ Messages: add interactive massages
 
 !Responsive web
 
+Search in store page take ui to component like in bcard project

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import PostComponent from "../../components/PostComponent";
 import { useLocation } from "react-router-dom";
-import SortComponent from "../../components/SortComponent1";
+import SortComponent from "../../components/SortComponent";
 
 const ShopPage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);

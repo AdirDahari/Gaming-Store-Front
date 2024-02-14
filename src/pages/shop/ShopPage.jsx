@@ -1,9 +1,10 @@
 import Grid from "@mui/material/Grid";
-import { Box, Typography } from "@mui/material";
-import { Fragment, useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import PostComponent from "../../components/PostComponent";
 import { useLocation } from "react-router-dom";
+import SortComponent from "../../components/SortComponent1";
 
 const ShopPage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
@@ -34,26 +35,19 @@ const ShopPage = () => {
           flexGrow: 1,
         }}
       ></Box>
-      <Box
-        sx={{
-          width: "100%",
-          height: "auto",
-          backgroundColor: "blue",
-          mt: 2,
-          flexGrow: 1,
-        }}
-      >
-        <Typography textAlign="center" variant="h5" color="white">
-          Sort items
-        </Typography>
-      </Box>
+      <SortComponent />
       <Grid
         container
         spacing={2}
-        sx={{ m: 2, p: 2, width: "100%", margin: "0 auto" }}
+        item
+        sx={{ m: 2, p: 2, margin: "0 auto" }}
+        xs={12}
+        sm={12}
+        md={12}
+        lg={10}
       >
         {dataFromServer.map((post) => (
-          <Grid item key={post._id} xs={12} sm={6} md={4} lg={3}>
+          <Grid item key={post._id} xs={12} sm={6} md={4}>
             <PostComponent color={state.color} post={post} />
           </Grid>
         ))}

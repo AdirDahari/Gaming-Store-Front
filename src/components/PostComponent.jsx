@@ -25,9 +25,9 @@ const PostComponent = ({ post, color }) => {
           <CardContent
             sx={{
               margin: "0 auto",
-              minHeight: 300,
-              maxHeight: 350,
-              maxWidth: 300,
+              minHeight: 250,
+              maxHeight: 300,
+              maxWidth: 250,
               display: "flex",
               borderRadius: "10px",
               overflow: "hidden",

@@ -12,7 +12,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import RangeSlider from "./RangeSlider";
 
@@ -56,18 +56,41 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const status = ["new", "like new", "used"];
+const status = ["all", "new", "like new", "used"];
 
-const SortComponent = () => {
+const SortComponent = ({ onInputsChange, categoriesData, maxPrice }) => {
   const [isFilterOpen, setisFilterOpen] = useState(false);
-  const [categoriesFilter, setCategoriesFilter] = useState([
-    "aaa",
-    "bbb",
-    "ccc",
-  ]);
+  const [categoriesFilter, setCategoriesFilter] = useState(["all"]);
+  const [priceRange, setPriceRange] = useState(null);
+  const [filterInputs, setFilterInputs] = useState({
+    categoties: "",
+    productStatus: "",
+    priceRange: [0, 100],
+  });
+
+  useEffect(() => {
+    setCategoriesFilter(["all", ...categoriesData]);
+    setPriceRange([0, maxPrice]);
+  }, []);
 
   const handleFilterClick = () => {
     setisFilterOpen(!isFilterOpen);
+  };
+
+  const handleOptionChange = (e) => {
+    setFilterInputs((currentState) => ({
+      ...currentState,
+      [e.target.name]: e.target.value,
+    }));
+    onInputsChange(filterInputs);
+  };
+
+  const handleRangeChange = (range) => {
+    setFilterInputs((currentState) => ({
+      ...currentState,
+      priceRange: range,
+    }));
+    onInputsChange(filterInputs);
   };
 
   return (
@@ -77,7 +100,6 @@ const SortComponent = () => {
         sx={{ borderRadius: "15px", backgroundColor: "lightgray" }}
       >
         <Toolbar>
-          {/* <FilterIconComponent /> */}
           <IconButton onClick={handleFilterClick}>
             <FilterListIcon fontSize="large" />
           </IconButton>
@@ -109,11 +131,12 @@ const SortComponent = () => {
               <Grid item xs={4} sx={{ mt: 1.5 }}>
                 <TextField
                   size="small"
-                  name="productStatus"
+                  name="categoties"
                   select
                   label="Categoties"
                   fullWidth
                   defaultValue="all"
+                  onChange={handleOptionChange}
                 >
                   {categoriesFilter.map((option, index) => (
                     <MenuItem key={index} value={option}>
@@ -130,6 +153,7 @@ const SortComponent = () => {
                   label="Status"
                   fullWidth
                   defaultValue="all"
+                  onChange={handleOptionChange}
                 >
                   {status.map((option, index) => (
                     <MenuItem key={index} value={option}>
@@ -139,7 +163,12 @@ const SortComponent = () => {
                 </TextField>
               </Grid>
               <Grid item xs={4}>
-                <RangeSlider />
+                {priceRange && (
+                  <RangeSlider
+                    range={priceRange}
+                    onRangeChange={handleRangeChange}
+                  />
+                )}
               </Grid>
             </Grid>
           </Toolbar>

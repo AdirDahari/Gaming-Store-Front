@@ -1,5 +1,6 @@
 import { Slider, Typography, Box } from "@mui/material";
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 function valuetext(value) {
   return `${value}`;
@@ -32,6 +33,11 @@ const RangeSlider = ({ range, onRangeChange }) => {
       )}
     </Box>
   );
+};
+
+RangeSlider.propTypes = {
+  range: PropTypes.array.isRequired,
+  onRangeChange: PropTypes.func.isRequired,
 };
 
 export default RangeSlider;

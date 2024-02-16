@@ -14,7 +14,9 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import CloseIcon from "@mui/icons-material/Close";
 import RangeSlider from "./RangeSlider";
+import PropTypes from "prop-types";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -58,14 +60,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const status = ["all", "new", "like new", "used"];
 
-const SortComponent = ({ onInputsChange, categoriesData, maxPrice }) => {
-  const [isFilterOpen, setisFilterOpen] = useState(false);
+const SortComponent = ({
+  onSearchChange,
+  onInputsChange,
+  categoriesData,
+  maxPrice,
+}) => {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [categoriesFilter, setCategoriesFilter] = useState(["all"]);
   const [priceRange, setPriceRange] = useState(null);
+  const [txt, setTxt] = useState("");
   const [filterInputs, setFilterInputs] = useState({
-    categoties: "",
-    productStatus: "",
-    priceRange: [0, 100],
+    categoties: "all",
+    productStatus: "all",
+    priceRange: [],
   });
 
   useEffect(() => {
@@ -73,8 +81,21 @@ const SortComponent = ({ onInputsChange, categoriesData, maxPrice }) => {
     setPriceRange([0, maxPrice]);
   }, []);
 
+  const handleTxtChange = (e) => {
+    setTxt(e.target.value);
+    onSearchChange(e.target.value);
+  };
+
   const handleFilterClick = () => {
-    setisFilterOpen(!isFilterOpen);
+    setIsFilterOpen(!isFilterOpen);
+    if (isFilterOpen) {
+      onInputsChange(null);
+      setFilterInputs({
+        categoties: "all",
+        productStatus: "all",
+        priceRange: [],
+      });
+    }
   };
 
   const handleOptionChange = (e) => {
@@ -82,7 +103,7 @@ const SortComponent = ({ onInputsChange, categoriesData, maxPrice }) => {
       ...currentState,
       [e.target.name]: e.target.value,
     }));
-    onInputsChange(filterInputs);
+    onInputsChange({ ...filterInputs, [e.target.name]: e.target.value });
   };
 
   const handleRangeChange = (range) => {
@@ -90,7 +111,7 @@ const SortComponent = ({ onInputsChange, categoriesData, maxPrice }) => {
       ...currentState,
       priceRange: range,
     }));
-    onInputsChange(filterInputs);
+    onInputsChange({ ...filterInputs, priceRange: range });
   };
 
   return (
@@ -101,7 +122,11 @@ const SortComponent = ({ onInputsChange, categoriesData, maxPrice }) => {
       >
         <Toolbar>
           <IconButton onClick={handleFilterClick}>
-            <FilterListIcon fontSize="large" />
+            {isFilterOpen ? (
+              <CloseIcon fontSize="large" />
+            ) : (
+              <FilterListIcon fontSize="large" />
+            )}
           </IconButton>
           <Typography
             variant="h6"
@@ -120,6 +145,8 @@ const SortComponent = ({ onInputsChange, categoriesData, maxPrice }) => {
               <SearchIcon sx={{ color: "black" }} />
             </SearchIconWrapper>
             <StyledInputBase
+              value={txt}
+              onChange={handleTxtChange}
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
             />
@@ -176,6 +203,13 @@ const SortComponent = ({ onInputsChange, categoriesData, maxPrice }) => {
       </AppBar>
     </Box>
   );
+};
+
+SortComponent.propTypes = {
+  onInputsChange: PropTypes.func.isRequired,
+  onSearchChange: PropTypes.func.isRequired,
+  categoriesData: PropTypes.array.isRequired,
+  maxPrice: PropTypes.number.isRequired,
 };
 
 export default SortComponent;

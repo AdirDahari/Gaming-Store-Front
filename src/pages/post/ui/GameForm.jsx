@@ -9,7 +9,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import { validateGameDetails } from "../../../validation/createPost/gameDetails";
+import { validateGameDetails } from "../../../validation/gameDetails";
 
 const platforms = ["xbox", "playstation", "pc"];
 const status = ["new", "like new", "used"];
@@ -175,6 +175,9 @@ const GameForm = ({ handleNext }) => {
             variant="standard"
             onChange={handleInputsChange}
           />
+          {errorsState && errorsState.url1 && (
+            <Alert severity="warning">{errorsState.url1}</Alert>
+          )}
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
@@ -185,6 +188,9 @@ const GameForm = ({ handleNext }) => {
             variant="standard"
             onChange={handleInputsChange}
           />
+          {errorsState && errorsState.url2 && (
+            <Alert severity="warning">{errorsState.url2}</Alert>
+          )}
         </Grid>
         <Grid item xs={12} sm={6} sx={{ mt: 2 }}>
           <TextField

@@ -1,5 +1,5 @@
 import Joi from "joi";
-import validation from "../validation";
+import validation from "./validation";
 
 const platformRegex = /xbox|pc|playstation/;
 const productStatusRegex = /new|like new|used/;
@@ -12,9 +12,9 @@ const gameDetailsSchema = Joi.object({
     cate1: Joi.string().allow(""),
     cate2: Joi.string().allow(""),
     productStatus: Joi.string().pattern(productStatusRegex).required(),
-    url0: Joi.string().min(5).max(250).required(),
-    url1: Joi.string().min(5).max(250).allow(""),
-    url2: Joi.string().min(5).max(250).allow(""),
+    url0: Joi.string().min(5).max(9999).required(),
+    url1: Joi.string().min(5).max(9999).allow(""),
+    url2: Joi.string().min(5).max(9999).allow(""),
     price: Joi.number().min(1).max(99999).required(),
 });
 

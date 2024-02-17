@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { testMainLink } from "../../myLink";
+import { MainLink } from "../../myLink";
 import { NavLink } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import nextKey from "generate-my-key";
@@ -7,7 +7,7 @@ import nextKey from "generate-my-key";
 const MainLinks = () => {
   return (
     <Fragment>
-      {testMainLink.map((myLink) => (
+      {MainLink.map((myLink) => (
         <NavLink
           key={nextKey()}
           to={myLink.to}

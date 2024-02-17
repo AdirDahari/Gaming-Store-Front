@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import PostComponent from "../../components/PostComponent";
 import { useLocation } from "react-router-dom";
-import SortComponent from "../../components/SortComponent";
+import SortComponent from "./ui/SortComponent";
 
 let initData = [];
 
@@ -33,46 +33,53 @@ const ShopPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log("filterInputs", filterInputs);
     if (!initData.length) return;
-    if (filterInputs) {
-      managePostToShow();
+    if (filterInputs || searchTxt.length > 1) {
+      filterPostToShow();
     } else {
       setDataFromServer(initData);
     }
-    if (searchTxt.length >= 2) {
-      searchPosts();
-    }
+    // if (searchTxt.length) {
+    //   searchPosts();
+    // }
   }, [filterInputs, initData, searchTxt]);
 
-  const searchPosts = () => {
-    setDataFromServer(
-      dataFromServer.filter((post) => post.game.name.startsWith(searchTxt))
-    );
-  };
+  // const searchPosts = () => {
+  //   let tempData = initData.filter((post) => post.game.name.startsWith(searchTxt));
+  //   setDataFromServer(
+  //     tempData.filter((post) => post.game.name.startsWith(searchTxt))
+  //   );
+  // };
 
-  const managePostToShow = () => {
+  const filterPostToShow = () => {
     let tempData = initData;
-    if (filterInputs.categories && filterInputs.categories !== "all") {
-      tempData = tempData.filter((post) =>
-        post.game.category.includes(filterInputs.categories)
-      );
-      setDataFromServer(tempData);
+    if (filterInputs) {
+      if (filterInputs.categories && filterInputs.categories !== "all") {
+        tempData = tempData.filter((post) =>
+          post.game.category.includes(filterInputs.categories)
+        );
+      }
+      if (filterInputs.priceRange.length) {
+        tempData = tempData.filter(
+          (post) =>
+            post.game.price >= filterInputs.priceRange[0] &&
+            post.game.price <= filterInputs.priceRange[1]
+        );
+      }
+      if (filterInputs.productStatus && filterInputs.productStatus !== "all") {
+        tempData = tempData.filter(
+          (post) => post.game.productStatus === filterInputs.productStatus
+        );
+      }
     }
-    if (filterInputs.priceRange.length) {
-      tempData = tempData.filter(
-        (post) =>
-          post.game.price >= filterInputs.priceRange[0] &&
-          post.game.price <= filterInputs.priceRange[1]
-      );
-      setDataFromServer(tempData);
+    if (searchTxt) {
+      if (searchTxt.length > 1) {
+        tempData = tempData.filter((post) =>
+          post.game.name.startsWith(searchTxt)
+        );
+      }
     }
-    if (filterInputs.productStatus && filterInputs.productStatus !== "all") {
-      tempData = tempData.filter(
-        (post) => post.game.productStatus === filterInputs.productStatus
-      );
-      setDataFromServer(tempData);
-    }
+    setDataFromServer(tempData);
   };
 
   const findMaxPrice = (data) => {
@@ -122,20 +129,16 @@ const ShopPage = () => {
         <SortComponent
           onInputsChange={filterData}
           onSearchChange={handleSearchTxt}
-          maxPrice={maxPrice}
-          categoriesData={allCategories}
+          priceRange={[0, maxPrice]}
+          categoriesData={["all", ...allCategories]}
         />
       )}
 
       <Grid
         container
         spacing={2}
-        item
+        maxWidth={1200}
         sx={{ m: 2, p: 2, margin: "0 auto" }}
-        xs={12}
-        sm={12}
-        md={12}
-        lg={10}
       >
         {dataFromServer.map((post) => (
           <Grid item key={post._id} xs={12} sm={6} md={4}>

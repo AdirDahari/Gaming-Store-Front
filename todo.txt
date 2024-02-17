@@ -1,4 +1,4 @@
-Pages: about, profile, update post, management
+Pages: about, profile(update/delete post), management
 
 Style: home, post, register, login
 
@@ -6,7 +6,7 @@ Components: post
 
 Dianamic: navbar
 
-Guard: management(admin), profile(user), login and register(guest)
+Guard: management(admin), create post and profile(user), login and register(guest)
 
 myLinks: state setting
 
@@ -14,6 +14,4 @@ Messages: add interactive massages
 
 !Responsive web
 
-Search in store page take ui to component like in bcard project
-
-url => change to 500
+url => change to 9999

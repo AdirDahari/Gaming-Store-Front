@@ -16,20 +16,18 @@ const PostComponent = ({ post, color }) => {
         border: `1px solid ${color}`,
         borderRadius: "15px",
         p: 1,
-        minHeight: 550,
-        maxHeight: 550,
+        minHeight: 450,
+        maxHeight: 450,
       }}
     >
-      <CardContent sx={{ height: 350 }}>
-        <CardContent sx={{ maxHeight: 350 }}>
+      <CardContent>
+        <CardContent sx={{ maxHeight: 250, minHeight: 250 }}>
           <CardContent
             sx={{
               margin: "0 auto",
-              minHeight: 250,
-              maxHeight: 300,
-              maxWidth: 250,
+              maxHeight: 250,
+              maxWidth: "100%",
               display: "flex",
-              borderRadius: "10px",
               overflow: "hidden",
             }}
           >
@@ -46,15 +44,20 @@ const PostComponent = ({ post, color }) => {
             />
           </CardContent>
         </CardContent>
-        <Typography
-          variant="h5"
-          noWrap
-          sx={{ textAlign: "center", fontWeight: "500", p: 2 }}
-        >
-          {post.game.name}
-        </Typography>
+        <CardContent sx={{ minHeight: 50, maxHeight: 50 }}>
+          <Typography
+            variant="h5"
+            noWrap
+            sx={{ textAlign: "center", fontWeight: "500" }}
+          >
+            {post.game.name}
+          </Typography>
+        </CardContent>
+
         <CardContent
           sx={{
+            minHeight: 50,
+            maxHeight: 50,
             display: "flex",
             justifyContent: "space-around",
           }}

@@ -1,12 +1,12 @@
 import Footer from "./footer/Footer";
-import NavigationBar from "./header/NavigationBar";
+import Header from "./header/Header";
 import Main from "./main/Main";
 import PropTypes from "prop-types";
 
 const Layout = ({ children }) => {
   return (
     <>
-      <NavigationBar />
+      <Header />
       <Main>{children}</Main>
       <Footer />
     </>

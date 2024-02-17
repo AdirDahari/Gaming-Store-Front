@@ -1,4 +1,3 @@
-import { styled, alpha } from "@mui/material/styles";
 import {
   Box,
   TextField,
@@ -6,57 +5,16 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  InputBase,
   Collapse,
   Grid,
   MenuItem,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import CloseIcon from "@mui/icons-material/Close";
 import RangeSlider from "./RangeSlider";
 import PropTypes from "prop-types";
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  width: "100%",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
+import { Search } from "./Search";
 
 const status = ["all", "new", "like new", "used"];
 
@@ -64,22 +22,15 @@ const SortComponent = ({
   onSearchChange,
   onInputsChange,
   categoriesData,
-  maxPrice,
+  priceRange,
 }) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [categoriesFilter, setCategoriesFilter] = useState(["all"]);
-  const [priceRange, setPriceRange] = useState(null);
   const [txt, setTxt] = useState("");
   const [filterInputs, setFilterInputs] = useState({
-    categoties: "all",
+    categories: "all",
     productStatus: "all",
     priceRange: [],
   });
-
-  useEffect(() => {
-    setCategoriesFilter(["all", ...categoriesData]);
-    setPriceRange([0, maxPrice]);
-  }, []);
 
   const handleTxtChange = (e) => {
     setTxt(e.target.value);
@@ -91,7 +42,7 @@ const SortComponent = ({
     if (isFilterOpen) {
       onInputsChange(null);
       setFilterInputs({
-        categoties: "all",
+        categories: "all",
         productStatus: "all",
         priceRange: [],
       });
@@ -140,17 +91,7 @@ const SortComponent = ({
           >
             Filter
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon sx={{ color: "black" }} />
-            </SearchIconWrapper>
-            <StyledInputBase
-              value={txt}
-              onChange={handleTxtChange}
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          <Search txt={txt} onTxtChange={handleTxtChange} />
         </Toolbar>
         <Collapse in={isFilterOpen}>
           <Toolbar>
@@ -158,14 +99,15 @@ const SortComponent = ({
               <Grid item xs={4} sx={{ mt: 1.5 }}>
                 <TextField
                   size="small"
-                  name="categoties"
+                  name="categories"
                   select
-                  label="Categoties"
+                  label="Categories"
                   fullWidth
                   defaultValue="all"
+                  value={filterInputs ? filterInputs.categories : "all"}
                   onChange={handleOptionChange}
                 >
-                  {categoriesFilter.map((option, index) => (
+                  {categoriesData.map((option, index) => (
                     <MenuItem key={index} value={option}>
                       {option}
                     </MenuItem>
@@ -180,6 +122,7 @@ const SortComponent = ({
                   label="Status"
                   fullWidth
                   defaultValue="all"
+                  value={filterInputs ? filterInputs.productStatus : "all"}
                   onChange={handleOptionChange}
                 >
                   {status.map((option, index) => (
@@ -190,7 +133,7 @@ const SortComponent = ({
                 </TextField>
               </Grid>
               <Grid item xs={4}>
-                {priceRange && (
+                {priceRange && isFilterOpen && (
                   <RangeSlider
                     range={priceRange}
                     onRangeChange={handleRangeChange}
@@ -209,7 +152,7 @@ SortComponent.propTypes = {
   onInputsChange: PropTypes.func.isRequired,
   onSearchChange: PropTypes.func.isRequired,
   categoriesData: PropTypes.array.isRequired,
-  maxPrice: PropTypes.number.isRequired,
+  priceRange: PropTypes.array.isRequired,
 };
 
 export default SortComponent;

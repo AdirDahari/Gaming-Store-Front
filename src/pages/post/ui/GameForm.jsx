@@ -29,6 +29,8 @@ const GameForm = ({ handleNext }) => {
     price: 0,
   });
   const [errorsState, setErrorsState] = useState(null);
+  const [platformValue, setPlatformValue] = useState("");
+  const [statusValue, setStatusValue] = useState("");
 
   const handleNextClick = () => {
     const joiResponse = validateGameDetails(gameDetails);
@@ -47,11 +49,19 @@ const GameForm = ({ handleNext }) => {
     }));
   };
 
-  const handleSelectChange = (e) => {
+  const handlePlatformChange = (e) => {
     setGameDetails((currentState) => ({
       ...currentState,
       [e.target.name]: e.target.value,
     }));
+    setPlatformValue(e.target.value);
+  };
+  const handleStatusChange = (e) => {
+    setStatusValue((currentState) => ({
+      ...currentState,
+      [e.target.name]: e.target.value,
+    }));
+    setStatusValue(e.target.value);
   };
 
   return (
@@ -82,8 +92,9 @@ const GameForm = ({ handleNext }) => {
             label="Platform"
             fullWidth
             helperText="Please select your platform"
-            defaultValue="xbox"
-            onChange={handleSelectChange}
+            defaultValue={platformValue ? platformValue : ""}
+            value={platformValue}
+            onChange={handlePlatformChange}
           >
             {platforms.map((option) => (
               <MenuItem key={option} value={option}>
@@ -102,8 +113,9 @@ const GameForm = ({ handleNext }) => {
             label="Product status"
             fullWidth
             helperText="Please select product status"
-            defaultValue="new"
-            onChange={handleSelectChange}
+            defaultValue={statusValue ? statusValue : ""}
+            value={statusValue}
+            onChange={handleStatusChange}
           >
             {status.map((option, index) => (
               <MenuItem key={index} value={option}>

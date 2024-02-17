@@ -1,10 +1,19 @@
 import ROUTES from "../routes/ROUTES";
 
-const testMainLink = [
-    { to: ROUTES.HOME, children: "Home" },
+const MainLink = [
     { to: "/", children: "About" },
+];
+const GuestLink = [
     { to: ROUTES.LOGIN, children: "Login" },
     { to: ROUTES.REGISTER, children: "Register" }
+];
+const ProfileLink = [
+    { to: ROUTES.CREATEPOST, children: "Create post" },
+    { to: "/", children: "Favourites" }
+];
+const ProfileIconLink = [
+    { to: "/", children: "Profile" },
+    { to: ROUTES.HOME, children: "Logout" }
 ];
 
 const categories = [
@@ -12,26 +21,26 @@ const categories = [
         name: "PlayStation",
         image: "../../../assets/img/categories/Playstation.jpg",
         alt: "PlayStation image",
-        color: "blue"
+        color: "blue",
     },
     {
         name: "Xbox",
         image: "../../../assets/img/categories/Xbox.jpg",
         alt: "Xbox image",
-        color: "green"
+        color: "green",
     },
     {
         name: "Pc",
         image: "../../../assets/img/categories/Pc.jpg",
         alt: "Pc image",
-        color: "purple"
+        color: "purple",
     },
     {
         name: "Nintendo",
         image: "../../../assets/img/categories/Pc.jpg",
         alt: "Pc image",
-        color: "red"
+        color: "red",
     },
 ];
 
-export { testMainLink, categories };
+export { MainLink, GuestLink, ProfileLink, ProfileIconLink, categories };

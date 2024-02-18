@@ -14,4 +14,4 @@ Messages: add interactive massages
 
 !Responsive web
 
-url => change to 9999
+Navbar => if loggedIn profile img with loggedIn link else loggedOut link with icon like bcard

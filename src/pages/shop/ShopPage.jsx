@@ -39,17 +39,7 @@ const ShopPage = () => {
     } else {
       setDataFromServer(initData);
     }
-    // if (searchTxt.length) {
-    //   searchPosts();
-    // }
   }, [filterInputs, initData, searchTxt]);
-
-  // const searchPosts = () => {
-  //   let tempData = initData.filter((post) => post.game.name.startsWith(searchTxt));
-  //   setDataFromServer(
-  //     tempData.filter((post) => post.game.name.startsWith(searchTxt))
-  //   );
-  // };
 
   const filterPostToShow = () => {
     let tempData = initData;
@@ -75,7 +65,7 @@ const ShopPage = () => {
     if (searchTxt) {
       if (searchTxt.length > 1) {
         tempData = tempData.filter((post) =>
-          post.game.name.startsWith(searchTxt)
+          post.game.name.toLowerCase().startsWith(searchTxt.toLowerCase())
         );
       }
     }

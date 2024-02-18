@@ -1,13 +1,18 @@
 import ROUTES from "../routes/ROUTES";
 
 const MainLink = [
-    { to: "/", children: "About" },
+    { to: "/", children: "About us" },
 ];
 const GuestLink = [
     { to: ROUTES.LOGIN, children: "Login" },
     { to: ROUTES.REGISTER, children: "Register" }
 ];
 const ProfileLink = [
+    { to: ROUTES.CREATEPOST, children: "Create post" },
+    { to: "/", children: "Favourites" }
+];
+const ProfileMobileLink = [
+    { to: "/", children: "About us" },
     { to: ROUTES.CREATEPOST, children: "Create post" },
     { to: "/", children: "Favourites" }
 ];
@@ -43,4 +48,4 @@ const categories = [
     },
 ];
 
-export { MainLink, GuestLink, ProfileLink, ProfileIconLink, categories };
+export { MainLink, GuestLink, ProfileLink, ProfileIconLink, ProfileMobileLink, categories };

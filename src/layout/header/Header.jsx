@@ -12,11 +12,18 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
-import { GuestLink, MainLink, ProfileIconLink, ProfileLink } from "../myLink";
+import {
+  GuestLink,
+  MainLink,
+  ProfileIconLink,
+  ProfileLink,
+  ProfileMobileLink,
+} from "../myLink";
 import { NavLink } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/authSlice";
+import IconLinks from "./ui/IconLinks";
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -105,7 +112,7 @@ function Header() {
               }}
             >
               {loggedIn
-                ? ProfileLink.map((myLink) => (
+                ? ProfileMobileLink.map((myLink) => (
                     <MenuItem
                       key={myLink.children + myLink.to}
                       onClick={handleCloseNavMenu}
@@ -139,7 +146,7 @@ function Header() {
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href={ROUTES.HOME}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -154,27 +161,16 @@ function Header() {
             Gamming Store
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {loggedIn
-              ? ProfileLink.map((myLink) => (
-                  <NavLink key={myLink.children + myLink.to} to={myLink.to}>
-                    <Button
-                      onClick={handleCloseNavMenu}
-                      sx={{ my: 2, color: "white", display: "block" }}
-                    >
-                      {myLink.children}
-                    </Button>
-                  </NavLink>
-                ))
-              : MainLink.map((myLink) => (
-                  <NavLink key={myLink.children + myLink.to} to={myLink.to}>
-                    <Button
-                      onClick={handleCloseNavMenu}
-                      sx={{ my: 2, color: "white", display: "block" }}
-                    >
-                      {myLink.children}
-                    </Button>
-                  </NavLink>
-                ))}
+            {MainLink.map((myLink) => (
+              <NavLink key={myLink.children + myLink.to} to={myLink.to}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {myLink.children}
+                </Button>
+              </NavLink>
+            ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -225,6 +221,7 @@ function Header() {
                     </NavLink>
                   ))}
             </Menu>
+            <IconLinks loggedIn={false} />
           </Box>
         </Toolbar>
       </Container>

@@ -1,5 +1,5 @@
-import GameForm from "./ui/GameForm";
-import Review from "./ui/Review";
+import GameForm from "./ui/GameForm.jsx";
+import Review from "./ui/Review.jsx";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
@@ -9,7 +9,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Typography from "@mui/material/Typography";
 import { Fragment, useState } from "react";
 import axios from "axios";
-import { createPostNormalization } from "./createPostNoramalization";
+import { createPostNormalization } from "./createPostNoramalization.js";
 import { useNavigate } from "react-router-dom";
 import ROUTE from "../../routes/ROUTES.js";
 

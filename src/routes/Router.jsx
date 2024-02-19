@@ -5,7 +5,8 @@ import ShopPage from "../pages/shop/ShopPage";
 import Error404Page from "../pages/error/Error404Page";
 import RegisterPage from "../pages/register/RegisterPage";
 import LoginPage from "../pages/login/LoginPage";
-import CreatePostPage from "../pages/post/CreatePostPage";
+import CreatePostPage from "../pages/createPost/CreatePostPage";
+import PostPage from "../pages/post/PostPage";
 
 const Router = () => {
   return (
@@ -15,6 +16,7 @@ const Router = () => {
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
       <Route path={ROUTES.CREATEPOST} element={<CreatePostPage />} />
+      <Route path={`${ROUTES.POST}/:id`} element={<PostPage />} />
       <Route path="*" element={<Error404Page />} />
     </Routes>
   );

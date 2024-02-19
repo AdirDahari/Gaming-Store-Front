@@ -9,7 +9,11 @@ import {
 import PropTypes from "prop-types";
 import "../style/PostComponent.css";
 
-const PostComponent = ({ post, color }) => {
+const PostComponent = ({ post, color, onBuyNowClick }) => {
+  const handleBuyNowClick = () => {
+    onBuyNowClick(post._id);
+  };
+
   return (
     <Card
       sx={{
@@ -32,11 +36,13 @@ const PostComponent = ({ post, color }) => {
             }}
           >
             <CardMedia
+              onClick={handleBuyNowClick}
               className="image"
               component="img"
               sx={{
-                borderRadius: "10px",
+                cursor: "pointer",
                 width: "100%",
+                borderRadius: "10px",
                 m: "0 auto",
               }}
               image={post.game.images[0].url}
@@ -63,7 +69,11 @@ const PostComponent = ({ post, color }) => {
           }}
         >
           <CardActions>
-            <Button sx={{ minWidth: 110 }} variant="contained">
+            <Button
+              sx={{ minWidth: 110 }}
+              onClick={handleBuyNowClick}
+              variant="contained"
+            >
               Buy now
             </Button>
           </CardActions>
@@ -79,6 +89,7 @@ const PostComponent = ({ post, color }) => {
 PostComponent.propTypes = {
   post: PropTypes.object.isRequired,
   color: PropTypes.string.isRequired,
+  onBuyNowClick: PropTypes.func.isRequired,
 };
 
 export default PostComponent;

@@ -3,8 +3,9 @@ import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PostComponent from "../../components/PostComponent";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import SortComponent from "./ui/SortComponent";
+import ROUTES from "../../routes/ROUTES.JS";
 
 let initData = [];
 
@@ -15,6 +16,7 @@ const ShopPage = () => {
   const [maxPrice, setMaxPrice] = useState(null);
   const [allCategories, setAllCategories] = useState(null);
   const { state } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -103,6 +105,10 @@ const ShopPage = () => {
     setSearchTxt(txt);
   };
 
+  const handleBuyNowClick = (_id) => {
+    navigate(`${ROUTES.POST}/${_id}`);
+  };
+
   return (
     <Box>
       <Box
@@ -132,7 +138,11 @@ const ShopPage = () => {
       >
         {dataFromServer.map((post) => (
           <Grid item key={post._id} xs={12} sm={6} md={4}>
-            <PostComponent color={state.color} post={post} />
+            <PostComponent
+              color={state.color}
+              post={post}
+              onBuyNowClick={handleBuyNowClick}
+            />
           </Grid>
         ))}
       </Grid>

@@ -10,7 +10,11 @@ const IconMenuItems = ({ loggedIn }) => {
       {loggedIn ? (
         <Box sx={{ display: { xs: "none", sm: "none", md: "flex" } }}>
           {ProfileLink.map((myLink) => (
-            <NavLink key={myLink.children} to={myLink.to}>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              key={myLink.children}
+              to={myLink.to}
+            >
               <MenuItem>
                 <myLink.icon />
                 <Typography>&nbsp; {myLink.children}</Typography>
@@ -21,7 +25,11 @@ const IconMenuItems = ({ loggedIn }) => {
       ) : (
         <Box sx={{ display: { xs: "none", sm: "none", md: "flex" } }}>
           {GuestLink.map((myLink) => (
-            <NavLink key={myLink.children} to={myLink.to}>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              key={myLink.children}
+              to={myLink.to}
+            >
               <MenuItem>
                 <myLink.icon />
                 <Typography>&nbsp; {myLink.children}</Typography>

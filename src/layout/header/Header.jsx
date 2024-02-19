@@ -5,10 +5,10 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import { MainLink } from "../myLink";
@@ -24,6 +24,7 @@ function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const loggedIn = useSelector((bigPie) => bigPie.authSlice.loggedIn);
+  const userData = useSelector((bigPie) => bigPie.authSlice.userData);
   const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event) => {
@@ -136,13 +137,17 @@ function Header() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {MainLink.map((myLink) => (
-              <NavLink key={myLink.children + myLink.to} to={myLink.to}>
-                <Button
+              <NavLink
+                style={{ textDecoration: "none" }}
+                key={myLink.children + myLink.to}
+                to={myLink.to}
+              >
+                <MenuItem
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   {myLink.children}
-                </Button>
+                </MenuItem>
               </NavLink>
             ))}
           </Box>
@@ -151,7 +156,7 @@ function Header() {
             <Box sx={{ flexGrow: 0, ml: { md: 2 } }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt="Profile image" src={userData.image} />
                 </IconButton>
               </Tooltip>
               <Menu

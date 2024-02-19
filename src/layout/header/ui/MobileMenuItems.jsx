@@ -12,7 +12,11 @@ const MobileMenuItems = ({ loggedIn, onCloseNavMenu }) => {
     <Fragment>
       {loggedIn
         ? ProfileMobileLink.map((myLink) => (
-            <NavLink key={myLink.children + myLink.to} to={myLink.to}>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              key={myLink.children + myLink.to}
+              to={myLink.to}
+            >
               <MenuItem onClick={handleCloseNavMenu}>
                 <myLink.icon />
                 <Typography sx={{ p: 1 }} textAlign="center">
@@ -22,7 +26,11 @@ const MobileMenuItems = ({ loggedIn, onCloseNavMenu }) => {
             </NavLink>
           ))
         : GuestMobileLink.map((myLink) => (
-            <NavLink key={myLink.children + myLink.to} to={myLink.to}>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              key={myLink.children + myLink.to}
+              to={myLink.to}
+            >
               <MenuItem onClick={handleCloseNavMenu}>
                 <myLink.icon />
                 <Typography sx={{ p: 1 }} textAlign="center">

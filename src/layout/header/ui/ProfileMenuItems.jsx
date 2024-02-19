@@ -16,7 +16,11 @@ const ProfileMenuItems = ({ loggedIn, onLogout, onCloseUserMenu }) => {
     <Fragment>
       {loggedIn &&
         ProfileIconLink.map((myLink) => (
-          <NavLink key={myLink.to + myLink.children} to={myLink.to}>
+          <NavLink
+            style={{ textDecoration: "none" }}
+            key={myLink.to + myLink.children}
+            to={myLink.to}
+          >
             <MenuItem
               onClick={
                 myLink.children == "Logout" ? handleLogout : handleCloseUserMenu

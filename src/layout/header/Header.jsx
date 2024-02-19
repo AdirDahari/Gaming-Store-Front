@@ -12,18 +12,13 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
-import {
-  GuestLink,
-  MainLink,
-  ProfileIconLink,
-  ProfileLink,
-  ProfileMobileLink,
-} from "../myLink";
+import { MainLink, ProfileMobileLink } from "../myLink";
 import { NavLink } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/authSlice";
 import IconLinks from "./ui/IconLinks";
+import IconProfileLink from "./ui/IconProfileLink";
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -172,57 +167,38 @@ function Header() {
               </NavLink>
             ))}
           </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {loggedIn
-                ? ProfileIconLink.map((myLink) => (
-                    <NavLink key={myLink.to + myLink.children} to={myLink.to}>
-                      <MenuItem
-                        onClick={
-                          myLink.children == "Logout"
-                            ? handleLogout
-                            : handleCloseUserMenu
-                        }
-                      >
-                        <Typography textAlign="center">
-                          {myLink.children}
-                        </Typography>
-                      </MenuItem>
-                    </NavLink>
-                  ))
-                : GuestLink.map((myLink) => (
-                    <NavLink key={myLink.to + myLink.children} to={myLink.to}>
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">
-                          {myLink.children}
-                        </Typography>
-                      </MenuItem>
-                    </NavLink>
-                  ))}
-            </Menu>
-            <IconLinks loggedIn={false} />
-          </Box>
+          <IconLinks loggedIn={loggedIn} />
+          {loggedIn && (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                <IconProfileLink
+                  loggedIn={loggedIn}
+                  onCloseUserMenu={handleCloseUserMenu}
+                  onLogout={handleLogout}
+                />
+              </Menu>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

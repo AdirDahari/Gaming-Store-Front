@@ -15,3 +15,5 @@ Messages: add interactive massages
 !Responsive web
 
 Navbar => if loggedIn profile img with loggedIn link else loggedOut link with icon like bcard
+
+navbar => loggedOut links in mobile

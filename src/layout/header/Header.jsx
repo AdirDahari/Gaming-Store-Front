@@ -10,15 +10,15 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
-import { MainLink, ProfileMobileLink } from "../myLink";
+import { MainLink } from "../myLink";
 import { NavLink } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/authSlice";
-import IconLinks from "./ui/IconLinks";
-import IconProfileLink from "./ui/IconProfileLink";
+import MobileMenuItems from "./ui/MobileMenuItems";
+import IconMenuItems from "./ui/IconMenuItems";
+import ProfileMenuItems from "./ui/ProfileMenuItems";
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -106,31 +106,10 @@ function Header() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {loggedIn
-                ? ProfileMobileLink.map((myLink) => (
-                    <MenuItem
-                      key={myLink.children + myLink.to}
-                      onClick={handleCloseNavMenu}
-                    >
-                      <NavLink to={myLink.to}>
-                        <Typography textAlign="center">
-                          {myLink.children}
-                        </Typography>
-                      </NavLink>
-                    </MenuItem>
-                  ))
-                : MainLink.map((myLink) => (
-                    <MenuItem
-                      key={myLink.children + myLink.to}
-                      onClick={handleCloseNavMenu}
-                    >
-                      <NavLink to={myLink.to}>
-                        <Typography textAlign="center">
-                          {myLink.children}
-                        </Typography>
-                      </NavLink>
-                    </MenuItem>
-                  ))}
+              <MobileMenuItems
+                loggedIn={loggedIn}
+                onCloseNavMenu={handleCloseNavMenu}
+              />
             </Menu>
           </Box>
           <SportsEsportsIcon
@@ -167,9 +146,9 @@ function Header() {
               </NavLink>
             ))}
           </Box>
-          <IconLinks loggedIn={loggedIn} />
+          <IconMenuItems loggedIn={loggedIn} />
           {loggedIn && (
-            <Box sx={{ flexGrow: 0 }}>
+            <Box sx={{ flexGrow: 0, ml: { md: 2 } }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -191,7 +170,7 @@ function Header() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                <IconProfileLink
+                <ProfileMenuItems
                   loggedIn={loggedIn}
                   onCloseUserMenu={handleCloseUserMenu}
                   onLogout={handleLogout}

@@ -4,7 +4,7 @@ import { MenuItem, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import { ProfileIconLink } from "../../myLink";
 
-const IconProfileLink = ({ loggedIn, onLogout, onCloseUserMenu }) => {
+const ProfileMenuItems = ({ loggedIn, onLogout, onCloseUserMenu }) => {
   const handleLogout = () => {
     onLogout();
   };
@@ -22,7 +22,10 @@ const IconProfileLink = ({ loggedIn, onLogout, onCloseUserMenu }) => {
                 myLink.children == "Logout" ? handleLogout : handleCloseUserMenu
               }
             >
-              <Typography textAlign="center">{myLink.children}</Typography>
+              <myLink.icon />
+              <Typography sx={{ p: 1 }} textAlign="center">
+                {myLink.children}
+              </Typography>
             </MenuItem>
           </NavLink>
         ))}
@@ -30,10 +33,10 @@ const IconProfileLink = ({ loggedIn, onLogout, onCloseUserMenu }) => {
   );
 };
 
-IconProfileLink.propTypes = {
+ProfileMenuItems.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   onLogout: PropTypes.func.isRequired,
   onCloseUserMenu: PropTypes.func.isRequired,
 };
 
-export default IconProfileLink;
+export default ProfileMenuItems;

@@ -1,10 +1,6 @@
-Pages: about, profile(update/delete post), management
+Pages: about, profile(update/delete post), management, post
 
-Style: home, post, register, login
-
-Components: post
-
-Dianamic: navbar
+Style: home, post, register, login, navbar, footer
 
 Guard: management(admin), create post and profile(user), login and register(guest)
 
@@ -13,5 +9,3 @@ myLinks: state setting
 Messages: add interactive massages
 
 !Responsive web
-
-Navbar => if loggedIn profile img 

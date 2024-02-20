@@ -22,7 +22,7 @@ const ShopPage = () => {
     (async () => {
       try {
         const { data } = await axios.get(
-          `/posts/${state.name}`.toLocaleLowerCase()
+          `/posts/platform/${state.name}`.toLocaleLowerCase()
         );
         console.log(data);
         initData = data;
@@ -140,7 +140,11 @@ const ShopPage = () => {
           <Grid item key={post._id} xs={12} sm={6} md={4}>
             <PostComponent
               color={state.color}
-              post={post}
+              _id={post._id}
+              name={post.game.name}
+              price={post.game.price}
+              image={post.game.images[0].url}
+              alt={post.game.images[0].alt}
               onBuyNowClick={handleBuyNowClick}
             />
           </Grid>

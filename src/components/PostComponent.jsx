@@ -9,9 +9,17 @@ import {
 import PropTypes from "prop-types";
 import "../style/PostComponent.css";
 
-const PostComponent = ({ post, color, onBuyNowClick }) => {
+const PostComponent = ({
+  _id,
+  name,
+  price,
+  image,
+  alt,
+  color,
+  onBuyNowClick,
+}) => {
   const handleBuyNowClick = () => {
-    onBuyNowClick(post._id);
+    onBuyNowClick(_id);
   };
 
   return (
@@ -45,8 +53,8 @@ const PostComponent = ({ post, color, onBuyNowClick }) => {
                 borderRadius: "10px",
                 m: "0 auto",
               }}
-              image={post.game.images[0].url}
-              alt={post.game.images[0].alt}
+              image={image}
+              alt={alt}
             />
           </CardContent>
         </CardContent>
@@ -56,7 +64,7 @@ const PostComponent = ({ post, color, onBuyNowClick }) => {
             noWrap
             sx={{ textAlign: "center", fontWeight: "500" }}
           >
-            {post.game.name}
+            {name}
           </Typography>
         </CardContent>
 
@@ -78,7 +86,7 @@ const PostComponent = ({ post, color, onBuyNowClick }) => {
             </Button>
           </CardActions>
           <Typography sx={{ fontWeight: "600", p: 1 }} variant="h5">
-            &#8362; {post.game.price}
+            &#8362; {price}
           </Typography>
         </CardContent>
       </CardContent>
@@ -87,7 +95,11 @@ const PostComponent = ({ post, color, onBuyNowClick }) => {
 };
 
 PostComponent.propTypes = {
-  post: PropTypes.object.isRequired,
+  _id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
   onBuyNowClick: PropTypes.func.isRequired,
 };

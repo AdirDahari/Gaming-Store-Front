@@ -7,6 +7,7 @@ const useAutoLogin = () => {
   const dispatch = useDispatch();
   return async () => {
     try {
+      console.log("refresh");
       const token = getToken();
       if (!token) return;
       const dataFromToken = jwtDecode(token);

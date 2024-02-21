@@ -12,7 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import { MainLink } from "../myLink";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/authSlice";
@@ -23,6 +23,7 @@ import ProfileMenuItems from "./ui/ProfileMenuItems";
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const navigate = useNavigate();
   const loggedIn = useSelector((bigPie) => bigPie.authSlice.loggedIn);
   const userData = useSelector((bigPie) => bigPie.authSlice.userData);
   const dispatch = useDispatch();
@@ -52,6 +53,10 @@ function Header() {
     dispatch(authActions.logout());
   };
 
+  const handleHomeClick = () => {
+    navigate(ROUTES.HOME);
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -62,11 +67,12 @@ function Header() {
           />
           <Typography
             variant="h6"
-            noWrap
+            onClick={handleHomeClick}
             component="a"
-            href={ROUTES.HOME}
+            noWrap
             sx={{
               mr: 2,
+              cursor: "pointer",
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,

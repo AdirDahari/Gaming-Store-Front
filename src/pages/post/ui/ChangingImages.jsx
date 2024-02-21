@@ -1,47 +1,72 @@
-import { Box, Grid } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import PropTypes from "prop-types";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-const ChangingImages = ({ images }) => {
+const ChangingImages = ({
+  image,
+  onChnageImageBackward,
+  onChnageImageForward,
+}) => {
   return (
-    <Box sx={{ overflow: "hidden" }}>
-      <Box sx={{ position: "relative", width: "100%", height: "50vh" }}>
-        <Box sx={{ position: "absolute", zIndex: 10, left: 0, height: "100%" }}>
-          <ArrowBackIosNewIcon sx={{ color: "white" }} />
-        </Box>
-        <Box
-          component="img"
-          src={images[0].url}
-          width="100%"
-          sx={{ position: "absolute" }}
-        />
-        <Box
-          sx={{ position: "absolute", zIndex: 10, right: 0, height: "100%" }}
-        >
-          <ArrowForwardIosIcon sx={{ color: "white" }} />
-        </Box>
+    <Box
+      sx={{
+        overflow: "hidden",
+        position: "relative",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <IconButton
+        onClick={onChnageImageBackward}
+        sx={{
+          bgcolor: "rgba(239, 239, 240, 0.5)",
+          position: "absolute",
+          zIndex: 10,
+          left: 0,
+          top: "50%",
+          transform: `translate(0, -50%)`,
+          ml: 2,
+        }}
+      >
+        <ArrowBackIosNewIcon fontSize="large" sx={{ color: "white" }} />
+      </IconButton>
+      <Box
+        sx={{
+          position: "absolute",
+          top: "50%",
+          transform: `translate(0, -50%)`,
+          borderRadius: "15px",
+          overflow: "hidden",
+          width: "100%",
+          maxHeight: "100%",
+        }}
+      >
+        <Box component="img" width="100%" src={image.url} alt={image.alt} />
       </Box>
 
-      <Grid
-        sx={{ width: "100%", height: 300 }}
-        container
-        spacing={2}
-        display="flex"
-        justifyContent="center"
+      <IconButton
+        onClick={onChnageImageForward}
+        sx={{
+          bgcolor: "rgba(239, 239, 240, 0.5)",
+          position: "absolute",
+          zIndex: 10,
+          right: 0,
+          top: "50%",
+          transform: `translate(0, -50%)`,
+          mr: 2,
+        }}
       >
-        {images.map((img) => (
-          <Grid key={img.url} item xs={4}>
-            <Box component="img" src={img.url} width="90%" sx={{ p: 2 }} />
-          </Grid>
-        ))}
-      </Grid>
+        <ArrowForwardIosIcon fontSize="large" sx={{ color: "white" }} />
+      </IconButton>
     </Box>
   );
 };
 
 ChangingImages.propTypes = {
-  images: PropTypes.array.isRequired,
+  image: PropTypes.object.isRequired,
+  onChnageImageBackward: PropTypes.func.isRequired,
+  onChnageImageForward: PropTypes.func.isRequired,
 };
 
 export default ChangingImages;

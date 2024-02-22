@@ -38,7 +38,7 @@ const ChangingImages = ({
           transform: `translate(0, -50%)`,
           borderRadius: "15px",
           overflow: "hidden",
-          width: "100%",
+          maxWidthidth: "100%",
           maxHeight: "100%",
         }}
       >

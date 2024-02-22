@@ -7,7 +7,7 @@ import {
   CardActions,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import "../style/PostComponent.css";
+import "../style/ImageScale.css";
 
 const PostComponent = ({
   _id,
@@ -45,7 +45,7 @@ const PostComponent = ({
           >
             <CardMedia
               onClick={handleBuyNowClick}
-              className="image"
+              className="imageSmallScale"
               component="img"
               sx={{
                 cursor: "pointer",

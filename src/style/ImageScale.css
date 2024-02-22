@@ -1,0 +1,23 @@
+.imageSmallScale {
+  transition: 0.25s all ease-in-out;
+}
+
+.imageSmallScale:hover {
+  scale: 1.08;
+}
+
+.imageMiddleScale {
+  transition: 0.25s all ease-in-out;
+}
+
+.imageMiddleScale:hover {
+  scale: 1.3;
+}
+
+.imageLargeScale {
+  transition: 0.25s all ease-in-out;
+}
+
+.imageLargeScale:hover {
+  scale: 2;
+}

@@ -7,9 +7,9 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Typography from "@mui/material/Typography";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ROUTE from "../../routes/ROUTES.js";
 import { editPostNormalization } from "./editPostNoramalization.js";
 
@@ -25,7 +25,7 @@ const getStepContent = (
 ) => {
   switch (step) {
     case 0:
-      return <GameForm handleNext={funcNext} />;
+      return <GameForm handleNext={funcNext} postData={gameDetails} />;
     case 1:
       return (
         <Review
@@ -40,11 +40,26 @@ const getStepContent = (
   }
 };
 
+let initData = {};
+
 const EditPostPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [userDetails, setUserDetails] = useState(null);
   const [gameDetails, setGameDetails] = useState(null);
   const navigate = useNavigate();
+  const { id: _id } = useParams();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await axios.get(`/posts/${_id}`);
+        initData = data;
+        setGameDetails(data);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
 
   const handleNext = async (gameDetailsValues) => {
     try {
@@ -58,13 +73,15 @@ const EditPostPage = () => {
   };
 
   const handleBack = () => {
+    setGameDetails(initData);
     setActiveStep(activeStep - 1);
   };
 
   const handleSubmit = async () => {
     try {
       const request = editPostNormalization(gameDetails, userDetails);
-      await axios.post("/posts", request);
+      console.log("request", request);
+      await axios.put(`/posts/${_id}`, request);
       navigate(ROUTE.HOME);
     } catch (err) {
       console.log("handleSubmit", err);
@@ -89,9 +106,7 @@ const EditPostPage = () => {
               </Step>
             ))}
           </Stepper>
-          {activeStep === steps.length ? (
-            <Fragment></Fragment>
-          ) : (
+          {gameDetails && (
             <Fragment>
               {getStepContent(
                 activeStep,

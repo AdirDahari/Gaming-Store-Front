@@ -14,23 +14,22 @@ import { validateGameDetails } from "../../../validation/gameDetails";
 const platforms = ["xbox", "playstation", "pc"];
 const status = ["new", "like new", "used"];
 
-const GameForm = ({ handleNext }) => {
+const GameForm = ({ handleNext, postData }) => {
   const [gameDetails, setGameDetails] = useState({
-    platform: "xbox",
-    name: "",
-    description: "",
-    cate0: "",
-    cate1: "",
-    cate2: "",
-    productStatus: "new",
-    url0: "",
-    url1: "",
-    url2: "",
-    price: 0,
+    platform: postData.platform,
+    name: postData.game.name,
+    description: postData.game.description ? postData.game.description : "",
+    cate0: postData.game.category[0],
+    cate1: postData.game.category[1] ? postData.game.category[1] : "",
+    cate2: postData.game.category[2] ? postData.game.category[2] : "",
+    productStatus: postData.game.productStatus,
+    url0: postData.game.images[0].url,
+    url1: postData.game.images[1] ? postData.game.images[1].url : "",
+    url2: postData.game.images[2] ? postData.game.images[2].url : "",
+    price: postData.game.price,
   });
+
   const [errorsState, setErrorsState] = useState(null);
-  const [platformValue, setPlatformValue] = useState("");
-  const [statusValue, setStatusValue] = useState("");
 
   const handleNextClick = () => {
     const joiResponse = validateGameDetails(gameDetails);
@@ -49,19 +48,11 @@ const GameForm = ({ handleNext }) => {
     }));
   };
 
-  const handlePlatformChange = (e) => {
+  const handleSelectChange = (e) => {
     setGameDetails((currentState) => ({
       ...currentState,
       [e.target.name]: e.target.value,
     }));
-    setPlatformValue(e.target.value);
-  };
-  const handleStatusChange = (e) => {
-    setStatusValue((currentState) => ({
-      ...currentState,
-      [e.target.name]: e.target.value,
-    }));
-    setStatusValue(e.target.value);
   };
 
   return (
@@ -80,6 +71,7 @@ const GameForm = ({ handleNext }) => {
             autoComplete="platform-name"
             variant="standard"
             onChange={handleInputsChange}
+            defaultValue={postData.game.name}
           />
           {errorsState && errorsState.name && (
             <Alert severity="warning">{errorsState.name}</Alert>
@@ -92,9 +84,8 @@ const GameForm = ({ handleNext }) => {
             label="Platform"
             fullWidth
             helperText="Please select your platform"
-            defaultValue={platformValue ? platformValue : ""}
-            value={platformValue}
-            onChange={handlePlatformChange}
+            defaultValue={postData.platform}
+            onChange={handleSelectChange}
           >
             {platforms.map((option) => (
               <MenuItem key={option} value={option}>
@@ -113,9 +104,8 @@ const GameForm = ({ handleNext }) => {
             label="Product status"
             fullWidth
             helperText="Please select product status"
-            defaultValue={statusValue ? statusValue : ""}
-            value={statusValue}
-            onChange={handleStatusChange}
+            defaultValue={postData.game.productStatus}
+            onChange={handleSelectChange}
           >
             {status.map((option, index) => (
               <MenuItem key={index} value={option}>
@@ -136,6 +126,7 @@ const GameForm = ({ handleNext }) => {
             fullWidth
             autoComplete="category-1"
             variant="standard"
+            defaultValue={postData.game.category[0]}
             onChange={handleInputsChange}
           />
           {errorsState && errorsState.cate0 && (
@@ -150,6 +141,9 @@ const GameForm = ({ handleNext }) => {
             fullWidth
             autoComplete="category-2"
             variant="standard"
+            defaultValue={
+              postData.game.category[1] ? postData.game.category[1] : ""
+            }
             onChange={handleInputsChange}
           />
         </Grid>
@@ -161,6 +155,9 @@ const GameForm = ({ handleNext }) => {
             fullWidth
             autoComplete="category-3"
             variant="standard"
+            defaultValue={
+              postData.game.category[2] ? postData.game.category[2] : ""
+            }
             onChange={handleInputsChange}
           />
         </Grid>
@@ -172,6 +169,7 @@ const GameForm = ({ handleNext }) => {
             label="Image URL"
             fullWidth
             variant="standard"
+            defaultValue={postData.game.images[0].url}
             onChange={handleInputsChange}
           />
           {errorsState && errorsState.url0 && (
@@ -185,6 +183,9 @@ const GameForm = ({ handleNext }) => {
             label="Image URL"
             fullWidth
             variant="standard"
+            defaultValue={
+              postData.game.images[1] ? postData.game.images[1].url : ""
+            }
             onChange={handleInputsChange}
           />
           {errorsState && errorsState.url1 && (
@@ -198,6 +199,9 @@ const GameForm = ({ handleNext }) => {
             label="Image URL"
             fullWidth
             variant="standard"
+            defaultValue={
+              postData.game.images[2] ? postData.game.images[2].url : ""
+            }
             onChange={handleInputsChange}
           />
           {errorsState && errorsState.url2 && (
@@ -209,6 +213,7 @@ const GameForm = ({ handleNext }) => {
             id="price"
             label="Price"
             type="number"
+            defaultValue={postData.game.price}
             onChange={handleInputsChange}
           />
           {errorsState && errorsState.price && (
@@ -222,6 +227,9 @@ const GameForm = ({ handleNext }) => {
             multiline
             rows={2}
             variant="standard"
+            defaultValue={
+              postData.game.description ? postData.game.description : ""
+            }
             onChange={handleInputsChange}
           />
         </Grid>
@@ -241,6 +249,7 @@ const GameForm = ({ handleNext }) => {
 
 GameForm.propTypes = {
   handleNext: PropTypes.func.isRequired,
+  postData: PropTypes.object.isRequired,
 };
 
 export default GameForm;

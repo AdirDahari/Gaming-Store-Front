@@ -9,7 +9,6 @@ const Review = ({ handleBack, handleSubmit, userDetails, gameDetails }) => {
     if (urls.length > 0) {
       return;
     }
-    console.log(gameDetails);
     if (gameDetails.url0) {
       setUrls((currentState) => {
         currentState = [gameDetails.url0, gameDetails.url1, gameDetails.url2];
@@ -142,7 +141,7 @@ const Review = ({ handleBack, handleSubmit, userDetails, gameDetails }) => {
           onClick={handleSubmitClick}
           sx={{ mt: 3, ml: 1 }}
         >
-          Create Post
+          Update Post
         </Button>
       </Box>
     </Fragment>

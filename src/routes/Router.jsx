@@ -17,7 +17,7 @@ const Router = () => {
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
       <Route path={ROUTES.CREATEPOST} element={<CreatePostPage />} />
-      <Route path={ROUTES.EDITPOST} element={<EditPostPage />} />
+      <Route path={`${ROUTES.EDITPOST}/:id`} element={<EditPostPage />} />
       <Route path={`${ROUTES.POST}/:id`} element={<PostPage />} />
       <Route path="*" element={<Error404Page />} />
     </Routes>

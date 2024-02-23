@@ -1,5 +1,6 @@
 const editPostNormalization = (gameDetails, userDetails) => {
-
+    console.log(gameDetails);
+    console.log(userDetails);
     let categoryArr = [gameDetails.cate0];
     if (gameDetails.cate1) categoryArr.push(gameDetails.cate1);
     if (gameDetails.cate2) categoryArr.push(gameDetails.cate2);
@@ -30,7 +31,8 @@ const editPostNormalization = (gameDetails, userDetails) => {
         seller: {
             city: userDetails.address.city,
             firstName: userDetails.name.first,
-            phone: userDetails.phone
+            phone: userDetails.phone,
+            userId: userDetails._id
         }
     }
 }

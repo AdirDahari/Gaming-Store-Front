@@ -34,8 +34,9 @@ const ChangingImages = ({
       <Box
         sx={{
           position: "absolute",
+          left: "50%",
           top: "50%",
-          transform: `translate(0, -50%)`,
+          transform: `translate(-50%, -50%)`,
           borderRadius: "15px",
           overflow: "hidden",
           maxWidthidth: "100%",

@@ -9,11 +9,11 @@ import StepLabel from "@mui/material/StepLabel";
 import Typography from "@mui/material/Typography";
 import { Fragment, useState } from "react";
 import axios from "axios";
-import { createPostNormalization } from "./createPostNoramalization.js";
 import { useNavigate } from "react-router-dom";
 import ROUTE from "../../routes/ROUTES.js";
+import { editPostNormalization } from "./editPostNoramalization.js";
 
-const steps = ["Game details", "Review your post"];
+const steps = ["Game details", "Update your post"];
 
 const getStepContent = (
   step,
@@ -40,7 +40,7 @@ const getStepContent = (
   }
 };
 
-const CreatePostPage = () => {
+const EditPostPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [userDetails, setUserDetails] = useState(null);
   const [gameDetails, setGameDetails] = useState(null);
@@ -63,7 +63,7 @@ const CreatePostPage = () => {
 
   const handleSubmit = async () => {
     try {
-      const request = createPostNormalization(gameDetails, userDetails);
+      const request = editPostNormalization(gameDetails, userDetails);
       await axios.post("/posts", request);
       navigate(ROUTE.HOME);
     } catch (err) {
@@ -80,7 +80,7 @@ const CreatePostPage = () => {
           sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
         >
           <Typography component="h1" variant="h4" align="center">
-            New Post
+            Edit Post
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label) => (
@@ -108,4 +108,4 @@ const CreatePostPage = () => {
     </Fragment>
   );
 };
-export default CreatePostPage;
+export default EditPostPage;

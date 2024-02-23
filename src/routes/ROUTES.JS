@@ -4,6 +4,7 @@ const ROUTES = {
     REGISTER: "/register",
     LOGIN: "/login",
     CREATEPOST: "/createpost",
+    EDITPOST: "/editpost",
     POST: "/post",
 };
 

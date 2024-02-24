@@ -1,7 +1,6 @@
 import GameForm from "./ui/GameForm.jsx";
 import Review from "./ui/Review.jsx";
-import CssBaseline from "@mui/material/CssBaseline";
-import Container from "@mui/material/Container";
+import Box from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -73,11 +72,10 @@ const CreatePostPage = () => {
 
   return (
     <Fragment>
-      <CssBaseline />
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+      <Box maxWidth="sm" sx={{ pb: 4, pt: 4 }}>
         <Paper
           variant="outlined"
-          sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
+          sx={{ py: { xs: 3, pd: 6 }, p: { xs: 2, pd: 3 } }}
         >
           <Typography component="h1" variant="h4" align="center">
             New Post
@@ -104,7 +102,7 @@ const CreatePostPage = () => {
             </Fragment>
           )}
         </Paper>
-      </Container>
+      </Box>
     </Fragment>
   );
 };

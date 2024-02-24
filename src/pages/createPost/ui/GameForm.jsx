@@ -220,6 +220,7 @@ const GameForm = ({ handleNext }) => {
             id="description"
             label="Description"
             multiline
+            fullWidth
             rows={2}
             variant="standard"
             onChange={handleInputsChange}

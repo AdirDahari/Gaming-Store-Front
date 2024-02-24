@@ -3,7 +3,7 @@ import { Container } from "@mui/material";
 
 const Main = ({ children }) => {
   return (
-    <Container maxWidth={false} sx={{ minHeight: "80vh" }}>
+    <Container maxWidth={false} sx={{ minHeight: "83vh", bgcolor: "#ededed" }}>
       {children}
     </Container>
   );

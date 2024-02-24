@@ -6,6 +6,7 @@ const ROUTES = {
     CREATEPOST: "/createpost",
     EDITPOST: "/editpost",
     POST: "/post",
+    PROFILE: "/profile"
 };
 
 export default ROUTES;

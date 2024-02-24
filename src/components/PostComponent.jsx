@@ -5,9 +5,14 @@ import {
   CardMedia,
   Typography,
   CardActions,
+  IconButton,
+  Box,
 } from "@mui/material";
 import PropTypes from "prop-types";
 import "../style/ImageScale.css";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 const PostComponent = ({
   _id,
@@ -17,9 +22,14 @@ const PostComponent = ({
   alt,
   color,
   onBuyNowClick,
+  onEditClick,
+  isUser,
 }) => {
   const handleBuyNowClick = () => {
     onBuyNowClick(_id);
+  };
+  const handleEditClick = () => {
+    onEditClick(_id);
   };
 
   return (
@@ -27,17 +37,41 @@ const PostComponent = ({
       sx={{
         border: `1px solid ${color}`,
         borderRadius: "15px",
-        p: 1,
+        pl: 2,
+        pr: 2,
         minHeight: 450,
         maxHeight: 450,
       }}
     >
       <CardContent>
-        <CardContent sx={{ maxHeight: 250, minHeight: 250 }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: isUser ? "space-between" : "end",
+          }}
+        >
+          {isUser && (
+            <Box>
+              <IconButton>
+                <DeleteIcon />
+              </IconButton>
+              <IconButton onClick={handleEditClick}>
+                <EditIcon />
+              </IconButton>
+            </Box>
+          )}
+          <Box>
+            <IconButton>
+              <FavoriteIcon />
+            </IconButton>
+          </Box>
+        </Box>
+
+        <CardContent sx={{ maxHeight: 200, minHeight: 200 }}>
           <CardContent
             sx={{
               margin: "0 auto",
-              maxHeight: 250,
+              maxHeight: 200,
               maxWidth: "100%",
               display: "flex",
               overflow: "hidden",
@@ -58,7 +92,7 @@ const PostComponent = ({
             />
           </CardContent>
         </CardContent>
-        <CardContent sx={{ minHeight: 50, maxHeight: 50 }}>
+        <CardContent>
           <Typography
             variant="h5"
             noWrap
@@ -102,6 +136,12 @@ PostComponent.propTypes = {
   price: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
   onBuyNowClick: PropTypes.func.isRequired,
+  onEditClick: PropTypes.func,
+  isUser: PropTypes.bool,
+};
+
+PostComponent.defaultProps = {
+  isUser: false,
 };
 
 export default PostComponent;

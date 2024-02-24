@@ -1,4 +1,4 @@
-Pages: about, profile(update/delete post), management, post
+Pages: about, favourites  management
 
 Style: home, post, register, login, navbar, footer
 
@@ -9,3 +9,13 @@ myLinks: state setting
 Messages: add interactive massages
 
 !Responsive web
+
+Alert to editpost and profile 
+
+Edit profile - seperate url to make sure is no changing in input only in update and make the image fit to all images size
+
+Delete user
+
+Post Like
+
+Post Delete

@@ -30,7 +30,7 @@ const ProfileMobileLink = [
     { to: "/", children: "Favourites", icon: FavoriteIcon }
 ];
 const ProfileIconLink = [
-    { to: "/", children: "Profile", icon: AccountBoxIcon },
+    { to: ROUTES.PROFILE, children: "Profile", icon: AccountBoxIcon },
     { to: ROUTES.HOME, children: "Logout", icon: LogoutIcon }
 ];
 

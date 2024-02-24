@@ -225,6 +225,7 @@ const GameForm = ({ handleNext, postData }) => {
             id="description"
             label="Description"
             multiline
+            fullWidth
             rows={2}
             variant="standard"
             defaultValue={

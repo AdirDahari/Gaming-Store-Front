@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import ROUTES from "../../routes/ROUTES.js";
+import ROUTES from "../../routes/ROUTES.JS";
 import { Alert } from "@mui/material";
 import axios from "axios";
 import { validateLogin } from "../../validation/loginValidation.js";

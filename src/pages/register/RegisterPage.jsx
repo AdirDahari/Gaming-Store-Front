@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import ROUTES from "../../routes/ROUTES";
+import ROUTES from "../../routes/ROUTES.JS";
 import { validateRegister } from "../../validation/registerValidation";
 import { registerNormalization } from "./registerNormalization";
 import axios from "axios";

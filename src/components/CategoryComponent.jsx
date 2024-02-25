@@ -3,7 +3,7 @@ import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import ROUTES from "../routes/ROUTES";
+import ROUTES from "../routes/ROUTES.JS";
 
 const CategoryComponent = ({ children }) => {
   const navigate = useNavigate();

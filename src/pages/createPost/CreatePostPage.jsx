@@ -10,7 +10,7 @@ import { Fragment, useState } from "react";
 import axios from "axios";
 import { createPostNormalization } from "./createPostNoramalization.js";
 import { useNavigate } from "react-router-dom";
-import ROUTE from "../../routes/ROUTES.js";
+import ROUTE from "../../routes/ROUTES.JS";
 
 const steps = ["Game details", "Review your post"];
 

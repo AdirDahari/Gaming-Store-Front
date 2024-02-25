@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import ROUTE from "../../routes/ROUTES.js";
+import ROUTE from "../../routes/ROUTES.JS";
 import { editPostNormalization } from "./editPostNoramalization.js";
 
 const steps = ["Game details", "Update your post"];

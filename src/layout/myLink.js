@@ -1,4 +1,4 @@
-import ROUTES from "../routes/ROUTES";
+import ROUTES from "../routes/ROUTES.JS";
 import LoginIcon from "@mui/icons-material/Login";
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -22,12 +22,12 @@ const GuestMobileLink = [
 ]
 const ProfileLink = [
     { to: ROUTES.CREATEPOST, children: "Create post", icon: PostAddIcon },
-    { to: "/", children: "Favourites", icon: FavoriteIcon }
+    { to: ROUTES.FAVOURITES, children: "Favourites", icon: FavoriteIcon }
 ];
 const ProfileMobileLink = [
     { to: "/", children: "About us", icon: InfoIcon },
     { to: ROUTES.CREATEPOST, children: "Create post", icon: PostAddIcon },
-    { to: "/", children: "Favourites", icon: FavoriteIcon }
+    { to: ROUTES.FAVOURITES, children: "Favourites", icon: FavoriteIcon }
 ];
 const ProfileIconLink = [
     { to: ROUTES.PROFILE, children: "Profile", icon: AccountBoxIcon },

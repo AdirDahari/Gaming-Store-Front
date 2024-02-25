@@ -6,6 +6,7 @@ import {
   Typography,
   CardActions,
   IconButton,
+  Popover,
   Box,
 } from "@mui/material";
 import PropTypes from "prop-types";
@@ -13,6 +14,7 @@ import "../style/ImageScale.css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { Fragment, useState } from "react";
 
 const PostComponent = ({
   _id,
@@ -23,13 +25,38 @@ const PostComponent = ({
   color,
   onBuyNowClick,
   onEditClick,
+  onDeleteClick,
+  onLikeClick,
   isUser,
+  isLoggedIn,
+  isLike,
 }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+
   const handleBuyNowClick = () => {
     onBuyNowClick(_id);
   };
+
   const handleEditClick = () => {
     onEditClick(_id);
+  };
+
+  const handleDeleteClick = () => {
+    onDeleteClick(_id);
+  };
+
+  const handleLikeClick = () => {
+    onLikeClick(_id);
   };
 
   return (
@@ -44,28 +71,56 @@ const PostComponent = ({
       }}
     >
       <CardContent>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: isUser ? "space-between" : "end",
-          }}
-        >
-          {isUser && (
+        {isLoggedIn ? (
+          <Box
+            sx={{
+              display: "flex",
+              height: 40,
+              justifyContent: isUser ? "space-between" : "end",
+            }}
+          >
+            {isUser && (
+              <Fragment>
+                <Box>
+                  <IconButton onClick={handleClick}>
+                    <DeleteIcon />
+                  </IconButton>
+                  <IconButton onClick={handleEditClick}>
+                    <EditIcon />
+                  </IconButton>
+                </Box>
+                <Popover
+                  open={open}
+                  anchorEl={anchorEl}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
+                  }}
+                  transformOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center",
+                  }}
+                >
+                  <Button
+                    onClick={handleDeleteClick}
+                    color="error"
+                    sx={{ p: 2 }}
+                  >
+                    Delete Post
+                  </Button>
+                </Popover>
+              </Fragment>
+            )}
             <Box>
-              <IconButton>
-                <DeleteIcon />
-              </IconButton>
-              <IconButton onClick={handleEditClick}>
-                <EditIcon />
+              <IconButton onClick={handleLikeClick}>
+                <FavoriteIcon sx={{ color: isLike && "red" }} />
               </IconButton>
             </Box>
-          )}
-          <Box>
-            <IconButton>
-              <FavoriteIcon />
-            </IconButton>
           </Box>
-        </Box>
+        ) : (
+          <Box sx={{ height: 40 }}></Box>
+        )}
 
         <CardContent sx={{ maxHeight: 200, minHeight: 200 }}>
           <CardContent
@@ -137,11 +192,17 @@ PostComponent.propTypes = {
   color: PropTypes.string.isRequired,
   onBuyNowClick: PropTypes.func.isRequired,
   onEditClick: PropTypes.func,
+  onDeleteClick: PropTypes.func,
+  onLikeClick: PropTypes.func,
   isUser: PropTypes.bool,
+  isLoggedIn: PropTypes.bool,
+  isLike: PropTypes.bool,
 };
 
 PostComponent.defaultProps = {
   isUser: false,
+  isLoggedIn: false,
+  isLike: false,
 };
 
 export default PostComponent;

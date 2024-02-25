@@ -12,10 +12,4 @@ Messages: add interactive massages
 
 Alert to editpost and profile 
 
-Edit profile - seperate url to make sure is no changing in input only in update and make the image fit to all images size
-
-Delete user
-
-Post Like
-
-Post Delete
+Check login and register functionality

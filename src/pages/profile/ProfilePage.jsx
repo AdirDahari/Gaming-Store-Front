@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Divider,
-  TextField,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Divider, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,13 +8,17 @@ import {
   toServerNormalization,
 } from "./inputsNormalization";
 import PostComponent from "../../components/PostComponent";
-// import { errorToast, infoToast } from "../../messages/myToasts";
+import UpdateUserForm from "./ui/UpdateUserForm";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/authSlice";
 
 let userId = "";
+let profileImage = "";
 
 const ProfilePage = () => {
   const [inputsValue, setInputsValue] = useState(null);
   const [postsData, setPostsData] = useState(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +26,8 @@ const ProfilePage = () => {
       try {
         let { data } = await axios.get("/users/my-user");
         userId = data._id;
-        console.log(data);
+        profileImage = data.image.url;
+        // console.log(data);
         setInputsValue(fromServerNormalization(data));
       } catch (err) {
         console.log(err);
@@ -41,6 +39,7 @@ const ProfilePage = () => {
     (async () => {
       try {
         let { data } = await axios.get("/posts/profile/my-posts");
+        console.log("my posts", data);
         setPostsData(data);
       } catch (err) {
         console.log(err.response.data);
@@ -64,6 +63,15 @@ const ProfilePage = () => {
   const handleCreatePostClick = () => {
     navigate(ROUTES.CREATEPOST);
   };
+  const handleDeletePostClick = async (_id) => {
+    try {
+      await axios.delete(`/posts/${_id}`);
+      let { data } = await axios.get("/posts/profile/my-posts");
+      setPostsData(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleUpdateProfile = async (e) => {
     try {
@@ -78,226 +86,40 @@ const ProfilePage = () => {
       console.log(err);
     }
   };
-
-  // const handleDeleteCardClick = async (_id, bizNumber) => {
-  //   try {
-  //     let request = {
-  //       bizNumber: +bizNumber,
-  //     };
-  //     await axios.delete("/cards/" + _id, request);
-  //     setMyCard((dataFromServerCopy) =>
-  //       dataFromServerCopy.filter((card) => card._id !== _id)
-  //     );
-  //     //   infoToast("Card deleted");
-  //   } catch (err) {
-  //     //   errorToast("Something wrong....");
-  //   }
-  // };
+  const handleDeleteProfile = async () => {
+    try {
+      await axios.delete(`/users/${userId}`);
+      if (localStorage.getItem("token")) {
+        localStorage.removeItem("token");
+      } else if (sessionStorage.getItem("token")) {
+        sessionStorage.removeItem("token");
+      } else return;
+      dispatch(authActions.logout());
+      navigate(ROUTES.HOME);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleLikePost = async (_id) => {
+    try {
+      await axios.patch(`/posts/${_id}`);
+      let { data } = await axios.get("/posts/profile/my-posts");
+      setPostsData(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Fragment>
       {inputsValue && (
-        <Grid
-          container
-          spacing={2}
-          sx={{
-            maxWidth: 1200,
-            m: "0 auto",
-            p: 2,
-          }}
-        >
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={7}
-            sx={{ order: { xs: 1, sm: 1, md: 0 } }}
-          >
-            <Box sx={{ bgcolor: "#f9f9f9", p: 2, pb: 2, borderRadius: "5px" }}>
-              <Box
-                sx={{
-                  width: "80%",
-                  m: "0 auto",
-                  p: 2,
-                  bgcolor: "#A32CC4",
-                  borderRadius: "5px",
-                }}
-              >
-                <Typography color="#f9f9f9" variant="h5">
-                  Edit Profile
-                </Typography>
-                <Typography color="#f9f9f9" sx={{ pl: 1 }}>
-                  Complate your profile
-                </Typography>
-              </Box>
-              <Box sx={{ pt: 4, pb: 4 }} component="form" noValidate>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={4}>
-                    <TextField
-                      variant="standard"
-                      name="first"
-                      required
-                      fullWidth
-                      id="first"
-                      label="First Name"
-                      value={inputsValue.first}
-                      onChange={handleInputsChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <TextField
-                      variant="standard"
-                      name="middle"
-                      fullWidth
-                      id="middle"
-                      label="Middle Name"
-                      value={inputsValue.middle}
-                      onChange={handleInputsChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <TextField
-                      variant="standard"
-                      required
-                      name="last"
-                      fullWidth
-                      id="last"
-                      label="Last Name"
-                      value={inputsValue.last}
-                      onChange={handleInputsChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      variant="standard"
-                      required
-                      name="phone"
-                      fullWidth
-                      id="phone"
-                      label="Phone Name"
-                      value={inputsValue.phone}
-                      onChange={handleInputsChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      variant="standard"
-                      name="url"
-                      fullWidth
-                      id="url"
-                      label="Profile image (url)"
-                      value={inputsValue.url}
-                      onChange={handleInputsChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <TextField
-                      variant="standard"
-                      name="state"
-                      fullWidth
-                      id="state"
-                      label="State"
-                      value={inputsValue.state}
-                      onChange={handleInputsChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <TextField
-                      variant="standard"
-                      required
-                      name="country"
-                      fullWidth
-                      id="country"
-                      label="Country"
-                      value={inputsValue.country}
-                      onChange={handleInputsChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <TextField
-                      variant="standard"
-                      required
-                      name="city"
-                      fullWidth
-                      id="city"
-                      label="City"
-                      value={inputsValue.city}
-                      onChange={handleInputsChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <TextField
-                      variant="standard"
-                      required
-                      name="street"
-                      fullWidth
-                      id="street"
-                      label="Street"
-                      value={inputsValue.street}
-                      onChange={handleInputsChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <TextField
-                      variant="standard"
-                      required
-                      name="houseNumber"
-                      fullWidth
-                      id="houseNumber"
-                      label="House number"
-                      value={inputsValue.houseNumber}
-                      onChange={handleInputsChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <TextField
-                      variant="standard"
-                      name="zip"
-                      fullWidth
-                      id="zip"
-                      label="Zip"
-                      value={inputsValue.zip}
-                      onChange={handleInputsChange}
-                    />
-                  </Grid>
-                </Grid>
-              </Box>
-              <Divider variant="middle" sx={{ pt: 2 }} />
-              <Box sx={{ pt: 4 }}>
-                <Button variant="outlined" onClick={handleUpdateProfile}>
-                  Update
-                </Button>
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item xs={12} sm={12} md={5} sx={{ m: "0 auto" }}>
-            <Box
-              sx={{
-                mt: 4,
-                m: "0 auto",
-                width: 200,
-                overflow: "hidden",
-                boxShadow: `rgba(0, 0, 0, 0.35) 0px 5px 15px`,
-                borderRadius: "50%",
-              }}
-            >
-              <Box
-                width="100%"
-                sx={{
-                  boxShadow: `rgba(0, 0, 0, 0.35) 0px 5px 15px`,
-                  borderRadius: "50%",
-                }}
-                component="img"
-                src={inputsValue.url}
-              />
-            </Box>
-            <Box>
-              <Typography variant="h5" sx={{ textAlign: "center", p: 2 }}>
-                {inputsValue.email}
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
+        <UpdateUserForm
+          inputsValue={inputsValue}
+          profileImage={profileImage}
+          handleInputsChange={handleInputsChange}
+          handleUpdateProfile={handleUpdateProfile}
+          handleDeleteProfile={handleDeleteProfile}
+        />
       )}
       <Box maxWidth={1200} m="0 auto" pt={4}>
         <Divider />
@@ -323,7 +145,11 @@ const ProfilePage = () => {
                   alt={post.game.images[0].alt}
                   onBuyNowClick={handleBuyNowClick}
                   onEditClick={handleEditCardClick}
+                  onDeleteClick={handleDeletePostClick}
+                  onLikeClick={handleLikePost}
                   isUser={true}
+                  isLoggedIn={true}
+                  isLike={userId ? post.likes.includes(userId) : false}
                 />
               </Grid>
             ))}

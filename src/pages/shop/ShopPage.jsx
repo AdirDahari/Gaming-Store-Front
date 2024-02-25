@@ -6,6 +6,7 @@ import PostComponent from "../../components/PostComponent";
 import { useLocation, useNavigate } from "react-router-dom";
 import SortComponent from "./ui/SortComponent";
 import ROUTES from "../../routes/ROUTES.JS";
+import { useSelector } from "react-redux";
 
 let initData = [];
 
@@ -15,19 +16,26 @@ const ShopPage = () => {
   const [searchTxt, setSearchTxt] = useState("");
   const [maxPrice, setMaxPrice] = useState(null);
   const [allCategories, setAllCategories] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const loggedIn = useSelector((bigPie) => bigPie.authSlice.loggedIn);
   const { state } = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get(
+        const { data: postData } = await axios.get(
           `/posts/platform/${state.name}`.toLocaleLowerCase()
         );
-        console.log(data);
-        initData = data;
-        findMaxPrice(data);
-        findAllCategories(data);
+        if (loggedIn == true) {
+          const { data: userData } = await axios.get("/users/my-user");
+          setUserId(userData._id);
+        }
+
+        console.log(postData);
+        initData = postData;
+        findMaxPrice(postData);
+        findAllCategories(postData);
       } catch (err) {
         console.log(err);
       }
@@ -108,6 +116,33 @@ const ShopPage = () => {
   const handleBuyNowClick = (_id) => {
     navigate(`${ROUTES.POST}/${_id}`);
   };
+  const handleEditCardClick = (_id) => {
+    navigate(`${ROUTES.EDITPOST}/${_id}`);
+  };
+  const handleDeletePostClick = async (_id) => {
+    try {
+      await axios.delete(`/posts/${_id}`);
+      let { data } = await axios.get(
+        `/posts/platform/${state.name}`.toLocaleLowerCase()
+      );
+      initData = data;
+      setDataFromServer(initData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleLikePost = async (_id) => {
+    try {
+      await axios.patch(`/posts/${_id}`);
+      let { data } = await axios.get(
+        `/posts/platform/${state.name}`.toLocaleLowerCase()
+      );
+      initData = data;
+      setDataFromServer(initData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Box>
@@ -146,6 +181,12 @@ const ShopPage = () => {
               image={post.game.images[0].url}
               alt={post.game.images[0].alt}
               onBuyNowClick={handleBuyNowClick}
+              onEditClick={handleEditCardClick}
+              onDeleteClick={handleDeletePostClick}
+              onLikeClick={handleLikePost}
+              isLoggedIn={loggedIn}
+              isUser={userId ? post.seller.userId == userId : false}
+              isLike={userId ? post.likes.includes(userId) : false}
             />
           </Grid>
         ))}

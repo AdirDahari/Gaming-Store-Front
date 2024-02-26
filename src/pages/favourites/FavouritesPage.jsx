@@ -106,7 +106,7 @@ const FavouritesPage = () => {
             <Search txt={txt} onTxtChange={handleTxtChange} />
           </Box>
         </Box>
-
+        <Divider variant="middle" sx={{ pt: 4, pb: 4 }} />
         {dataFromServer && (
           <Grid
             container
@@ -114,7 +114,6 @@ const FavouritesPage = () => {
             maxWidth={1200}
             sx={{ m: 2, p: 2, pt: 4, margin: "0 auto" }}
           >
-            <Divider sx={{ pt: 4 }} />
             {dataFromServer.map((post) => (
               <Grid item key={post._id} xs={12} sm={6} md={4} sx={{ p: 1 }}>
                 <PostComponent

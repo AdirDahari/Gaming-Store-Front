@@ -59,7 +59,12 @@ const Footer = () => {
             justifyContent="space-between"
           >
             <Grid item xs={12} sm={6}>
-              <Typography textAlign="center" variant="h3" fontWeight={300}>
+              <Typography
+                color="#6A6A6A"
+                textAlign="center"
+                variant="h5"
+                fontWeight={500}
+              >
                 Contact us
               </Typography>
             </Grid>

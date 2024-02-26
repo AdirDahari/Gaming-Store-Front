@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Box, Typography, Divider, Grid } from "@mui/material";
 import PostComponent from "../../components/PostComponent";
 import axios from "axios";
@@ -10,7 +10,7 @@ let initData = [];
 let userId = "";
 
 const FavouritesPage = () => {
-  const [dataFromServer, setDataFromServer] = useState(null);
+  const [dataFromServer, setDataFromServer] = useState([]);
   const [txt, setTxt] = useState("");
   const navigate = useNavigate();
 
@@ -107,7 +107,7 @@ const FavouritesPage = () => {
           </Box>
         </Box>
         <Divider variant="middle" sx={{ pt: 4, pb: 4 }} />
-        {dataFromServer && (
+        {dataFromServer.length > 0 ? (
           <Grid
             container
             spacing={0}
@@ -134,6 +134,12 @@ const FavouritesPage = () => {
               </Grid>
             ))}
           </Grid>
+        ) : (
+          <Fragment>
+            <Typography sx={{ p: 4 }} variant="h6">
+              Your favourite collection is empty...
+            </Typography>
+          </Fragment>
         )}
       </Box>
     </Box>

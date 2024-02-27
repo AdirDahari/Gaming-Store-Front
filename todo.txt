@@ -1,4 +1,4 @@
-Pages: about,  management
+Pages: about,  management, viewProfile
 
 Style: home, post, register, login, navbar, footer
 

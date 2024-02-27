@@ -1,7 +1,7 @@
 import { Box, Grid, TextField } from "@mui/material";
 import PropTypes from "prop-types";
 
-const UpdateUserInputs = ({ inputsValue, handleInputsChange }) => {
+const ProfileFormComponent = ({ inputsValue, handleInputsChange }) => {
   return (
     <Box sx={{ pt: 4, pb: 4 }} component="form" noValidate>
       <Grid container spacing={2}>
@@ -138,9 +138,9 @@ const UpdateUserInputs = ({ inputsValue, handleInputsChange }) => {
   );
 };
 
-UpdateUserInputs.propTypes = {
+ProfileFormComponent.propTypes = {
   inputsValue: PropTypes.object.isRequired,
   handleInputsChange: PropTypes.func.isRequired,
 };
 
-export default UpdateUserInputs;
+export default ProfileFormComponent;

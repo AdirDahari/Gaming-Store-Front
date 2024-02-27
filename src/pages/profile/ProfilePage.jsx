@@ -4,11 +4,11 @@ import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES.JS";
 import {
-  fromServerNormalization,
-  toServerNormalization,
-} from "./inputsNormalization";
+  fromServerUserNormalization,
+  toServerUserNormalization,
+} from "../../service/inputsNormalization";
 import PostComponent from "../../components/PostComponent";
-import UpdateUserForm from "./ui/UpdateUserForm";
+import UpdateProfileForm from "./ui/UpdateProfileForm";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/authSlice";
 
@@ -28,7 +28,7 @@ const ProfilePage = () => {
         userId = data._id;
         profileImage = data.image.url;
         // console.log(data);
-        setInputsValue(fromServerNormalization(data));
+        setInputsValue(fromServerUserNormalization(data));
       } catch (err) {
         console.log(err);
       }
@@ -76,7 +76,7 @@ const ProfilePage = () => {
   const handleUpdateProfile = async (e) => {
     try {
       e.preventDefault();
-      let request = toServerNormalization(inputsValue);
+      let request = toServerUserNormalization(inputsValue);
       console.log("request", request);
       if (userId) {
         const { data } = await axios.put(`/users/${userId}`, request);
@@ -113,7 +113,7 @@ const ProfilePage = () => {
   return (
     <Fragment>
       {inputsValue && (
-        <UpdateUserForm
+        <UpdateProfileForm
           inputsValue={inputsValue}
           profileImage={profileImage}
           handleInputsChange={handleInputsChange}
@@ -123,9 +123,28 @@ const ProfilePage = () => {
       )}
       <Box maxWidth={1200} m="0 auto" pt={4}>
         <Divider />
-        <Typography pl={10} pt={4} variant="h5">
-          My Posts
-        </Typography>
+        <Box
+          sx={{
+            display: { xs: "block", sm: "flex" },
+            justifyContent: "space-between",
+          }}
+        >
+          <Box>
+            <Typography pl={10} pt={4} variant="h5">
+              My Posts
+            </Typography>
+          </Box>
+          <Box sx={{ pr: { xs: 0, sm: 10 }, pt: 4, pl: { xs: 6, sm: 0 } }}>
+            <Button
+              onClick={handleCreatePostClick}
+              sx={{ boxShadow: `rgba(0, 0, 0, 0.35) 0px 5px 15px` }}
+              variant="outlined"
+            >
+              Create New post
+            </Button>
+          </Box>
+        </Box>
+
         {postsData && (
           <Grid
             container
@@ -155,15 +174,6 @@ const ProfilePage = () => {
             ))}
           </Grid>
         )}
-        <Box pl={10} py={4}>
-          <Button
-            onClick={handleCreatePostClick}
-            sx={{ boxShadow: `rgba(0, 0, 0, 0.35) 0px 5px 15px` }}
-            variant="outlined"
-          >
-            Create New post
-          </Button>
-        </Box>
       </Box>
     </Fragment>
   );

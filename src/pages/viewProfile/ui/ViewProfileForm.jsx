@@ -1,10 +1,10 @@
 import { Grid, Box, Typography, Divider, Button, Avatar } from "@mui/material";
 import PropTypes from "prop-types";
-import UpdateUserInputs from "./UpdateUserInputs";
 import { useState } from "react";
-import DeleteProfileDialog from "./DeleteProfileDialog";
+import DeleteProfileDialogAdmin from "./DeleteProfileDialogAdmin";
+import ProfileFormComponent from "../../../components/ProfileFormComponent";
 
-const UpdateUserForm = ({
+const ViewProfileForm = ({
   inputsValue,
   handleInputsChange,
   handleUpdateProfile,
@@ -57,7 +57,7 @@ const UpdateUserForm = ({
               Complate your profile
             </Typography>
           </Box>
-          <UpdateUserInputs
+          <ProfileFormComponent
             inputsValue={inputsValue}
             handleInputsChange={handleInputsChange}
           />
@@ -71,7 +71,7 @@ const UpdateUserForm = ({
             </Button>
           </Box>
         </Box>
-        <DeleteProfileDialog
+        <DeleteProfileDialogAdmin
           open={open}
           handleClose={handleClose}
           handleDeleteProfile={handleDeleteProfile}
@@ -99,7 +99,7 @@ const UpdateUserForm = ({
   );
 };
 
-UpdateUserForm.propTypes = {
+ViewProfileForm.propTypes = {
   inputsValue: PropTypes.object.isRequired,
   handleInputsChange: PropTypes.func.isRequired,
   handleUpdateProfile: PropTypes.func.isRequired,
@@ -107,4 +107,4 @@ UpdateUserForm.propTypes = {
   profileImage: PropTypes.string.isRequired,
 };
 
-export default UpdateUserForm;
+export default ViewProfileForm;

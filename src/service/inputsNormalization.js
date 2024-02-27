@@ -1,4 +1,4 @@
-const fromServerNormalization = (dataFromServer) => {
+const fromServerUserNormalization = (dataFromServer) => {
     return {
         first: dataFromServer.name.first,
         middle: dataFromServer.name.middle,
@@ -15,7 +15,7 @@ const fromServerNormalization = (dataFromServer) => {
     }
 }
 
-const toServerNormalization = (dataToServer) => {
+const toServerUserNormalization = (dataToServer) => {
     return {
         address: {
             city: dataToServer.city,
@@ -37,4 +37,4 @@ const toServerNormalization = (dataToServer) => {
         }
     }
 }
-export { fromServerNormalization, toServerNormalization }
+export { fromServerUserNormalization, toServerUserNormalization }

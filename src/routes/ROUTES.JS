@@ -7,7 +7,9 @@ const ROUTES = {
     EDITPOST: "/editpost",
     POST: "/post",
     PROFILE: "/profile",
-    FAVOURITES: "/favourites"
+    FAVOURITES: "/favourites",
+    MANAGMENT: "/managment",
+    VIEWPROFILE: "/viewprofile",
 };
 
 export default ROUTES;

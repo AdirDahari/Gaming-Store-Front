@@ -1,5 +1,5 @@
-import { TableCell, TableRow } from "@mui/material";
-import OptionsButton from "./OptionsButton";
+import { TableCell, TableRow, IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import PropTypes from "prop-types";
 
 const RowUserComponent = ({
@@ -7,22 +7,26 @@ const RowUserComponent = ({
   name,
   email,
   phone,
+  country,
   onDeleteUser,
-  onEditUser,
 }) => {
+  const handleDeleteClick = () => {
+    onDeleteUser(_id);
+  };
+
   return (
     <TableRow hover>
       <TableCell component="th" scope="row">
         {name}
       </TableCell>
-      <TableCell align="right">{email}</TableCell>
-      <TableCell align="right">{phone}</TableCell>
+      <TableCell align="left">{email}</TableCell>
+      <TableCell align="left">{phone}</TableCell>
+      <TableCell align="left">{country}</TableCell>
+      <TableCell align="left">{_id}</TableCell>
       <TableCell align="right">
-        <OptionsButton
-          onDeleteClick={onDeleteUser}
-          onEditClick={onEditUser}
-          _id={_id}
-        />
+        <IconButton onClick={handleDeleteClick}>
+          <DeleteIcon />
+        </IconButton>
       </TableCell>
     </TableRow>
   );
@@ -33,6 +37,7 @@ RowUserComponent.propTypes = {
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
   onDeleteUser: PropTypes.func.isRequired,
   onEditUser: PropTypes.func.isRequired,
 };

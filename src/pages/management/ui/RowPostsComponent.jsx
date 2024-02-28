@@ -4,28 +4,30 @@ import PropTypes from "prop-types";
 
 const RowPostsComponent = ({
   _id,
-  title,
-  email,
-  phone,
+  name,
+  platform,
+  price,
+  userId,
   onDeleteCard,
-  onEditCard,
+  onEditPost,
 }) => {
-  const handleReturnData = (_id) => {
+  const handleDeleteClick = (_id) => {
     onDeleteCard(_id);
   };
   return (
     <TableRow hover>
       <TableCell component="th" scope="row">
-        {title}
+        {name}
       </TableCell>
-      <TableCell align="right">{email}</TableCell>
-      <TableCell align="right">{phone}</TableCell>
+      <TableCell align="left">{platform}</TableCell>
+      <TableCell align="left">{price}</TableCell>
+      <TableCell align="left">{userId}</TableCell>
       <TableCell align="right">
-        <OptionsButton
+        {/* <OptionsButton
           _id={_id}
-          onDeleteClick={handleReturnData}
+          onDeleteClick={handleDeleteClick}
           onEditClick={onEditCard}
-        />
+        /> */}
       </TableCell>
     </TableRow>
   );
@@ -33,11 +35,12 @@ const RowPostsComponent = ({
 
 RowPostsComponent.propTypes = {
   _id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  platform: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   onDeleteCard: PropTypes.func.isRequired,
-  onEditCard: PropTypes.func.isRequired,
+  onEditPost: PropTypes.func.isRequired,
 };
 
 export default RowPostsComponent;

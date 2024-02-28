@@ -12,6 +12,7 @@ import RowUserComponent from "./ui/RowUserComponent";
 import axios from "axios";
 import ROUTES from "../../routes/ROUTES.JS";
 import PostComponent from "../../components/PostComponent";
+import RowPostsComponent from "./ui/RowPostsComponent";
 
 const ManagementPage = () => {
   const [value, setValue] = useState(1);
@@ -25,6 +26,7 @@ const ManagementPage = () => {
         let { data: usersData } = await axios.get("/users");
         setUsersFromServer(usersData);
         let { data: postsData } = await axios.get("/posts");
+        console.log("postsData", postsData);
         setPostsFromServer(postsData);
       } catch (err) {
         console.log(err);
@@ -49,14 +51,14 @@ const ManagementPage = () => {
   };
 
   const handleEditPostClick = (_id) => {
-    navigate(`${ROUTES.EDITCARD}/${_id}`);
+    navigate(`${ROUTES.EDITPOST}/${_id}`);
   };
   const handleBuyNowClick = (_id) => {
     console.log("handleBuyNowClick", _id);
   };
 
   return (
-    <Box maxWidth={1200} m="0 auto" p={2} pt={4}>
+    <Box maxWidth={1200} m="0 auto" sx={{ p: { sm: 0, md: 2 } }} pt={4}>
       <Typography sx={{ my: 1 }} variant="h4">
         Manage gamming store users and posts
       </Typography>
@@ -73,74 +75,71 @@ const ManagementPage = () => {
           <Tab value={2} label="Posts" />
         </Tabs>
       </Box>
-      {value == 1 ? (
-        <Fragment>
-          <TableContainer component={Paper} sx={{ maxHeight: 600 }}>
-            <Table
-              stickyHeader
-              sx={{ minWidth: 650 }}
-              aria-label="caption table"
-            >
-              <Fragment>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Full Name</TableCell>
-                    <TableCell align="right">Email</TableCell>
-                    <TableCell align="right">Phone</TableCell>
-                    <TableCell align="right">Options</TableCell>
-                  </TableRow>
-                </TableHead>
 
-                {usersFromServer && (
-                  <TableBody>
-                    {usersFromServer.map((user) => (
-                      <RowUserComponent
-                        key={user._id}
-                        _id={user._id}
-                        name={`${user.name.first} ${user.name.last}`}
-                        email={user.email}
-                        phone={user.phone}
-                        onDeleteUser={handleDeleteUser}
-                        onEditUser={handleEditUser}
-                      />
-                    ))}
-                  </TableBody>
-                )}
-              </Fragment>
-            </Table>
-          </TableContainer>
-        </Fragment>
-      ) : (
-        <Fragment>
-          {postsFromServer && (
-            <Grid
-              container
-              spacing={2}
-              maxWidth={1200}
-              sx={{ m: 2, p: 4, margin: "0 auto" }}
-            >
-              {postsFromServer.map((post) => (
-                <Grid item key={post._id} xs={12} sm={6} md={4}>
-                  <PostComponent
-                    color="#A32CC4"
-                    _id={post._id}
-                    name={post.game.name}
-                    price={post.game.price}
-                    image={post.game.images[0].url}
-                    alt={post.game.images[0].alt}
-                    onBuyNowClick={handleBuyNowClick}
-                    onEditClick={handleEditPostClick}
-                    onDeleteClick={handleDeletePostClick}
-                    isUser={true}
-                    isLoggedIn={true}
-                    isAdmin={true}
-                  />
-                </Grid>
-              ))}
-            </Grid>
+      <TableContainer component={Paper} sx={{ maxHeight: 600 }}>
+        <Table stickyHeader sx={{ minWidth: 650 }} aria-label="caption table">
+          {value == 1 ? (
+            <Fragment>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Full Name</TableCell>
+                  <TableCell align="left">Email</TableCell>
+                  <TableCell align="left">Phone</TableCell>
+                  <TableCell align="left">Country</TableCell>
+                  <TableCell align="left">User id</TableCell>
+                  <TableCell align="right">Delete</TableCell>
+                </TableRow>
+              </TableHead>
+
+              {usersFromServer && (
+                <TableBody>
+                  {usersFromServer.map((user) => (
+                    <RowUserComponent
+                      key={user._id}
+                      _id={user._id}
+                      name={`${user.name.first} ${user.name.last}`}
+                      email={user.email}
+                      country={user.address.country}
+                      phone={user.phone}
+                      onDeleteUser={handleDeleteUser}
+                      onEditUser={handleEditUser}
+                    />
+                  ))}
+                </TableBody>
+              )}
+            </Fragment>
+          ) : (
+            <Fragment>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Game</TableCell>
+                  <TableCell align="left">Platform</TableCell>
+                  <TableCell align="left">Price</TableCell>
+                  <TableCell align="left">User id</TableCell>
+                  <TableCell align="right">Delete</TableCell>
+                </TableRow>
+              </TableHead>
+
+              {postsFromServer && (
+                <TableBody>
+                  {postsFromServer.map((post) => (
+                    <RowPostsComponent
+                      _id={post._id}
+                      name={post.game.name}
+                      platform={post.platform}
+                      price={post.game.price}
+                      userId={post.seller.userId}
+                      key={post._id}
+                      onDeleteCard={handleDeletePostClick}
+                      onEditPost={handleEditPostClick}
+                    />
+                  ))}
+                </TableBody>
+              )}
+            </Fragment>
           )}
-        </Fragment>
-      )}
+        </Table>
+      </TableContainer>
     </Box>
   );
 };

@@ -54,7 +54,7 @@ const ProfilePage = () => {
     }));
   };
 
-  const handleEditCardClick = (_id) => {
+  const handleEditPostClick = (_id) => {
     navigate(`${ROUTES.EDITPOST}/${_id}`);
   };
   const handleBuyNowClick = (_id) => {
@@ -163,7 +163,7 @@ const ProfilePage = () => {
                   image={post.game.images[0].url}
                   alt={post.game.images[0].alt}
                   onBuyNowClick={handleBuyNowClick}
-                  onEditClick={handleEditCardClick}
+                  onEditClick={handleEditPostClick}
                   onDeleteClick={handleDeletePostClick}
                   onLikeClick={handleLikePost}
                   isUser={true}

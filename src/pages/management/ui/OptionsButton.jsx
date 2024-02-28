@@ -1,11 +1,13 @@
 import { styled, alpha } from "@mui/material/styles";
-import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import EditIcon from "@mui/icons-material/Edit";
 import Divider from "@mui/material/Divider";
 import DeleteIcon from "@mui/icons-material/Delete";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ArticleIcon from "@mui/icons-material/Article";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
@@ -52,7 +54,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-const OptionsButton = ({ _id, onDeleteClick, onEditClick }) => {
+const OptionsButton = ({ onDeleteClick, onEditClick, onShowPostClick }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -63,27 +65,31 @@ const OptionsButton = ({ _id, onDeleteClick, onEditClick }) => {
   };
   const handleEditClick = () => {
     setAnchorEl(null);
-    onEditClick(_id);
+    onEditClick();
   };
   const handleDeleteClick = () => {
     setAnchorEl(null);
-    onDeleteClick(_id);
+    onDeleteClick();
+  };
+  const handleShowPostClick = () => {
+    setAnchorEl(null);
+    onShowPostClick();
   };
 
   return (
     <div>
-      <Button
+      <IconButton
         id="demo-customized-button"
         aria-controls={open ? "demo-customized-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
-        variant="contained"
+        variant="outlined"
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        Options
-      </Button>
+        <MoreVertIcon />
+      </IconButton>
       <StyledMenu
         id="demo-customized-menu"
         MenuListProps={{
@@ -93,14 +99,19 @@ const OptionsButton = ({ _id, onDeleteClick, onEditClick }) => {
         open={open}
         onClose={handleClose}
       >
+        <MenuItem onClick={handleShowPostClick} disableRipple>
+          <ArticleIcon />
+          Show post
+        </MenuItem>
+        <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={handleEditClick} disableRipple>
           <EditIcon />
-          Edit
+          Edit post
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={handleDeleteClick} disableRipple>
           <DeleteIcon />
-          Delete
+          Delete post
         </MenuItem>
       </StyledMenu>
     </div>
@@ -108,9 +119,9 @@ const OptionsButton = ({ _id, onDeleteClick, onEditClick }) => {
 };
 
 OptionsButton.propTypes = {
-  _id: PropTypes.string.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
+  onShowPostClick: PropTypes.func.isRequired,
 };
 
 export default OptionsButton;

@@ -9,10 +9,17 @@ const RowPostsComponent = ({
   price,
   userId,
   onDeleteCard,
+  onShowPostClick,
   onEditPost,
 }) => {
-  const handleDeleteClick = (_id) => {
+  const handleDeleteClick = () => {
     onDeleteCard(_id);
+  };
+  const handleShowPostClick = () => {
+    onShowPostClick(_id);
+  };
+  const handleEditPostClick = () => {
+    onEditPost(_id);
   };
   return (
     <TableRow hover>
@@ -23,11 +30,11 @@ const RowPostsComponent = ({
       <TableCell align="left">{price}</TableCell>
       <TableCell align="left">{userId}</TableCell>
       <TableCell align="right">
-        {/* <OptionsButton
-          _id={_id}
+        <OptionsButton
+          onShowPostClick={handleShowPostClick}
           onDeleteClick={handleDeleteClick}
-          onEditClick={onEditCard}
-        /> */}
+          onEditClick={handleEditPostClick}
+        />
       </TableCell>
     </TableRow>
   );
@@ -41,6 +48,7 @@ RowPostsComponent.propTypes = {
   price: PropTypes.number.isRequired,
   onDeleteCard: PropTypes.func.isRequired,
   onEditPost: PropTypes.func.isRequired,
+  onShowPostClick: PropTypes.func.isRequired,
 };
 
 export default RowPostsComponent;

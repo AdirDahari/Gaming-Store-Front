@@ -1,4 +1,4 @@
-import { Box, Grid, Divider, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Divider, Tab, Tabs, Typography } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import RowUserComponent from "./ui/RowUserComponent";
 import axios from "axios";
 import ROUTES from "../../routes/ROUTES.JS";
-import PostComponent from "../../components/PostComponent";
 import RowPostsComponent from "./ui/RowPostsComponent";
 
 const ManagementPage = () => {
@@ -32,7 +31,7 @@ const ManagementPage = () => {
         console.log(err);
       }
     })();
-  }, []);
+  }, [usersFromServer, postsFromServer]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -53,8 +52,8 @@ const ManagementPage = () => {
   const handleEditPostClick = (_id) => {
     navigate(`${ROUTES.EDITPOST}/${_id}`);
   };
-  const handleBuyNowClick = (_id) => {
-    console.log("handleBuyNowClick", _id);
+  const handleShowPostClick = (_id) => {
+    navigate(`${ROUTES.POST}/${_id}`);
   };
 
   return (
@@ -116,7 +115,7 @@ const ManagementPage = () => {
                   <TableCell align="left">Platform</TableCell>
                   <TableCell align="left">Price</TableCell>
                   <TableCell align="left">User id</TableCell>
-                  <TableCell align="right">Delete</TableCell>
+                  <TableCell align="right">Options</TableCell>
                 </TableRow>
               </TableHead>
 
@@ -130,6 +129,7 @@ const ManagementPage = () => {
                       price={post.game.price}
                       userId={post.seller.userId}
                       key={post._id}
+                      onShowPostClick={handleShowPostClick}
                       onDeleteCard={handleDeletePostClick}
                       onEditPost={handleEditPostClick}
                     />

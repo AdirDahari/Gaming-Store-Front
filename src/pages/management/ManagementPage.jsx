@@ -22,31 +22,38 @@ const ManagementPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        let { data: usersData } = await axios.get("/users");
+        const { data: usersData } = await axios.get("/users");
         setUsersFromServer(usersData);
-        let { data: postsData } = await axios.get("/posts");
-        console.log("postsData", postsData);
+        const { data: postsData } = await axios.get("/posts");
         setPostsFromServer(postsData);
       } catch (err) {
         console.log(err);
       }
     })();
-  }, [usersFromServer, postsFromServer]);
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const handleDeleteUser = async (_id) => {
-    console.log("handleDeleteUser", _id);
-  };
-
-  const handleEditUser = (_id) => {
-    navigate(`${ROUTES.VIEWPROFILE}/${_id}`);
+    try {
+      await axios.delete(`/users/${_id}`);
+      const { data: usersData } = await axios.get("/users");
+      setUsersFromServer(usersData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleDeletePostClick = async (_id) => {
-    console.log("handleDeleteCard", _id);
+    try {
+      await axios.delete(`/posts/${_id}`);
+      const { data: postsData } = await axios.get("/posts");
+      setPostsFromServer(postsData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleEditPostClick = (_id) => {
@@ -58,7 +65,7 @@ const ManagementPage = () => {
 
   return (
     <Box maxWidth={1200} m="0 auto" sx={{ p: { sm: 0, md: 2 } }} pt={4}>
-      <Typography sx={{ my: 1 }} variant="h4">
+      <Typography sx={{ my: 1, pt: 2, pb: 4 }} variant="h4">
         Manage gamming store users and posts
       </Typography>
       <Divider />
@@ -101,7 +108,6 @@ const ManagementPage = () => {
                       country={user.address.country}
                       phone={user.phone}
                       onDeleteUser={handleDeleteUser}
-                      onEditUser={handleEditUser}
                     />
                   ))}
                 </TableBody>

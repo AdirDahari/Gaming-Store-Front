@@ -39,7 +39,6 @@ const ProfilePage = () => {
     (async () => {
       try {
         let { data } = await axios.get("/posts/profile/my-posts");
-        console.log("my posts", data);
         setPostsData(data);
       } catch (err) {
         console.log(err.response.data);
@@ -145,7 +144,7 @@ const ProfilePage = () => {
           </Box>
         </Box>
 
-        {postsData && (
+        {postsData && postsData.length ? (
           <Grid
             container
             spacing={2}
@@ -173,6 +172,12 @@ const ProfilePage = () => {
               </Grid>
             ))}
           </Grid>
+        ) : (
+          <Fragment>
+            <Typography sx={{ p: 4 }} variant="h6">
+              Your posts collection is empty...
+            </Typography>
+          </Fragment>
         )}
       </Box>
     </Fragment>

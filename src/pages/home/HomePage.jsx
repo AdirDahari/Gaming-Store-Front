@@ -11,9 +11,9 @@ const HomePage = () => {
           Here you can find second hand video games!
         </Typography>
       </Box>
-      <Grid container spacing={2} m="0 auto" maxWidth={1000}>
+      <Grid container m="0 auto" maxWidth={650}>
         {categories.map((cate, index) => (
-          <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
+          <Grid item xs={12} sm={6} key={index} p={2}>
             <CategoryComponent>{cate}</CategoryComponent>
           </Grid>
         ))}

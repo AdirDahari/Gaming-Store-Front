@@ -9,7 +9,6 @@ const ROUTES = {
     PROFILE: "/profile",
     FAVOURITES: "/favourites",
     MANAGMENT: "/managment",
-    VIEWPROFILE: "/viewprofile",
 };
 
 export default ROUTES;

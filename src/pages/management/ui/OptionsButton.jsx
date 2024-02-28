@@ -5,7 +5,6 @@ import MenuItem from "@mui/material/MenuItem";
 import EditIcon from "@mui/icons-material/Edit";
 import Divider from "@mui/material/Divider";
 import DeleteIcon from "@mui/icons-material/Delete";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ArticleIcon from "@mui/icons-material/Article";
 import { useState } from "react";
@@ -78,27 +77,10 @@ const OptionsButton = ({ onDeleteClick, onEditClick, onShowPostClick }) => {
 
   return (
     <div>
-      <IconButton
-        id="demo-customized-button"
-        aria-controls={open ? "demo-customized-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        variant="outlined"
-        disableElevation
-        onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
-      >
+      <IconButton onClick={handleClick}>
         <MoreVertIcon />
       </IconButton>
-      <StyledMenu
-        id="demo-customized-menu"
-        MenuListProps={{
-          "aria-labelledby": "demo-customized-button",
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
+      <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
         <MenuItem onClick={handleShowPostClick} disableRipple>
           <ArticleIcon />
           Show post

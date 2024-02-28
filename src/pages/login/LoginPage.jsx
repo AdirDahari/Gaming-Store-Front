@@ -53,8 +53,6 @@ const LoginPage = () => {
         email: emailValue,
         password: passwordValue,
       });
-      console.log("rememberMe", rememberMe);
-      console.log("data", data.jwt);
       storeToken(data.jwt, rememberMe);
       autoLogin();
       navigate(ROUTES.HOME);

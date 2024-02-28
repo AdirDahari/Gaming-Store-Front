@@ -11,7 +11,6 @@ import EditPostPage from "../pages/editPost/EditPostPage";
 import ProfilePage from "../pages/profile/ProfilePage";
 import FavouritesPage from "../pages/favourites/FavouritesPage";
 import ManagementPage from "../pages/management/ManagementPage";
-import ViewProfilePage from "../pages/viewProfile/ViewProfilePage";
 
 const Router = () => {
   return (
@@ -26,7 +25,6 @@ const Router = () => {
       <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
       <Route path={ROUTES.FAVOURITES} element={<FavouritesPage />} />
       <Route path={ROUTES.MANAGMENT} element={<ManagementPage />} />
-      <Route path={`${ROUTES.VIEWPROFILE}/:id`} element={<ViewProfilePage />} />
 
       <Route path="*" element={<Error404Page />} />
     </Routes>

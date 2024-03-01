@@ -1,7 +1,7 @@
 import Joi from "joi";
 import validation from "./validation";
 
-const platformRegex = /xbox|pc|playstation/;
+const platformRegex = /xbox|pc|playstation|nintendo/;
 const productStatusRegex = /new|like new|used/;
 
 const gameDetailsSchema = Joi.object({

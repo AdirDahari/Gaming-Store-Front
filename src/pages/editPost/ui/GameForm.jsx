@@ -11,7 +11,7 @@ import {
 import PropTypes from "prop-types";
 import { validateGameDetails } from "../../../validation/gameDetails";
 
-const platforms = ["xbox", "playstation", "pc"];
+const platforms = ["xbox", "playstation", "pc", "nintendo"];
 const status = ["new", "like new", "used"];
 
 const GameForm = ({ handleNext, postData }) => {

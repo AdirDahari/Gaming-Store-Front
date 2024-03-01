@@ -9,10 +9,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import InfoIcon from '@mui/icons-material/Info';
 
 const MainLink = [
-    { to: "/", children: "About us" },
+    { to: ROUTES.ABOUT, children: "About us" },
 ];
 const MainAdminLink = [
-    { to: "/", children: "About us" },
+    { to: ROUTES.ABOUT, children: "About us" },
     { to: ROUTES.MANAGMENT, children: "Managment" },
 ]
 const GuestLink = [
@@ -21,7 +21,7 @@ const GuestLink = [
 
 ];
 const GuestMobileLink = [
-    { to: "/", children: "About us", icon: InfoIcon },
+    { to: ROUTES.ABOUT, children: "About us", icon: InfoIcon },
     { to: ROUTES.LOGIN, children: "Login", icon: LoginIcon },
     { to: ROUTES.REGISTER, children: "Register", icon: AppRegistrationIcon }
 ]
@@ -30,12 +30,12 @@ const ProfileLink = [
     { to: ROUTES.FAVOURITES, children: "Favourites", icon: FavoriteIcon }
 ];
 const ProfileMobileLink = [
-    { to: "/", children: "About us", icon: InfoIcon },
+    { to: ROUTES.ABOUT, children: "About us", icon: InfoIcon },
     { to: ROUTES.CREATEPOST, children: "Create post", icon: PostAddIcon },
     { to: ROUTES.FAVOURITES, children: "Favourites", icon: FavoriteIcon }
 ];
 const ProfileMobileAdminLink = [
-    { to: "/", children: "About us", icon: InfoIcon },
+    { to: ROUTES.ABOUT, children: "About us", icon: InfoIcon },
     { to: ROUTES.CREATEPOST, children: "Create post", icon: PostAddIcon },
     { to: ROUTES.FAVOURITES, children: "Favourites", icon: FavoriteIcon },
     { to: ROUTES.MANAGMENT, children: "Managment", icon: ManageAccountsIcon },
@@ -66,7 +66,7 @@ const categories = [
     },
     {
         name: "Nintendo",
-        image: "../../../assets/img/categories/Pc.jpg",
+        image: "../../../assets/img/categories/Nintendo.jpg",
         alt: "Pc image",
         color: "red",
     },

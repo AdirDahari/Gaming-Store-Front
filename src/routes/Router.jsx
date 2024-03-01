@@ -12,6 +12,8 @@ import ProfilePage from "../pages/profile/ProfilePage";
 import FavouritesPage from "../pages/favourites/FavouritesPage";
 import ManagementPage from "../pages/management/ManagementPage";
 import AboutPage from "../pages/about/AboutPage";
+import AuthGuard from "../guard/AuthGuard";
+import AdminGuard from "../guard/AdminGuard";
 
 const Router = () => {
   return (
@@ -20,13 +22,50 @@ const Router = () => {
       <Route path={ROUTES.SHOP} element={<ShopPage />} />
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-      <Route path={ROUTES.CREATEPOST} element={<CreatePostPage />} />
-      <Route path={`${ROUTES.EDITPOST}/:id`} element={<EditPostPage />} />
       <Route path={`${ROUTES.POST}/:id`} element={<PostPage />} />
-      <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
-      <Route path={ROUTES.FAVOURITES} element={<FavouritesPage />} />
-      <Route path={ROUTES.MANAGMENT} element={<ManagementPage />} />
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
+
+      <Route
+        path={ROUTES.CREATEPOST}
+        element={
+          <AuthGuard>
+            <CreatePostPage />
+          </AuthGuard>
+        }
+      />
+      <Route
+        path={`${ROUTES.EDITPOST}/:id`}
+        element={
+          <AuthGuard>
+            <EditPostPage />
+          </AuthGuard>
+        }
+      />
+      <Route
+        path={ROUTES.PROFILE}
+        element={
+          <AuthGuard>
+            <ProfilePage />
+          </AuthGuard>
+        }
+      />
+      <Route
+        path={ROUTES.FAVOURITES}
+        element={
+          <AuthGuard>
+            <FavouritesPage />
+          </AuthGuard>
+        }
+      />
+
+      <Route
+        path={ROUTES.MANAGMENT}
+        element={
+          <AdminGuard>
+            <ManagementPage />
+          </AdminGuard>
+        }
+      />
 
       <Route path="*" element={<Error404Page />} />
     </Routes>

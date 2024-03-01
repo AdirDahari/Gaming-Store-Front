@@ -2,8 +2,6 @@ Pages: about , login register
 
 Style: home, post, register, login, navbar, footer
 
-Guard: management(admin), create post and profile(user), login and register(guest)
-
 myLinks: state setting
 
 Messages: add interactive massages

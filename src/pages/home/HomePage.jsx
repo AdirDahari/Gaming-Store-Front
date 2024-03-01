@@ -1,24 +1,32 @@
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import CategoryComponent from "../../components/CategoryComponent";
-import { Fragment } from "react";
 import { categories } from "../../layout/myLink";
+import SwiperImages from "../../components/SwiperImages";
 
 const HomePage = () => {
   return (
-    <Fragment>
-      <Box sx={{ bgcolor: "lightblue", height: 350 }}>
-        <Typography textAlign="center" variant="h3">
-          Here you can find second hand video games!
-        </Typography>
+    <Box>
+      <Box
+        sx={{
+          width: "100%",
+          height: 650,
+          margin: "0 auto",
+          maxWidth: 1200,
+          borderRadius: "5px",
+          overflow: "hidden",
+          boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+        }}
+      >
+        <SwiperImages />
       </Box>
-      <Grid container m="0 auto" maxWidth={650}>
+      <Grid container m="0 auto" maxWidth={650} pt={8} pb={8}>
         {categories.map((cate, index) => (
           <Grid item xs={12} sm={6} key={index} p={2}>
             <CategoryComponent>{cate}</CategoryComponent>
           </Grid>
         ))}
       </Grid>
-    </Fragment>
+    </Box>
   );
 };
 export default HomePage;

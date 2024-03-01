@@ -1,15 +1,17 @@
 import { Grid, Box, Typography, Divider, Button, Avatar } from "@mui/material";
 import PropTypes from "prop-types";
-import ProfileFormComponent from "../../../components/ProfileFormComponent";
 import { useState } from "react";
 import DeleteProfileDialog from "./DeleteProfileDialog";
+import ProfileFormComponent from "./ProfileFormComponent";
 
 const UpdateProfileForm = ({
   inputsValue,
+  errorsState,
   handleInputsChange,
   handleUpdateProfile,
   handleDeleteProfile,
   profileImage,
+  email,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -58,6 +60,7 @@ const UpdateProfileForm = ({
             </Typography>
           </Box>
           <ProfileFormComponent
+            errorState={errorsState}
             inputsValue={inputsValue}
             handleInputsChange={handleInputsChange}
           />
@@ -91,7 +94,7 @@ const UpdateProfileForm = ({
         </Box>
         <Box>
           <Typography variant="h5" sx={{ textAlign: "center", p: 2 }}>
-            {inputsValue.email}
+            {email}
           </Typography>
         </Box>
       </Grid>
@@ -105,6 +108,8 @@ UpdateProfileForm.propTypes = {
   handleUpdateProfile: PropTypes.func.isRequired,
   handleDeleteProfile: PropTypes.func.isRequired,
   profileImage: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  errorsState: PropTypes.object,
 };
 
 export default UpdateProfileForm;

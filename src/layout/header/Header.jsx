@@ -194,7 +194,7 @@ function Header() {
             )}
           </Box>
           <IconMenuItems loggedIn={loggedIn} />
-          {userData && (
+          {loggedIn && userData && (
             <Box sx={{ flexGrow: 0, ml: { md: 2 } }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

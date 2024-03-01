@@ -11,15 +11,18 @@ import PostComponent from "../../components/PostComponent";
 import UpdateProfileForm from "./ui/UpdateProfileForm";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/authSlice";
+import { validateUpdateProfile } from "../../validation/updateProfileValidation";
 
 let userId = "";
 let profileImage = "";
+let email = "";
 
 const ProfilePage = () => {
   const [inputsValue, setInputsValue] = useState(null);
   const [postsData, setPostsData] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [errorsState, setErrorsState] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -27,6 +30,7 @@ const ProfilePage = () => {
         let { data } = await axios.get("/users/my-user");
         userId = data._id;
         profileImage = data.image.url;
+        email = data.email;
         // console.log(data);
         setInputsValue(fromServerUserNormalization(data));
       } catch (err) {
@@ -75,6 +79,13 @@ const ProfilePage = () => {
   const handleUpdateProfile = async (e) => {
     try {
       e.preventDefault();
+
+      const joiResponse = validateUpdateProfile(inputsValue);
+      if (joiResponse) {
+        setErrorsState(joiResponse);
+        console.log(joiResponse);
+        return;
+      }
       let request = toServerUserNormalization(inputsValue);
       console.log("request", request);
       if (userId) {
@@ -115,6 +126,8 @@ const ProfilePage = () => {
         <UpdateProfileForm
           inputsValue={inputsValue}
           profileImage={profileImage}
+          errorsState={errorsState}
+          email={email}
           handleInputsChange={handleInputsChange}
           handleUpdateProfile={handleUpdateProfile}
           handleDeleteProfile={handleDeleteProfile}

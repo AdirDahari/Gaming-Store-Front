@@ -10,6 +10,4 @@ Messages: add interactive massages
 
 !Responsive web
 
-Alert to editpost and profile 
-
-Check login and register functionality
+Alert to  profile (errorsState bug)

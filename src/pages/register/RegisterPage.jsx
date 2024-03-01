@@ -7,7 +7,6 @@ import {
   Alert,
   Box,
   Avatar,
-  Container,
 } from "@mui/material";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -61,10 +60,12 @@ const RegisterPage = () => {
   };
 
   return (
-    <Container
+    <Box
       sx={{
+        maxWidth: 1200,
+        m: "0 auto",
         minHeight: "90vh",
-        marginTop: 8,
+        pt: 8,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -289,7 +290,7 @@ const RegisterPage = () => {
           </Grid>
         </Grid>
       </Box>
-    </Container>
+    </Box>
   );
 };
 

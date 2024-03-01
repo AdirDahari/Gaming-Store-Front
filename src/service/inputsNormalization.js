@@ -3,7 +3,6 @@ const fromServerUserNormalization = (dataFromServer) => {
         first: dataFromServer.name.first,
         middle: dataFromServer.name.middle,
         last: dataFromServer.name.last,
-        email: dataFromServer.email,
         phone: dataFromServer.phone,
         url: dataFromServer.image.url,
         state: dataFromServer.address.state,

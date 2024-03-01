@@ -1,7 +1,15 @@
-import { Box, Grid, TextField } from "@mui/material";
+import { Box, Grid, TextField, Alert } from "@mui/material";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 
-const ProfileFormComponent = ({ inputsValue, handleInputsChange }) => {
+const ProfileFormComponent = ({
+  inputsValue,
+  errorsState,
+  handleInputsChange,
+}) => {
+  useEffect(() => {
+    console.log("aaaaaa", errorsState);
+  }, []);
   return (
     <Box sx={{ pt: 4, pb: 4 }} component="form" noValidate>
       <Grid container spacing={2}>
@@ -16,6 +24,9 @@ const ProfileFormComponent = ({ inputsValue, handleInputsChange }) => {
             value={inputsValue.first}
             onChange={handleInputsChange}
           />
+          {errorsState && errorsState.first && (
+            <Alert severity="warning">{errorsState.first}</Alert>
+          )}
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
@@ -39,6 +50,9 @@ const ProfileFormComponent = ({ inputsValue, handleInputsChange }) => {
             value={inputsValue.last}
             onChange={handleInputsChange}
           />
+          {errorsState && errorsState.last && (
+            <Alert severity="warning">{errorsState.last}</Alert>
+          )}
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -51,6 +65,9 @@ const ProfileFormComponent = ({ inputsValue, handleInputsChange }) => {
             value={inputsValue.phone}
             onChange={handleInputsChange}
           />
+          {errorsState && errorsState.phone && (
+            <Alert severity="warning">{errorsState.phone}</Alert>
+          )}
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -85,6 +102,9 @@ const ProfileFormComponent = ({ inputsValue, handleInputsChange }) => {
             value={inputsValue.country}
             onChange={handleInputsChange}
           />
+          {errorsState && errorsState.country && (
+            <Alert severity="warning">{errorsState.country}</Alert>
+          )}
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
@@ -97,6 +117,9 @@ const ProfileFormComponent = ({ inputsValue, handleInputsChange }) => {
             value={inputsValue.city}
             onChange={handleInputsChange}
           />
+          {errorsState && errorsState.city && (
+            <Alert severity="warning">{errorsState.city}</Alert>
+          )}
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
@@ -109,6 +132,9 @@ const ProfileFormComponent = ({ inputsValue, handleInputsChange }) => {
             value={inputsValue.street}
             onChange={handleInputsChange}
           />
+          {errorsState && errorsState.street && (
+            <Alert severity="warning">{errorsState.street}</Alert>
+          )}
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
@@ -121,6 +147,9 @@ const ProfileFormComponent = ({ inputsValue, handleInputsChange }) => {
             value={inputsValue.houseNumber}
             onChange={handleInputsChange}
           />
+          {errorsState && errorsState.houseNumber && (
+            <Alert severity="warning">{errorsState.houseNumber}</Alert>
+          )}
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
@@ -141,6 +170,7 @@ const ProfileFormComponent = ({ inputsValue, handleInputsChange }) => {
 ProfileFormComponent.propTypes = {
   inputsValue: PropTypes.object.isRequired,
   handleInputsChange: PropTypes.func.isRequired,
+  errorsState: PropTypes.object,
 };
 
 export default ProfileFormComponent;

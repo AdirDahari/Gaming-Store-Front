@@ -1,5 +1,4 @@
 import {
-  Box,
   Grid,
   Typography,
   Card,
@@ -10,13 +9,12 @@ import {
 import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import ChangingImages from "./ui/ChangingImages";
 import "../../style/ImageScale.css";
 import PopupSellerDetails from "./ui/PopupSellerDetails";
+import SwiperPostImages from "./ui/SwiperPostImages";
 
 const PostPage = () => {
   const { id: _id } = useParams();
-  const [indexImg, setIndexImg] = useState(0);
   const [imageList, setImageList] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const [dataFromServer, setDataFromServer] = useState(null);
@@ -36,24 +34,6 @@ const PostPage = () => {
     })();
   }, []);
 
-  const handleChangeImageForward = () => {
-    if (indexImg == imageList.length - 1) {
-      setIndexImg(0);
-    } else {
-      setIndexImg(indexImg + 1);
-    }
-  };
-  const handleChangeImageBackward = () => {
-    if (indexImg == 0) {
-      setIndexImg(imageList.length - 1);
-    } else {
-      setIndexImg(indexImg - 1);
-    }
-  };
-  const handleChangeImageIndex = (e) => {
-    console.log(e.target.id);
-    setIndexImg(e.target.id);
-  };
   const handleClosePopup = () => {
     setOpenPopup(false);
   };
@@ -64,7 +44,7 @@ const PostPage = () => {
   return (
     <Fragment>
       {dataFromServer && (
-        <Grid container spacing={2} maxWidth={1600} sx={{ p: 5, m: "0 auto" }}>
+        <Grid container spacing={2} maxWidth={1200} sx={{ p: 5, m: "0 auto" }}>
           <Grid item sm={12} md={6} width="100%">
             {dataFromServer && (
               <Card
@@ -191,52 +171,9 @@ const PostPage = () => {
                 m: "0 auto",
               }}
             >
-              <Box
-                sx={{
-                  m: "0 auto",
-                  height: 455,
-                  width: "100%",
-                }}
-              >
-                {imageList && (
-                  <ChangingImages
-                    image={imageList[indexImg]}
-                    onChnageImageBackward={handleChangeImageBackward}
-                    onChnageImageForward={handleChangeImageForward}
-                  />
-                )}
-              </Box>
-
-              <Box
-                sx={{
-                  maxHeight: 100,
-                  display: "flex",
-                  width: { xs: "100%", sm: "80%", md: "60%" },
-                  justifyContent: "space-evenly",
-                  m: "0 auto",
-                  pt: 4,
-                }}
-              >
-                {imageList &&
-                  imageList.map((img, index) => (
-                    <Box
-                      className="imageSmallScale"
-                      onClick={handleChangeImageIndex}
-                      id={index}
-                      key={img.url + img.alt}
-                      component="img"
-                      src={img.url}
-                      alt={img.alt}
-                      sx={{
-                        maxWidth: 70,
-                        maxHeight: 70,
-                        width: "100%",
-                        border: "2px solid grey",
-                        borderRadius: "15px",
-                      }}
-                    />
-                  ))}
-              </Box>
+              <CardContent sx={{ height: 450 }}>
+                {imageList && <SwiperPostImages images={imageList} />}
+              </CardContent>
             </Card>
           </Grid>
         </Grid>

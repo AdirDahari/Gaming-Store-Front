@@ -11,6 +11,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import ROUTE from "../../routes/ROUTES.JS";
 import { editPostNormalization } from "./editPostNoramalization.js";
+import MyToast from "../../messages/MyToast";
 
 const steps = ["Game details", "Update your post"];
 
@@ -81,6 +82,7 @@ const EditPostPage = () => {
       const request = editPostNormalization(gameDetails, userDetails);
       console.log("request", request);
       await axios.put(`/posts/${_id}`, request);
+      MyToast.info("Post Updated!");
       navigate(ROUTE.HOME);
     } catch (err) {
       console.log("handleSubmit", err);

@@ -11,6 +11,7 @@ import axios from "axios";
 import { createPostNormalization } from "./createPostNoramalization.js";
 import { useNavigate } from "react-router-dom";
 import ROUTE from "../../routes/ROUTES.JS";
+import MyToast from "../../messages/MyToast";
 
 const steps = ["Game details", "Review your post"];
 
@@ -64,6 +65,7 @@ const CreatePostPage = () => {
     try {
       const request = createPostNormalization(gameDetails, userDetails);
       await axios.post("/posts", request);
+      MyToast.info("Post Created!");
       navigate(ROUTE.HOME);
     } catch (err) {
       console.log("handleSubmit", err);

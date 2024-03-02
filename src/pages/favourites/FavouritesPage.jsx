@@ -5,6 +5,7 @@ import axios from "axios";
 import { Search } from "../shop/ui/Search";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES.JS";
+import MyToast from "../../messages/MyToast";
 
 let initData = [];
 let userId = "";
@@ -59,6 +60,7 @@ const FavouritesPage = () => {
       const { data: postData } = await axios.get("/posts");
       initData = postData.filter((post) => post.likes.includes(userId));
       setDataFromServer(initData);
+      MyToast.info("Post Deleted!");
     } catch (err) {
       console.log(err);
     }

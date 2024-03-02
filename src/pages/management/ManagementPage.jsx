@@ -12,6 +12,7 @@ import RowUserComponent from "./ui/RowUserComponent";
 import axios from "axios";
 import ROUTES from "../../routes/ROUTES.JS";
 import RowPostsComponent from "./ui/RowPostsComponent";
+import MyToast from "../../messages/MyToast";
 
 const ManagementPage = () => {
   const [value, setValue] = useState(1);
@@ -41,6 +42,7 @@ const ManagementPage = () => {
       await axios.delete(`/users/${_id}`);
       const { data: usersData } = await axios.get("/users");
       setUsersFromServer(usersData);
+      MyToast.info("User Deleted!");
     } catch (err) {
       console.log(err);
     }
@@ -51,6 +53,7 @@ const ManagementPage = () => {
       await axios.delete(`/posts/${_id}`);
       const { data: postsData } = await axios.get("/posts");
       setPostsFromServer(postsData);
+      MyToast.info("Post Deleted!");
     } catch (err) {
       console.log(err);
     }

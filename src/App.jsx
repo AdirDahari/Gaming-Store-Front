@@ -4,6 +4,7 @@ import Layout from "./layout/Layout";
 import Router from "./routes/Router";
 import useAutoLogin from "./hooks/useAutoLogin";
 import { ToastContainer } from "react-toastify";
+import { LinearProgress } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
   return (
     <Layout>
       <ToastContainer />
-      <Router />
+      {doneAuth ? <Router /> : <LinearProgress />}
     </Layout>
   );
 }

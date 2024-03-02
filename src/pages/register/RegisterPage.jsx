@@ -13,6 +13,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES.JS";
 import { validateRegister } from "../../validation/registerValidation";
 import { registerNormalization } from "./registerNormalization";
+import MyToast from "../../messages/MyToast";
 import axios from "axios";
 
 const RegisterPage = () => {
@@ -53,6 +54,7 @@ const RegisterPage = () => {
       }
       const requestBody = registerNormalization(inputsValue);
       await axios.post("/users", requestBody);
+      MyToast.success("You have successfully registered");
       navigate(ROUTES.HOME);
     } catch (err) {
       console.log("Error from submit", err);

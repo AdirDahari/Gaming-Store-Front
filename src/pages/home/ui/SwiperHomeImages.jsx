@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
-import "../style/swiperImages.css";
+import "../../../style/swiperHomeImages.css";
 
 // import required modules
 import {
@@ -15,7 +15,7 @@ import {
   Navigation,
 } from "swiper/modules";
 
-const SwiperImages = () => {
+const SwiperHomeImages = () => {
   return (
     <>
       <Swiper
@@ -66,4 +66,4 @@ const SwiperImages = () => {
     </>
   );
 };
-export default SwiperImages;
+export default SwiperHomeImages;

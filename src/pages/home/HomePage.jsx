@@ -1,7 +1,7 @@
 import { Box, Grid } from "@mui/material";
 import CategoryComponent from "../../components/CategoryComponent";
 import { categories } from "../../layout/myLink";
-import SwiperImages from "../../components/SwiperImages";
+import SwiperHomeImages from "./ui/SwiperHomeImages";
 const HomePage = () => {
   return (
     <Box>
@@ -12,7 +12,7 @@ const HomePage = () => {
           margin: "0 auto",
         }}
       >
-        <SwiperImages />
+        <SwiperHomeImages />
       </Box>
 
       <Grid container m="0 auto" maxWidth={650} pt={8} pb={8}>

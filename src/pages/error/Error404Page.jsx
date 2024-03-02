@@ -5,6 +5,7 @@ import ROUTES from "../../routes/ROUTES.JS";
 
 const Error404Page = () => {
   const navigate = useNavigate();
+
   const handleBackHomeClick = () => {
     navigate(ROUTES.HOME);
   };

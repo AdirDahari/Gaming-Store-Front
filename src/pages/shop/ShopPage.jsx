@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import SortComponent from "./ui/SortComponent";
 import ROUTES from "../../routes/ROUTES.JS";
 import { useSelector } from "react-redux";
+import MyToast from "../../messages/MyToast";
 
 let initData = [];
 
@@ -127,6 +128,7 @@ const ShopPage = () => {
       );
       initData = data;
       setDataFromServer(initData);
+      MyToast.info("Post Deleted!");
     } catch (err) {
       console.log(err);
     }

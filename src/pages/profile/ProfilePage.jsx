@@ -12,6 +12,7 @@ import UpdateProfileForm from "./ui/UpdateProfileForm";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/authSlice";
 import { validateUpdateProfile } from "../../validation/updateProfileValidation";
+import MyToast from "../../messages/MyToast";
 
 let userId = "";
 let profileImage = "";
@@ -71,6 +72,7 @@ const ProfilePage = () => {
       await axios.delete(`/posts/${_id}`);
       let { data } = await axios.get("/posts/profile/my-posts");
       setPostsData(data);
+      MyToast.info("Post Deleted!");
     } catch (err) {
       console.log(err);
     }
@@ -92,6 +94,7 @@ const ProfilePage = () => {
         const { data } = await axios.put(`/users/${userId}`, request);
         console.log("data", data);
       }
+      MyToast.info("Profile Updated!");
     } catch (err) {
       console.log(err);
     }
@@ -105,6 +108,7 @@ const ProfilePage = () => {
         sessionStorage.removeItem("token");
       } else return;
       dispatch(authActions.logout());
+      MyToast.info("Profile Deleted!");
       navigate(ROUTES.HOME);
     } catch (err) {
       console.log(err);
@@ -119,6 +123,10 @@ const ProfilePage = () => {
       console.log(err);
     }
   };
+
+  // const handleError = (errorInputs) => {
+  //   setErrorsState(errorInputs);
+  // };
 
   return (
     <Fragment>

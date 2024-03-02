@@ -14,7 +14,7 @@ function srcset(image, size, rows = 1, cols = 1) {
 const AboutPage = () => {
   return (
     <Fragment>
-      <Grid container maxWidth={1200} m="0 auto" pt={4} pb={4}>
+      <Grid container maxWidth={1200} m="0 auto" pt={6} pb={4}>
         <Grid item sm={12} md={6}>
           <Box sx={{ p: 4 }}>
             <Typography variant="h4" component="h1" pb={2}>
@@ -67,7 +67,7 @@ const AboutPage = () => {
           <ImageList
             sx={{
               maxWidth: 550,
-              pt: 8,
+              pt: 5.5,
               m: "0 auto",
               display: { xs: "none", sm: "none", md: "grid" },
             }}

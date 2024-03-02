@@ -8,7 +8,7 @@ const HomePage = () => {
       <Box
         sx={{
           position: "relative",
-          maxWidth: "100%",
+          maxWidth: 1900,
           margin: "0 auto",
         }}
       >

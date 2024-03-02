@@ -20,6 +20,7 @@ import MobileMenuItems from "./ui/MobileMenuItems";
 import IconMenuItems from "./ui/IconMenuItems";
 import ProfileMenuItems from "./ui/ProfileMenuItems";
 import axios from "axios";
+import MyToast from "../../messages/MyToast";
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -65,6 +66,8 @@ function Header() {
     } else return;
     dispatch(authActions.logout());
     setUserData(null);
+    MyToast.info("You have logged out, see you soon");
+    navigate(ROUTES.HOME);
   };
 
   const handleHomeClick = () => {

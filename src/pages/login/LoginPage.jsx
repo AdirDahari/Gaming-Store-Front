@@ -18,6 +18,7 @@ import { validateLogin } from "../../validation/loginValidation.js";
 import { storeToken } from "../../service/storeService.js";
 import { useNavigate } from "react-router-dom";
 import useAutoLogin from "../../hooks/useAutoLogin.jsx";
+import MyToast from "../../messages/MyToast.js";
 
 const LoginPage = () => {
   const [emailValue, setEmailValue] = useState("");
@@ -55,6 +56,7 @@ const LoginPage = () => {
       });
       storeToken(data.jwt, rememberMe);
       autoLogin();
+      MyToast.success("You've logged in successfully");
       navigate(ROUTES.HOME);
     } catch (err) {
       console.log("Error from Submit", err);

@@ -1,4 +1,4 @@
-Pages: about , login register
+Pages:  login register
 
 Style: home, post, register, login, navbar, footer
 

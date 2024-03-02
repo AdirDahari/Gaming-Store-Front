@@ -50,7 +50,7 @@ const categories = [
         name: "PlayStation",
         image: "../../../assets/img/categories/Playstation.jpg",
         alt: "PlayStation image",
-        color: "blue",
+        color: "#0E86D4",
     },
     {
         name: "Xbox",

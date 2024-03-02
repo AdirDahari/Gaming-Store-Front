@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid";
-import { Box } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PostComponent from "../../components/PostComponent";
@@ -25,6 +25,7 @@ const ShopPage = () => {
   useEffect(() => {
     (async () => {
       try {
+        console.log("state", state);
         const { data: postData } = await axios.get(
           `/posts/platform/${state.name}`.toLocaleLowerCase()
         );
@@ -147,52 +148,64 @@ const ShopPage = () => {
   };
 
   return (
-    <Box>
+    <Box maxWidth={1200} m="0 auto" sx={{ p: 1, pt: 4 }}>
       <Box
         sx={{
-          width: "100%",
-          height: "200px",
-          backgroundImage: `url(${state.image})`,
-          paddingTop: "1rem",
-          paddingBottom: "1rem",
-          flexGrow: 1,
+          minHeight: 650,
+          bgcolor: "#f9f9f9",
+          p: 4,
+          pb: 2,
+          mb: 4,
+          borderRadius: "5px",
+          boxShadow: `rgba(149, 157, 165, 0.2) 0px 8px 24px`,
         }}
-      ></Box>
-      {maxPrice && allCategories && (
-        <SortComponent
-          onInputsChange={filterData}
-          onSearchChange={handleSearchTxt}
-          priceRange={[0, maxPrice]}
-          categoriesData={["all", ...allCategories]}
-        />
-      )}
-
-      <Grid
-        container
-        spacing={2}
-        maxWidth={1200}
-        sx={{ m: 2, p: 2, margin: "0 auto" }}
       >
-        {dataFromServer.map((post) => (
-          <Grid item key={post._id} xs={12} sm={6} md={4}>
-            <PostComponent
-              color={state.color}
-              _id={post._id}
-              name={post.game.name}
-              price={post.game.price}
-              image={post.game.images[0].url}
-              alt={post.game.images[0].alt}
-              onBuyNowClick={handleBuyNowClick}
-              onEditClick={handleEditCardClick}
-              onDeleteClick={handleDeletePostClick}
-              onLikeClick={handleLikePost}
-              isLoggedIn={loggedIn}
-              isUser={userId ? post.seller.userId == userId : false}
-              isLike={userId ? post.likes.includes(userId) : false}
+        <Box
+          sx={{
+            width: "80%",
+            m: "0 auto",
+            p: 2,
+            bgcolor: state.color,
+            borderRadius: "5px",
+          }}
+        >
+          {maxPrice && allCategories && (
+            <SortComponent
+              onInputsChange={filterData}
+              onSearchChange={handleSearchTxt}
+              priceRange={[0, maxPrice]}
+              categoriesData={["all", ...allCategories]}
             />
-          </Grid>
-        ))}
-      </Grid>
+          )}
+        </Box>
+        <Divider variant="middle" sx={{ pt: 4, pb: 4 }} />
+        <Grid
+          container
+          spacing={2}
+          maxWidth={1200}
+          sx={{ m: 2, p: 2, margin: "0 auto" }}
+        >
+          {dataFromServer.map((post) => (
+            <Grid item key={post._id} xs={12} sm={6} md={4}>
+              <PostComponent
+                color={state.color}
+                _id={post._id}
+                name={post.game.name}
+                price={post.game.price}
+                image={post.game.images[0].url}
+                alt={post.game.images[0].alt}
+                onBuyNowClick={handleBuyNowClick}
+                onEditClick={handleEditCardClick}
+                onDeleteClick={handleDeletePostClick}
+                onLikeClick={handleLikePost}
+                isLoggedIn={loggedIn}
+                isUser={userId ? post.seller.userId == userId : false}
+                isLike={userId ? post.likes.includes(userId) : false}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </Box>
   );
 };

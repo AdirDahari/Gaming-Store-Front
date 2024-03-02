@@ -30,6 +30,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: "100%",
+  color: "#f9f9f9",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
@@ -47,7 +48,7 @@ const SearchComponent = ({ txt, onTxtChange }) => {
   return (
     <Search>
       <SearchIconWrapper>
-        <SearchIcon sx={{ color: "black" }} />
+        <SearchIcon sx={{ color: "#f9f9f9" }} />
       </SearchIconWrapper>
       <StyledInputBase
         value={txt}

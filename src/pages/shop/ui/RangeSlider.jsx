@@ -19,7 +19,7 @@ const RangeSlider = ({ range, onRangeChange }) => {
 
   return (
     <Box sx={{ width: "85%", m: "0 auto" }}>
-      <Typography>price:</Typography>
+      <Typography color="#f9f9f9">price:</Typography>
       {value && (
         <Slider
           min={range[0]}

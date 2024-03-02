@@ -48,27 +48,27 @@ const ProfileIconLink = [
 const categories = [
     {
         name: "PlayStation",
-        image: "../../../assets/img/categories/Playstation.jpg",
+        image: "/assets/img/categories/Playstation.png",
         alt: "PlayStation image",
         color: "#0E86D4",
     },
     {
         name: "Xbox",
-        image: "../../../assets/img/categories/Xbox.jpg",
+        image: "/assets/img/categories/Xbox.png",
         alt: "Xbox image",
-        color: "green",
+        color: "#50C878",
     },
     {
         name: "Pc",
-        image: "../../../assets/img/categories/Pc.jpg",
+        image: "/assets/img/categories/Pc.png",
         alt: "Pc image",
-        color: "purple",
+        color: "#9370DB",
     },
     {
         name: "Nintendo",
-        image: "../../../assets/img/categories/Nintendo.jpg",
+        image: "/assets/img/categories/nintendo.png",
         alt: "Pc image",
-        color: "red",
+        color: "#FF7F7F",
     },
 ];
 

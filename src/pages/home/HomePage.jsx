@@ -15,9 +15,9 @@ const HomePage = () => {
         <SwiperHomeImages />
       </Box>
 
-      <Grid container m="0 auto" maxWidth={650} pt={8} pb={8}>
+      <Grid container m="0 auto" maxWidth={1200} pt={8} pb={8}>
         {categories.map((cate, index) => (
-          <Grid item xs={12} sm={6} key={index} p={2}>
+          <Grid item xs={12} sm={6} md={3} key={index} p={2}>
             <CategoryComponent>{cate}</CategoryComponent>
           </Grid>
         ))}

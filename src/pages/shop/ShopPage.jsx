@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid";
-import { Box, Divider } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, Divider, Typography } from "@mui/material";
+import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import PostComponent from "../../components/PostComponent";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -169,42 +169,48 @@ const ShopPage = () => {
             borderRadius: "5px",
           }}
         >
-          {maxPrice && allCategories && (
-            <SortComponent
-              onInputsChange={filterData}
-              onSearchChange={handleSearchTxt}
-              priceRange={[0, maxPrice]}
-              categoriesData={["all", ...allCategories]}
-            />
-          )}
+          <SortComponent
+            onInputsChange={filterData}
+            onSearchChange={handleSearchTxt}
+            priceRange={maxPrice ? [0, maxPrice] : [0, 10]}
+            categoriesData={allCategories ? ["all", ...allCategories] : ["all"]}
+          />
         </Box>
         <Divider variant="middle" sx={{ pt: 4, pb: 4 }} />
-        <Grid
-          container
-          spacing={2}
-          maxWidth={1200}
-          sx={{ m: 2, p: 2, margin: "0 auto" }}
-        >
-          {dataFromServer.map((post) => (
-            <Grid item key={post._id} xs={12} sm={6} md={4}>
-              <PostComponent
-                color={state.color}
-                _id={post._id}
-                name={post.game.name}
-                price={post.game.price}
-                image={post.game.images[0].url}
-                alt={post.game.images[0].alt}
-                onBuyNowClick={handleBuyNowClick}
-                onEditClick={handleEditCardClick}
-                onDeleteClick={handleDeletePostClick}
-                onLikeClick={handleLikePost}
-                isLoggedIn={loggedIn}
-                isUser={userId ? post.seller.userId == userId : false}
-                isLike={userId ? post.likes.includes(userId) : false}
-              />
-            </Grid>
-          ))}
-        </Grid>
+        {dataFromServer && dataFromServer.length > 0 ? (
+          <Grid
+            container
+            spacing={2}
+            maxWidth={1200}
+            sx={{ m: 2, p: 2, margin: "0 auto" }}
+          >
+            {dataFromServer.map((post) => (
+              <Grid item key={post._id} xs={12} sm={6} md={4}>
+                <PostComponent
+                  color={state.color}
+                  _id={post._id}
+                  name={post.game.name}
+                  price={post.game.price}
+                  image={post.game.images[0].url}
+                  alt={post.game.images[0].alt}
+                  onBuyNowClick={handleBuyNowClick}
+                  onEditClick={handleEditCardClick}
+                  onDeleteClick={handleDeletePostClick}
+                  onLikeClick={handleLikePost}
+                  isLoggedIn={loggedIn}
+                  isUser={userId ? post.seller.userId == userId : false}
+                  isLike={userId ? post.likes.includes(userId) : false}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        ) : (
+          <Fragment>
+            <Typography sx={{ p: 4, pl: { xs: 0, sm: 2, md: 8 } }} variant="h6">
+              No posts found
+            </Typography>
+          </Fragment>
+        )}
       </Box>
     </Box>
   );

@@ -4,8 +4,4 @@ Style: home, post, register, login, navbar, footer
 
 myLinks: state setting
 
-Messages: add interactive massages
-
 !Responsive web
-
-Alert to  profile (errorsState bug)

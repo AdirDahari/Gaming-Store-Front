@@ -12,7 +12,6 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import ROUTES from "../../routes/ROUTES.JS";
-import { Alert } from "@mui/material";
 import axios from "axios";
 import { validateLogin } from "../../validation/loginValidation.js";
 import { storeToken } from "../../service/storeService.js";
@@ -111,10 +110,11 @@ const LoginPage = () => {
               autoFocus
               value={emailValue}
               onChange={handleEmailInputChange}
+              error={errorsState && errorsState.email ? true : false}
+              helperText={
+                errorsState && errorsState.email ? errorsState.email : ""
+              }
             />
-            {errorsState && errorsState.email && (
-              <Alert severity="warning">{errorsState.email}</Alert>
-            )}
             <TextField
               margin="normal"
               required
@@ -126,10 +126,11 @@ const LoginPage = () => {
               autoComplete="current-password"
               value={passwordValue}
               onChange={handlePasswordInputChange}
+              error={errorsState && errorsState.password ? true : false}
+              helperText={
+                errorsState && errorsState.password ? errorsState.password : ""
+              }
             />
-            {errorsState && errorsState.password && (
-              <Alert severity="warning">{errorsState.password}</Alert>
-            )}
             <FormControlLabel
               control={
                 <Checkbox

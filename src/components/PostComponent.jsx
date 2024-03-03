@@ -64,7 +64,7 @@ const PostComponent = ({
     <Card
       sx={{
         border: `1px solid ${color}`,
-        borderRadius: "15px",
+        borderRadius: "5px",
         pl: 2,
         pr: 2,
         minHeight: 450,
@@ -140,9 +140,9 @@ const PostComponent = ({
               className="imageSmallScale"
               component="img"
               sx={{
+                objectFit: "contain",
                 cursor: "pointer",
                 width: "100%",
-                borderRadius: "10px",
                 m: "0 auto",
               }}
               image={image}

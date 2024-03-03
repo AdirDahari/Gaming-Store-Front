@@ -4,7 +4,6 @@ import {
   Typography,
   Button,
   TextField,
-  Alert,
   Box,
   Avatar,
 } from "@mui/material";
@@ -64,9 +63,8 @@ const RegisterPage = () => {
   return (
     <Box
       sx={{
-        maxWidth: 1200,
+        maxWidth: 900,
         m: "0 auto",
-        minHeight: "90vh",
         pt: 8,
         display: "flex",
         flexDirection: "column",
@@ -92,10 +90,11 @@ const RegisterPage = () => {
               autoFocus
               value={inputsValue.first}
               onChange={handleInputsChange}
+              error={errorsState && errorsState.first ? true : false}
+              helperText={
+                errorsState && errorsState.first ? errorsState.first : ""
+              }
             />
-            {errorsState && errorsState.first && (
-              <Alert severity="warning">{errorsState.first}</Alert>
-            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -119,10 +118,11 @@ const RegisterPage = () => {
               autoComplete="family-name"
               value={inputsValue.last}
               onChange={handleInputsChange}
+              error={errorsState && errorsState.last ? true : false}
+              helperText={
+                errorsState && errorsState.last ? errorsState.last : ""
+              }
             />
-            {errorsState && errorsState.last && (
-              <Alert severity="warning">{errorsState.last}</Alert>
-            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -134,10 +134,11 @@ const RegisterPage = () => {
               autoComplete="email"
               value={inputsValue.email}
               onChange={handleInputsChange}
+              error={errorsState && errorsState.email ? true : false}
+              helperText={
+                errorsState && errorsState.email ? errorsState.email : ""
+              }
             />
-            {errorsState && errorsState.email && (
-              <Alert severity="warning">{errorsState.email}</Alert>
-            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -150,10 +151,11 @@ const RegisterPage = () => {
               autoComplete="new-password"
               value={inputsValue.password}
               onChange={handleInputsChange}
+              error={errorsState && errorsState.password ? true : false}
+              helperText={
+                errorsState && errorsState.password ? errorsState.password : ""
+              }
             />
-            {errorsState && errorsState.password && (
-              <Alert severity="warning">{errorsState.password}</Alert>
-            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -165,10 +167,11 @@ const RegisterPage = () => {
               autoComplete="new-phone"
               value={inputsValue.phone}
               onChange={handleInputsChange}
+              error={errorsState && errorsState.phone ? true : false}
+              helperText={
+                errorsState && errorsState.phone ? errorsState.phone : ""
+              }
             />
-            {errorsState && errorsState.phone && (
-              <Alert severity="warning">{errorsState.phone}</Alert>
-            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -191,10 +194,11 @@ const RegisterPage = () => {
               autoComplete="new-country"
               value={inputsValue.country}
               onChange={handleInputsChange}
+              error={errorsState && errorsState.country ? true : false}
+              helperText={
+                errorsState && errorsState.country ? errorsState.country : ""
+              }
             />
-            {errorsState && errorsState.country && (
-              <Alert severity="warning">{errorsState.country}</Alert>
-            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -206,10 +210,11 @@ const RegisterPage = () => {
               autoComplete="new-city"
               value={inputsValue.city}
               onChange={handleInputsChange}
+              error={errorsState && errorsState.city ? true : false}
+              helperText={
+                errorsState && errorsState.city ? errorsState.city : ""
+              }
             />
-            {errorsState && errorsState.city && (
-              <Alert severity="warning">{errorsState.city}</Alert>
-            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -221,10 +226,11 @@ const RegisterPage = () => {
               autoComplete="new-street"
               value={inputsValue.street}
               onChange={handleInputsChange}
+              error={errorsState && errorsState.street ? true : false}
+              helperText={
+                errorsState && errorsState.street ? errorsState.street : ""
+              }
             />
-            {errorsState && errorsState.street && (
-              <Alert severity="warning">{errorsState.street}</Alert>
-            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -236,10 +242,13 @@ const RegisterPage = () => {
               autoComplete="new-houseNumber"
               value={inputsValue.houseNumber}
               onChange={handleInputsChange}
+              error={errorsState && errorsState.houseNumber ? true : false}
+              helperText={
+                errorsState && errorsState.houseNumber
+                  ? errorsState.houseNumber
+                  : ""
+              }
             />
-            {errorsState && errorsState.houseNumber && (
-              <Alert severity="warning">{errorsState.houseNumber}</Alert>
-            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField

@@ -235,9 +235,6 @@ const UpdateProfileForm = ({
             <Button variant="outlined" onClick={handleUpdateProfile}>
               Update
             </Button>
-            <Button color="error" variant="outlined" onClick={handleClickOpen}>
-              Delete
-            </Button>
           </Box>
         </Box>
         <DeleteProfileDialog
@@ -259,9 +256,17 @@ const UpdateProfileForm = ({
           />
         </Box>
         <Box>
-          <Typography variant="h5" sx={{ textAlign: "center", p: 2 }}>
+          <Typography variant="h5" sx={{ textAlign: "center", p: 2, pb: 4 }}>
             {email}
           </Typography>
+          <Button
+            color="error"
+            variant="outlined"
+            onClick={handleClickOpen}
+            sx={{ display: "block", m: "0 auto" }}
+          >
+            Delete Profile
+          </Button>
         </Box>
       </Grid>
     </Grid>

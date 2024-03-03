@@ -170,7 +170,11 @@ const PostComponent = ({
         >
           <CardActions>
             <Button
-              sx={{ minWidth: 110 }}
+              sx={{
+                minWidth: 110,
+                bgcolor: "#282C35",
+                ":hover": { bgcolor: color },
+              }}
               onClick={handleBuyNowClick}
               variant="contained"
             >

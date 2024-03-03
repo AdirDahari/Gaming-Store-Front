@@ -26,8 +26,8 @@ const ProfileMenuItems = ({ loggedIn, onLogout, onCloseUserMenu }) => {
                 myLink.children == "Logout" ? handleLogout : handleCloseUserMenu
               }
             >
-              <myLink.icon />
-              <Typography sx={{ p: 1 }} textAlign="center">
+              <myLink.icon sx={{ color: "#282C35" }} />
+              <Typography sx={{ p: 1, color: "#282C35" }} textAlign="center">
                 {myLink.children}
               </Typography>
             </MenuItem>

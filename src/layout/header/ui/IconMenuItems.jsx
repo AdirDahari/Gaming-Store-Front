@@ -16,8 +16,10 @@ const IconMenuItems = ({ loggedIn }) => {
               to={myLink.to}
             >
               <MenuItem>
-                <myLink.icon />
-                <Typography>&nbsp; {myLink.children}</Typography>
+                <myLink.icon sx={{ color: "#f9f9f9" }} />
+                <Typography sx={{ color: "#f9f9f9" }}>
+                  &nbsp; {myLink.children}
+                </Typography>
               </MenuItem>
             </NavLink>
           ))}
@@ -31,8 +33,10 @@ const IconMenuItems = ({ loggedIn }) => {
               to={myLink.to}
             >
               <MenuItem>
-                <myLink.icon />
-                <Typography>&nbsp; {myLink.children}</Typography>
+                <myLink.icon sx={{ color: "#f9f9f9" }} />
+                <Typography sx={{ color: "#f9f9f9" }}>
+                  &nbsp; {myLink.children}
+                </Typography>
               </MenuItem>
             </NavLink>
           ))}

@@ -94,7 +94,7 @@ const FavouritesPage = () => {
             width: "80%",
             m: "0 auto",
             p: 2,
-            bgcolor: "#FB607F",
+            bgcolor: "#E0115F",
             borderRadius: "5px",
           }}
         >

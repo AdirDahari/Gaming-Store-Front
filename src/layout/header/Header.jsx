@@ -75,7 +75,7 @@ function Header() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ bgcolor: "#282C35" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <SportsEsportsIcon
@@ -170,7 +170,7 @@ function Header() {
                   >
                     <MenuItem
                       onClick={handleCloseNavMenu}
-                      sx={{ my: 2, color: "white", display: "block" }}
+                      sx={{ my: 2, color: "#f9f9f9", display: "block" }}
                     >
                       {myLink.children}
                     </MenuItem>
@@ -187,7 +187,7 @@ function Header() {
                   >
                     <MenuItem
                       onClick={handleCloseNavMenu}
-                      sx={{ my: 2, color: "white", display: "block" }}
+                      sx={{ my: 2, color: "#f9f9f9", display: "block" }}
                     >
                       {myLink.children}
                     </MenuItem>

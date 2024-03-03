@@ -68,7 +68,7 @@ const categories = [
         name: "Nintendo",
         image: "/assets/img/categories/nintendo.png",
         alt: "Pc image",
-        color: "#FF7F7F",
+        color: "#ED2939",
     },
 ];
 

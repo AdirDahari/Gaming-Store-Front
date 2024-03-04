@@ -162,6 +162,7 @@ const ShopPage = () => {
       >
         <Box
           sx={{
+            width: "80%",
             m: "0 auto",
             p: 2,
             bgcolor: state.color,

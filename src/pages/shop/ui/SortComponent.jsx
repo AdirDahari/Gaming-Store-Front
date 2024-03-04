@@ -93,7 +93,7 @@ const SortComponent = ({
         <Collapse in={isFilterOpen}>
           <Toolbar>
             <Grid container spacing={1} sx={{ pt: 1, pb: 1 }}>
-              <Grid item xs={4} sx={{ mt: 1.5 }}>
+              <Grid item xs={12} sm={4} sx={{ mt: 1.5 }}>
                 <TextField
                   sx={{
                     // Root class for the input field
@@ -126,7 +126,7 @@ const SortComponent = ({
                   ))}
                 </TextField>
               </Grid>
-              <Grid item xs={4} sx={{ mt: 1.5 }}>
+              <Grid item xs={12} sm={4} sx={{ mt: 1.5 }}>
                 <TextField
                   sx={{
                     // Root class for the input field
@@ -159,7 +159,7 @@ const SortComponent = ({
                   ))}
                 </TextField>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={4}>
                 {priceRange && isFilterOpen && (
                   <RangeSlider
                     range={priceRange}

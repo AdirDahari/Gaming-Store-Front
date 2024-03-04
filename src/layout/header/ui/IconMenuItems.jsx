@@ -15,7 +15,11 @@ const IconMenuItems = ({ loggedIn }) => {
               key={myLink.children}
               to={myLink.to}
             >
-              <MenuItem>
+              <MenuItem
+                sx={{
+                  "&:hover": { backgroundColor: "rgb(246, 245, 245, 0.1)" },
+                }}
+              >
                 <myLink.icon sx={{ color: "#f9f9f9" }} />
                 <Typography sx={{ color: "#f9f9f9" }}>
                   &nbsp; {myLink.children}
@@ -32,7 +36,11 @@ const IconMenuItems = ({ loggedIn }) => {
               key={myLink.children}
               to={myLink.to}
             >
-              <MenuItem>
+              <MenuItem
+                sx={{
+                  "&:hover": { backgroundColor: "rgb(246, 245, 245, 0.1)" },
+                }}
+              >
                 <myLink.icon sx={{ color: "#f9f9f9" }} />
                 <Typography sx={{ color: "#f9f9f9" }}>
                   &nbsp; {myLink.children}

@@ -168,13 +168,11 @@ const ProfilePage = () => {
         {postsData && postsData.length ? (
           <Grid
             container
-            spacing={2}
             maxWidth={1200}
-            sx={{ m: 2, p: 2, pt: 2, margin: "0 auto" }}
+            sx={{ margin: "0 auto", p: 1, pb: 6, pt: 6 }}
           >
-            <Divider sx={{ pt: 4 }} />
             {postsData.map((post) => (
-              <Grid item key={post._id} xs={12} sm={6} md={4}>
+              <Grid item key={post._id} xs={12} sm={6} md={4} p={1}>
                 <PostComponent
                   color="#A32CC4"
                   _id={post._id}
@@ -196,7 +194,7 @@ const ProfilePage = () => {
         ) : (
           <Fragment>
             <Typography sx={{ p: 4 }} variant="h6">
-              Your posts collection is empty...
+              Your posts collection is empty
             </Typography>
           </Fragment>
         )}

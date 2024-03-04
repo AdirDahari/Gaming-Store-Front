@@ -119,7 +119,7 @@ const FavouritesPage = () => {
             {dataFromServer.map((post) => (
               <Grid item key={post._id} xs={12} sm={6} md={4} sx={{ p: 1 }}>
                 <PostComponent
-                  color="#A32CC4"
+                  color="#E0115F"
                   _id={post._id}
                   name={post.game.name}
                   price={post.game.price}
@@ -139,7 +139,7 @@ const FavouritesPage = () => {
         ) : (
           <Fragment>
             <Typography sx={{ p: 4 }} variant="h6">
-              Your favourite collection is empty...
+              Your favourite collection is empty
             </Typography>
           </Fragment>
         )}

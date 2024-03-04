@@ -1,7 +1,3 @@
-Pages:  login register
+Style:  login register, post
 
-Style: home, post, register, login, navbar, footer
-
-myLinks: state setting
-
-!Responsive web
+clean code

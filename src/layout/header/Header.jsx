@@ -170,7 +170,14 @@ function Header() {
                   >
                     <MenuItem
                       onClick={handleCloseNavMenu}
-                      sx={{ my: 2, color: "#f9f9f9", display: "block" }}
+                      sx={{
+                        my: 2,
+                        color: "#f9f9f9",
+                        display: "block",
+                        "&:hover": {
+                          backgroundColor: "rgb(246, 245, 245, 0.1)",
+                        },
+                      }}
                     >
                       {myLink.children}
                     </MenuItem>
@@ -187,7 +194,14 @@ function Header() {
                   >
                     <MenuItem
                       onClick={handleCloseNavMenu}
-                      sx={{ my: 2, color: "#f9f9f9", display: "block" }}
+                      sx={{
+                        my: 2,
+                        color: "#f9f9f9",
+                        display: "block",
+                        "&:hover": {
+                          backgroundColor: "rgb(246, 245, 245, 0.1)",
+                        },
+                      }}
                     >
                       {myLink.children}
                     </MenuItem>

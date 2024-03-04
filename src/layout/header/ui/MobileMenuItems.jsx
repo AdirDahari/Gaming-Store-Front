@@ -22,8 +22,8 @@ const MobileMenuItems = ({ loggedIn, isAdmin, onCloseNavMenu }) => {
             to={myLink.to}
           >
             <MenuItem onClick={handleCloseNavMenu}>
-              <myLink.icon sx={{ color: "#f9f9f9" }} />
-              <Typography sx={{ p: 1, color: "#f9f9f9" }} textAlign="center">
+              <myLink.icon sx={{ color: "#282C35" }} />
+              <Typography sx={{ p: 1, color: "#282C35" }} textAlign="center">
                 {myLink.children}
               </Typography>
             </MenuItem>
@@ -39,9 +39,9 @@ const MobileMenuItems = ({ loggedIn, isAdmin, onCloseNavMenu }) => {
                   to={myLink.to}
                 >
                   <MenuItem onClick={handleCloseNavMenu}>
-                    <myLink.icon sx={{ color: "#f9f9f9" }} />
+                    <myLink.icon sx={{ color: "#282C35" }} />
                     <Typography
-                      sx={{ p: 1, color: "#f9f9f9" }}
+                      sx={{ p: 1, color: "#282C35" }}
                       textAlign="center"
                     >
                       {myLink.children}
@@ -56,9 +56,9 @@ const MobileMenuItems = ({ loggedIn, isAdmin, onCloseNavMenu }) => {
                   to={myLink.to}
                 >
                   <MenuItem onClick={handleCloseNavMenu}>
-                    <myLink.icon sx={{ color: "#f9f9f9" }} />
+                    <myLink.icon sx={{ color: "#282C35" }} />
                     <Typography
-                      sx={{ p: 1, color: "#f9f9f9" }}
+                      sx={{ p: 1, color: "#282C35" }}
                       textAlign="center"
                     >
                       {myLink.children}

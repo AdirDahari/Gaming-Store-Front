@@ -2,19 +2,13 @@ import { TextField, Grid, MenuItem } from "@mui/material";
 import PropTypes from "prop-types";
 
 const PostInputsForm = ({
+  gameDetails,
   errorsState,
-  platformValue,
   platforms,
   status,
-  cate0Value,
-  cate1Value,
-  cate2Value,
-  statusValue,
   categoryOptions,
   handleInputsChange,
-  handlePlatformChange,
-  handleCategoryChange,
-  handleStatusChange,
+  handleOptionChange,
 }) => {
   return (
     <Grid container spacing={3}>
@@ -26,6 +20,7 @@ const PostInputsForm = ({
           label="Game name"
           fullWidth
           autoComplete="platform-name"
+          defaultValue={gameDetails.name ? gameDetails.name : ""}
           variant="standard"
           onChange={handleInputsChange}
           error={errorsState && errorsState.name ? true : false}
@@ -38,9 +33,9 @@ const PostInputsForm = ({
           select
           label="Platform"
           fullWidth
-          defaultValue={platformValue ? platformValue : ""}
-          value={platformValue}
-          onChange={handlePlatformChange}
+          defaultValue={gameDetails.platform ? gameDetails.platform : ""}
+          value={gameDetails.platform}
+          onChange={handleOptionChange}
           error={errorsState && errorsState.platform ? true : false}
           helperText={
             errorsState && errorsState.platform
@@ -61,9 +56,11 @@ const PostInputsForm = ({
           select
           label="Product status"
           fullWidth
-          defaultValue={statusValue ? statusValue : ""}
-          value={statusValue}
-          onChange={handleStatusChange}
+          defaultValue={
+            gameDetails.productStatus ? gameDetails.productStatus : ""
+          }
+          value={gameDetails.productStatus}
+          onChange={handleOptionChange}
           error={errorsState && errorsState.productStatus ? true : false}
           helperText={
             errorsState && errorsState.productStatus
@@ -85,9 +82,9 @@ const PostInputsForm = ({
           name="cate0"
           label="Category 1"
           fullWidth
-          defaultValue={cate0Value ? cate0Value : ""}
-          value={cate0Value}
-          onChange={handleCategoryChange}
+          defaultValue={gameDetails.cate0 ? gameDetails.cate0 : ""}
+          value={gameDetails.cate0}
+          onChange={handleOptionChange}
           error={errorsState && errorsState.cate0 ? true : false}
           helperText={errorsState && errorsState.cate0 ? errorsState.cate0 : ""}
         >
@@ -104,9 +101,9 @@ const PostInputsForm = ({
           name="cate1"
           label="Category 2"
           fullWidth
-          defaultValue={cate1Value ? cate1Value : ""}
-          value={cate1Value}
-          onChange={handleCategoryChange}
+          defaultValue={gameDetails.cate1 ? gameDetails.cate1 : ""}
+          value={gameDetails.cate1}
+          onChange={handleOptionChange}
         >
           {categoryOptions.map((option, index) => (
             <MenuItem key={index} value={option}>
@@ -121,9 +118,9 @@ const PostInputsForm = ({
           name="cate2"
           label="Category 3"
           fullWidth
-          defaultValue={cate2Value ? cate2Value : ""}
-          value={cate2Value}
-          onChange={handleCategoryChange}
+          defaultValue={gameDetails.cate2 ? gameDetails.cate2 : ""}
+          value={gameDetails.cate2}
+          onChange={handleOptionChange}
         >
           {categoryOptions.map((option, index) => (
             <MenuItem key={index} value={option}>
@@ -140,6 +137,7 @@ const PostInputsForm = ({
           label="Image URL"
           fullWidth
           variant="standard"
+          defaultValue={gameDetails.url0 ? gameDetails.url0 : ""}
           onChange={handleInputsChange}
           error={errorsState && errorsState.url0 ? true : false}
           helperText={errorsState && errorsState.url0 ? errorsState.url0 : ""}
@@ -152,6 +150,7 @@ const PostInputsForm = ({
           label="Image URL"
           fullWidth
           variant="standard"
+          defaultValue={gameDetails.url1 ? gameDetails.url1 : ""}
           onChange={handleInputsChange}
         />
       </Grid>
@@ -162,6 +161,7 @@ const PostInputsForm = ({
           label="Image URL"
           fullWidth
           variant="standard"
+          defaultValue={gameDetails.url2 ? gameDetails.url2 : ""}
           onChange={handleInputsChange}
         />
       </Grid>
@@ -173,6 +173,7 @@ const PostInputsForm = ({
           onChange={handleInputsChange}
           error={errorsState && errorsState.price ? true : false}
           helperText={errorsState && errorsState.price ? errorsState.price : ""}
+          defaultValue={gameDetails.price ? gameDetails.price : ""}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -184,6 +185,7 @@ const PostInputsForm = ({
           rows={2}
           variant="standard"
           onChange={handleInputsChange}
+          defaultValue={gameDetails.description ? gameDetails.description : ""}
         />
       </Grid>
     </Grid>
@@ -191,19 +193,13 @@ const PostInputsForm = ({
 };
 
 PostInputsForm.propTypes = {
-  errorsState: PropTypes.object.isRequired,
-  platformValue: PropTypes.string.isRequired,
+  gameDetails: PropTypes.object.isRequired,
+  errorsState: PropTypes.object,
   platforms: PropTypes.array.isRequired,
   status: PropTypes.array.isRequired,
-  cate0Value: PropTypes.string.isRequired,
-  cate1Value: PropTypes.string.isRequired,
-  cate2Value: PropTypes.string.isRequired,
-  statusValue: PropTypes.string.isRequired,
   categoryOptions: PropTypes.array.isRequired,
   handleInputsChange: PropTypes.func.isRequired,
-  handlePlatformChange: PropTypes.func.isRequired,
-  handleCategoryChange: PropTypes.func.isRequired,
-  handleStatusChange: PropTypes.func.isRequired,
+  handleOptionChange: PropTypes.func.isRequired,
 };
 
 export default PostInputsForm;

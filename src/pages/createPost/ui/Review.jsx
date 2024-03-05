@@ -9,7 +9,7 @@ const Review = ({ handleBack, handleSubmit, userDetails, gameDetails }) => {
     if (urls.length > 0) {
       return;
     }
-    console.log(gameDetails);
+    checkDoubles(gameDetails);
     if (gameDetails.url0) {
       setUrls((currentState) => {
         currentState = [gameDetails.url0, gameDetails.url1, gameDetails.url2];
@@ -17,6 +17,18 @@ const Review = ({ handleBack, handleSubmit, userDetails, gameDetails }) => {
       });
     }
   }, []);
+
+  const checkDoubles = (gameDetails) => {
+    if (gameDetails.cate0 == gameDetails.cate1) {
+      gameDetails.cate1 = "";
+    }
+    if (gameDetails.cate0 == gameDetails.cate2) {
+      gameDetails.cate2 = "";
+    }
+    if (gameDetails.cate1 == gameDetails.cate2) {
+      gameDetails.cate1 = "";
+    }
+  };
 
   const handleSubmitClick = () => {
     handleSubmit();

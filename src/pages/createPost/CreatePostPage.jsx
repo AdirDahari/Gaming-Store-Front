@@ -74,7 +74,7 @@ const CreatePostPage = () => {
 
   return (
     <Fragment>
-      <Box maxWidth="sm" sx={{ pb: 4, pt: 8 }}>
+      <Box maxWidth="sm" sx={{ pb: 8, pt: 8 }}>
         <Paper
           variant="outlined"
           sx={{ py: { xs: 3, pd: 6 }, p: { xs: 2, pd: 3 } }}

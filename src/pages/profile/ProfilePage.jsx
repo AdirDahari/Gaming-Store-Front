@@ -43,7 +43,7 @@ const ProfilePage = () => {
   useEffect(() => {
     (async () => {
       try {
-        let { data } = await axios.get("/posts/profile/my-posts");
+        let { data } = await axios.get("/posts/my-posts");
         setPostsData(data);
       } catch (err) {
         console.log(err.response.data);
@@ -70,7 +70,7 @@ const ProfilePage = () => {
   const handleDeletePostClick = async (_id) => {
     try {
       await axios.delete(`/posts/${_id}`);
-      let { data } = await axios.get("/posts/profile/my-posts");
+      let { data } = await axios.get("/posts/my-posts");
       setPostsData(data);
       MyToast.info("Post Deleted!");
     } catch (err) {
@@ -117,7 +117,7 @@ const ProfilePage = () => {
   const handleLikePost = async (_id) => {
     try {
       await axios.patch(`/posts/${_id}`);
-      let { data } = await axios.get("/posts/profile/my-posts");
+      let { data } = await axios.get("/posts/my-posts");
       setPostsData(data);
     } catch (err) {
       console.log(err);

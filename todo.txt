@@ -1,3 +1,5 @@
 Style:  login register, post
 
+change category to option
+
 clean code

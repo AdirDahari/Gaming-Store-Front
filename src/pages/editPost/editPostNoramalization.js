@@ -1,6 +1,4 @@
-const editPostNormalization = (gameDetails, userDetails) => {
-    console.log(gameDetails);
-    console.log(userDetails);
+const editPostNormalization = (gameDetails) => {
     let categoryArr = [gameDetails.cate0];
     if (gameDetails.cate1) categoryArr.push(gameDetails.cate1);
     if (gameDetails.cate2) categoryArr.push(gameDetails.cate2);
@@ -27,12 +25,6 @@ const editPostNormalization = (gameDetails, userDetails) => {
             description: gameDetails.description,
             images: imagesToSend,
             productStatus: gameDetails.productStatus
-        },
-        seller: {
-            city: userDetails.address.city,
-            firstName: userDetails.name.first,
-            phone: userDetails.phone,
-            userId: userDetails._id
         }
     }
 }

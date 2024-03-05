@@ -36,7 +36,7 @@ const Review = ({ handleBack, handleSubmit, userDetails, gameDetails }) => {
             <Typography fontWeight="500" variant="subtitle1" component="span">
               User name:{" "}
             </Typography>
-            {userDetails.name.first}
+            {userDetails.firstName}
           </Typography>
         </Grid>
         <Grid item xs={12} sm={4}>
@@ -44,7 +44,7 @@ const Review = ({ handleBack, handleSubmit, userDetails, gameDetails }) => {
             <Typography fontWeight="500" variant="subtitle1" component="span">
               City:{" "}
             </Typography>
-            {userDetails.address.city}
+            {userDetails.city}
           </Typography>
         </Grid>
         <Grid item xs={12} sm={4}>

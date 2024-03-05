@@ -54,6 +54,8 @@ const EditPostPage = () => {
       try {
         const { data } = await axios.get(`/posts/${_id}`);
         initData = data;
+        console.log(data.seller);
+        setUserDetails(data.seller);
         setGameDetails(data);
       } catch (err) {
         console.log(err);
@@ -63,8 +65,6 @@ const EditPostPage = () => {
 
   const handleNext = async (gameDetailsValues) => {
     try {
-      const { data: myUser } = await axios.get("users/my-user");
-      setUserDetails(myUser);
       setGameDetails(gameDetailsValues);
       setActiveStep(activeStep + 1);
     } catch (err) {
@@ -79,8 +79,7 @@ const EditPostPage = () => {
 
   const handleSubmit = async () => {
     try {
-      const request = editPostNormalization(gameDetails, userDetails);
-      console.log("request", request);
+      const request = editPostNormalization(gameDetails);
       await axios.put(`/posts/${_id}`, request);
       MyToast.info("Post Updated!");
       navigate(ROUTE.HOME);

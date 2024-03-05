@@ -53,8 +53,15 @@ const LoginPage = () => {
         email: emailValue,
         password: passwordValue,
       });
+      if (!data.jwt) {
+        setErrorsState({
+          invalid: "Email or Password Invalid",
+        });
+        MyToast.warning("Email or Password Invalid");
+        return;
+      }
       storeToken(data.jwt, rememberMe);
-      autoLogin();
+      await autoLogin();
       MyToast.success("You've logged in successfully");
       navigate(ROUTES.HOME);
     } catch (err) {
@@ -110,7 +117,12 @@ const LoginPage = () => {
               autoFocus
               value={emailValue}
               onChange={handleEmailInputChange}
-              error={errorsState && errorsState.email ? true : false}
+              error={
+                (errorsState && errorsState.email) ||
+                (errorsState && errorsState.invalid)
+                  ? true
+                  : false
+              }
               helperText={
                 errorsState && errorsState.email ? errorsState.email : ""
               }
@@ -126,7 +138,12 @@ const LoginPage = () => {
               autoComplete="current-password"
               value={passwordValue}
               onChange={handlePasswordInputChange}
-              error={errorsState && errorsState.password ? true : false}
+              error={
+                (errorsState && errorsState.password) ||
+                (errorsState && errorsState.invalid)
+                  ? true
+                  : false
+              }
               helperText={
                 errorsState && errorsState.password ? errorsState.password : ""
               }

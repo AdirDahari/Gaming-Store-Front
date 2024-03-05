@@ -28,25 +28,16 @@ const ProfilePage = () => {
   useEffect(() => {
     (async () => {
       try {
-        let { data } = await axios.get("/users/my-user");
-        userId = data._id;
-        profileImage = data.image.url;
-        email = data.email;
-        // console.log(data);
-        setInputsValue(fromServerUserNormalization(data));
+        let { data: userDara } = await axios.get("/users/my-user");
+        userId = userDara._id;
+        profileImage = userDara.image.url;
+        email = userDara.email;
+        setInputsValue(fromServerUserNormalization(userDara));
+
+        let { data: postData } = await axios.get("/posts/profile/my-posts");
+        setPostsData(postData);
       } catch (err) {
         console.log(err);
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        let { data } = await axios.get("/posts/my-posts");
-        setPostsData(data);
-      } catch (err) {
-        console.log(err.response.data);
       }
     })();
   }, []);
@@ -70,7 +61,7 @@ const ProfilePage = () => {
   const handleDeletePostClick = async (_id) => {
     try {
       await axios.delete(`/posts/${_id}`);
-      let { data } = await axios.get("/posts/my-posts");
+      let { data } = await axios.get("/posts/profile/my-posts");
       setPostsData(data);
       MyToast.info("Post Deleted!");
     } catch (err) {
@@ -117,16 +108,12 @@ const ProfilePage = () => {
   const handleLikePost = async (_id) => {
     try {
       await axios.patch(`/posts/${_id}`);
-      let { data } = await axios.get("/posts/my-posts");
+      let { data } = await axios.get("/posts/profile/my-posts");
       setPostsData(data);
     } catch (err) {
       console.log(err);
     }
   };
-
-  // const handleError = (errorInputs) => {
-  //   setErrorsState(errorInputs);
-  // };
 
   return (
     <Fragment>

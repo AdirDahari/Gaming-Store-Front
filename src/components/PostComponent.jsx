@@ -30,7 +30,6 @@ const PostComponent = ({
   isUser,
   isLoggedIn,
   isLike,
-  isAdmin,
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -113,13 +112,12 @@ const PostComponent = ({
                 </Popover>
               </Fragment>
             )}
-            {isAdmin == false && (
-              <Box>
-                <IconButton onClick={handleLikeClick}>
-                  <FavoriteIcon sx={{ color: isLike && "red" }} />
-                </IconButton>
-              </Box>
-            )}
+
+            <Box>
+              <IconButton onClick={handleLikeClick}>
+                <FavoriteIcon sx={{ color: isLike && "red" }} />
+              </IconButton>
+            </Box>
           </Box>
         ) : (
           <Box sx={{ height: 40 }}></Box>
@@ -204,14 +202,12 @@ PostComponent.propTypes = {
   isUser: PropTypes.bool,
   isLoggedIn: PropTypes.bool,
   isLike: PropTypes.bool,
-  isAdmin: PropTypes.bool,
 };
 
 PostComponent.defaultProps = {
   isUser: false,
   isLoggedIn: false,
   isLike: false,
-  isAdmin: false,
 };
 
 export default PostComponent;

@@ -1,9 +1,21 @@
 Style:  login register, post
 
-change category to option
+massage for error also
 
 clean code
 
 keys
 
+title + favicon
+
+home page add titles?
+
+remove email from token and change to user id + change request + change router
+
+managment change user to admin
+
 test edit and create post
+
+readme + postman
+
+server -> redux to category option

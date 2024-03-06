@@ -39,6 +39,7 @@ const ShopPage = () => {
         findMaxPrice(postData);
         findAllCategories(postData);
       } catch (err) {
+        MyToast.error("Something wrong, Please try again later");
         console.log(err);
       }
     })();
@@ -131,6 +132,7 @@ const ShopPage = () => {
       setDataFromServer(initData);
       MyToast.info("Post Deleted!");
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log(err);
     }
   };
@@ -143,6 +145,7 @@ const ShopPage = () => {
       initData = data;
       setDataFromServer(initData);
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log(err);
     }
   };
@@ -170,6 +173,7 @@ const ShopPage = () => {
           }}
         >
           <SortComponent
+            platform={state.name}
             onInputsChange={filterData}
             onSearchChange={handleSearchTxt}
             priceRange={maxPrice ? [0, maxPrice] : [0, 10]}

@@ -53,6 +53,7 @@ const CreatePostPage = () => {
       setGameDetails(gameDetailsValues);
       setActiveStep(activeStep + 1);
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log("handleNext", err);
     }
   };
@@ -68,6 +69,7 @@ const CreatePostPage = () => {
       MyToast.info("Post Created!");
       navigate(ROUTE.HOME);
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log("handleSubmit", err);
     }
   };

@@ -58,18 +58,15 @@ const EditPostPage = () => {
         setUserDetails(data.seller);
         setGameDetails(data);
       } catch (err) {
+        MyToast.error("Something wrong, Please try again later");
         console.log(err);
       }
     })();
   }, []);
 
-  const handleNext = async (gameDetailsValues) => {
-    try {
-      setGameDetails(gameDetailsValues);
-      setActiveStep(activeStep + 1);
-    } catch (err) {
-      console.log("handleNext", err);
-    }
+  const handleNext = (gameDetailsValues) => {
+    setGameDetails(gameDetailsValues);
+    setActiveStep(activeStep + 1);
   };
 
   const handleBack = () => {
@@ -84,6 +81,7 @@ const EditPostPage = () => {
       MyToast.info("Post Updated!");
       navigate(ROUTE.HOME);
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log("handleSubmit", err);
     }
   };

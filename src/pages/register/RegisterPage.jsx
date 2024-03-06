@@ -56,6 +56,7 @@ const RegisterPage = () => {
       MyToast.success("You have successfully registered");
       navigate(ROUTES.HOME);
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log("Error from submit", err);
     }
   };

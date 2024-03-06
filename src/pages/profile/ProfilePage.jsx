@@ -37,6 +37,7 @@ const ProfilePage = () => {
         let { data: postData } = await axios.get("/posts/profile/my-posts");
         setPostsData(postData);
       } catch (err) {
+        MyToast.error("Something wrong, Please try again later");
         console.log(err);
       }
     })();
@@ -65,6 +66,7 @@ const ProfilePage = () => {
       setPostsData(data);
       MyToast.info("Post Deleted!");
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log(err);
     }
   };
@@ -87,6 +89,7 @@ const ProfilePage = () => {
       }
       MyToast.info("Profile Updated!");
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log(err);
     }
   };
@@ -102,6 +105,7 @@ const ProfilePage = () => {
       MyToast.info("Profile Deleted!");
       navigate(ROUTES.HOME);
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log(err);
     }
   };
@@ -111,6 +115,7 @@ const ProfilePage = () => {
       let { data } = await axios.get("/posts/profile/my-posts");
       setPostsData(data);
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log(err);
     }
   };

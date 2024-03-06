@@ -47,7 +47,7 @@ const ProfileIconLink = [
 
 const categories = [
     {
-        name: "PlayStation",
+        name: "Playstation",
         image: "/assets/img/categories/Playstation.png",
         alt: "PlayStation image",
         color: "#0E86D4",

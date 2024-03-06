@@ -12,6 +12,7 @@ import axios from "axios";
 import "../../style/ImageScale.css";
 import PopupSellerDetails from "./ui/PopupSellerDetails";
 import SwiperPostImages from "./ui/SwiperPostImages";
+import MyToast from "../../messages/MyToast";
 
 const PostPage = () => {
   const { id: _id } = useParams();
@@ -22,13 +23,13 @@ const PostPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        console.log(_id);
         const { data } = await axios.get(`/posts/${_id}`);
         console.log(data);
         setDataFromServer(data);
         setImageList(data.game.images);
         setOpenPopup(false);
       } catch (err) {
+        MyToast.error("Something wrong, Please try again later");
         console.log(err);
       }
     })();

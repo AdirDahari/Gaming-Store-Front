@@ -37,6 +37,7 @@ function Header() {
         const { data } = await axios.get("users/my-user");
         setUserData(data);
       } catch (err) {
+        MyToast.error("Something wrong, Please try again later");
         console.log(err);
       }
     })();

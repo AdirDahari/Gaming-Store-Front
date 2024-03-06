@@ -28,6 +28,7 @@ const ManagementPage = () => {
         const { data: postsData } = await axios.get("/posts");
         setPostsFromServer(postsData);
       } catch (err) {
+        MyToast.error("Something wrong, Please try again later");
         console.log(err);
       }
     })();
@@ -44,6 +45,7 @@ const ManagementPage = () => {
       setUsersFromServer(usersData);
       MyToast.info("User Deleted!");
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log(err);
     }
   };
@@ -55,6 +57,7 @@ const ManagementPage = () => {
       setPostsFromServer(postsData);
       MyToast.info("Post Deleted!");
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log(err);
     }
   };

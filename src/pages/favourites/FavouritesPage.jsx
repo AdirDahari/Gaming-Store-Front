@@ -29,6 +29,7 @@ const FavouritesPage = () => {
         console.log(initData);
         setDataFromServer(initData);
       } catch (err) {
+        MyToast.error("Something wrong, Please try again later");
         console.log(err);
       }
     })();
@@ -62,6 +63,7 @@ const FavouritesPage = () => {
       setDataFromServer(initData);
       MyToast.info("Post Deleted!");
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log(err);
     }
   };
@@ -72,6 +74,7 @@ const FavouritesPage = () => {
       initData = postData.filter((post) => post.likes.includes(userId));
       setDataFromServer(initData);
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log(err);
     }
   };

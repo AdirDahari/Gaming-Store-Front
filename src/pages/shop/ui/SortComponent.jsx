@@ -20,6 +20,7 @@ const status = ["all", "new", "like new", "used"];
 const SortComponent = ({
   onSearchChange,
   onInputsChange,
+  platform,
   categoriesData,
   priceRange,
 }) => {
@@ -68,26 +69,36 @@ const SortComponent = ({
     <Fragment>
       <Box position="static">
         <Toolbar>
-          <IconButton onClick={handleFilterClick}>
+          <IconButton sx={{ p: 1, mr: 2 }} onClick={handleFilterClick}>
             {isFilterOpen ? (
-              <CloseIcon sx={{ color: "#f9f9f9" }} fontSize="large" />
+              <CloseIcon sx={{ color: "#f9f9f9" }} />
             ) : (
-              <FilterListIcon sx={{ color: "#f9f9f9" }} fontSize="large" />
+              <FilterListIcon sx={{ color: "#f9f9f9" }} />
             )}
           </IconButton>
-          <Typography
-            color="#f9f9f9"
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{
-              ml: 2,
-              flexGrow: 1,
-              display: { xs: "none", sm: "block", color: "#f9f9f9" },
-            }}
-          >
-            Filter
-          </Typography>
+          <Box sx={{ flexGrow: 1 }}>
+            <Typography
+              color="#f9f9f9"
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{
+                display: { xs: "none", sm: "block" },
+              }}
+            >
+              {platform}
+            </Typography>
+            <Typography
+              sx={{
+                display: { xs: "none", sm: "block" },
+                color: "#f9f9f9",
+                pl: 1,
+              }}
+            >
+              Find you games
+            </Typography>
+          </Box>
+
           <Search txt={txt} onTxtChange={handleTxtChange} />
         </Toolbar>
         <Collapse in={isFilterOpen}>
@@ -177,6 +188,7 @@ const SortComponent = ({
 
 SortComponent.propTypes = {
   onInputsChange: PropTypes.func.isRequired,
+  platform: PropTypes.string.isRequired,
   onSearchChange: PropTypes.func.isRequired,
   categoriesData: PropTypes.array.isRequired,
   priceRange: PropTypes.array.isRequired,

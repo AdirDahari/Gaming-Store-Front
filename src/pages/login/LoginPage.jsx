@@ -65,6 +65,7 @@ const LoginPage = () => {
       MyToast.success("You've logged in successfully");
       navigate(ROUTES.HOME);
     } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
       console.log("Error from Submit", err);
     }
     e.preventDefault();

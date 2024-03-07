@@ -69,7 +69,7 @@ const SortComponent = ({
     <Fragment>
       <Box position="static">
         <Toolbar>
-          <IconButton sx={{ p: 1, mr: 2 }} onClick={handleFilterClick}>
+          <IconButton sx={{ p: 1, mr: 3 }} onClick={handleFilterClick}>
             {isFilterOpen ? (
               <CloseIcon sx={{ color: "#f9f9f9" }} />
             ) : (
@@ -92,7 +92,6 @@ const SortComponent = ({
               sx={{
                 display: { xs: "none", sm: "block" },
                 color: "#f9f9f9",
-                pl: 1,
               }}
             >
               Find you games

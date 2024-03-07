@@ -1,27 +1,13 @@
-import {
-  Card,
-  Button,
-  CardContent,
-  CardMedia,
-  Typography,
-  CardActions,
-  IconButton,
-  Popover,
-  Box,
-} from "@mui/material";
+import "../style/post.css";
+import { Box, Button, Popover } from "@mui/material";
 import PropTypes from "prop-types";
-import "../style/ImageScale.css";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 const PostComponent = ({
   _id,
   name,
   price,
   image,
-  alt,
   color,
   onBuyNowClick,
   onEditClick,
@@ -60,35 +46,32 @@ const PostComponent = ({
   };
 
   return (
-    <Card
-      sx={{
-        border: `1px solid ${color}`,
-        borderRadius: "5px",
-        pl: 2,
-        pr: 2,
-        minHeight: 450,
-        maxHeight: 450,
-      }}
-    >
-      <CardContent>
+    <>
+      <Box
+        m="0 auto"
+        maxWidth={350}
+        className="post-card"
+        sx={{
+          background: `linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(0, 0, 0, 0.5) 99.15%
+    ),
+    url(${image}),
+    lightgray -13.481px -202.136px / 107.344% 188.488% no-repeat`,
+          backgroundSize: "contain",
+        }}
+      >
         {isLoggedIn ? (
-          <Box
-            sx={{
-              display: "flex",
-              height: 40,
-              justifyContent: isUser ? "space-between" : "end",
-            }}
-          >
+          <Box className="post-icons-container">
             {isUser && (
-              <Fragment>
-                <Box>
-                  <IconButton onClick={handleClick}>
-                    <DeleteIcon />
-                  </IconButton>
-                  <IconButton onClick={handleEditClick}>
-                    <EditIcon />
-                  </IconButton>
-                </Box>
+              <Box className="post-two-icon">
+                <button onClick={handleEditClick} className="post-icon">
+                  <img className="post-svg" src="/assets/img/post/Edit.svg" />
+                </button>
+                <button onClick={handleClick} className="post-icon">
+                  <img className="post-svg" src="/assets/img/post/Trash.svg" />
+                </button>
                 <Popover
                   open={open}
                   anchorEl={anchorEl}
@@ -110,81 +93,47 @@ const PostComponent = ({
                     Delete Post
                   </Button>
                 </Popover>
-              </Fragment>
+              </Box>
             )}
-
-            <Box>
-              <IconButton onClick={handleLikeClick}>
-                <FavoriteIcon sx={{ color: isLike && "red" }} />
-              </IconButton>
-            </Box>
+            {isLike ? (
+              <button onClick={handleLikeClick} className="post-one-icon">
+                <img className="post-svg" src="/assets/img/post/Heart.svg" />
+              </button>
+            ) : (
+              <button onClick={handleLikeClick} className="post-one-icon">
+                <img
+                  className="post-svg"
+                  src="/assets/img/post/EmptyHeart.svg"
+                />
+              </button>
+            )}
           </Box>
         ) : (
-          <Box sx={{ height: 40 }}></Box>
+          <Box sx={{ height: "73.88px" }} />
         )}
 
-        <CardContent sx={{ maxHeight: 200, minHeight: 200 }}>
-          <CardContent
-            sx={{
-              margin: "0 auto",
-              maxHeight: 200,
-              maxWidth: "100%",
-              display: "flex",
-              overflow: "hidden",
-            }}
-          >
-            <CardMedia
-              onClick={handleBuyNowClick}
-              className="imageSmallScale"
-              component="img"
-              sx={{
-                objectFit: "contain",
-                cursor: "pointer",
-                width: "100%",
-                m: "0 auto",
-              }}
-              image={image}
-              alt={alt}
-            />
-          </CardContent>
-        </CardContent>
-        <CardContent>
-          <Typography
-            variant="h5"
-            noWrap
-            sx={{ textAlign: "center", fontWeight: "500" }}
-          >
-            {name}
-          </Typography>
-        </CardContent>
-
-        <CardContent
-          sx={{
-            minHeight: 50,
-            maxHeight: 50,
-            display: "flex",
-            justifyContent: "space-around",
-          }}
-        >
-          <CardActions>
-            <Button
-              sx={{
-                minWidth: 110,
-                bgcolor: "#282C35",
-                ":hover": { bgcolor: color },
-              }}
-              onClick={handleBuyNowClick}
-              variant="contained"
-            >
-              Buy now
-            </Button>
-          </CardActions>
-          <Typography sx={{ fontWeight: "600", p: 1 }} variant="h5">
-            &#8362; {price}
-          </Typography>
-        </CardContent>
-      </CardContent>
-    </Card>
+        <Box className="post-rectangle"></Box>
+        <Box className="post-section">
+          <Box className="post-title-container">
+            <Box className="post-title">
+              <p className="post-title-text">{name}</p>
+            </Box>
+          </Box>
+          <Box className="post-details">
+            <Box className="post-button">
+              <Button
+                onClick={handleBuyNowClick}
+                sx={{ bgcolor: "#282C35", ":hover": { bgcolor: color } }}
+                variant="contained"
+              >
+                BUY NOW
+              </Button>
+            </Box>
+            <p className="post-price">₪{price}</p>
+          </Box>
+        </Box>
+      </Box>
+    </>
   );
 };
 
@@ -202,12 +151,6 @@ PostComponent.propTypes = {
   isUser: PropTypes.bool,
   isLoggedIn: PropTypes.bool,
   isLike: PropTypes.bool,
-};
-
-PostComponent.defaultProps = {
-  isUser: false,
-  isLoggedIn: false,
-  isLike: false,
 };
 
 export default PostComponent;

@@ -52,7 +52,7 @@ const FavouritesPage = () => {
   const handleBuyNowClick = (_id) => {
     navigate(`${ROUTES.POST}/${_id}`);
   };
-  const handleEditCardClick = (_id) => {
+  const handleEditPostClick = (_id) => {
     navigate(`${ROUTES.EDITPOST}/${_id}`);
   };
   const handleDeletePostClick = async (_id) => {
@@ -96,16 +96,16 @@ const FavouritesPage = () => {
           sx={{
             width: "80%",
             m: "0 auto",
-            p: 2,
+            p: 1,
             bgcolor: "#E0115F",
             borderRadius: "5px",
           }}
         >
-          <Typography color="#f9f9f9" variant="h5">
+          <Typography sx={{ pl: 2 }} color="#f9f9f9" variant="h5">
             FAVOURITES
           </Typography>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography color="#f9f9f9" sx={{ pl: 1 }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between", pr: 1 }}>
+            <Typography color="#f9f9f9" sx={{ pl: 3 }}>
               find your saved posts
             </Typography>
             <Search txt={txt} onTxtChange={handleTxtChange} />
@@ -117,10 +117,10 @@ const FavouritesPage = () => {
             container
             spacing={0}
             maxWidth={1200}
-            sx={{ m: 2, p: 2, pt: 4, margin: "0 auto" }}
+            sx={{ m: 2, p: 1, pt: 4, margin: "0 auto" }}
           >
             {dataFromServer.map((post) => (
-              <Grid item key={post._id} xs={12} sm={6} md={4} sx={{ p: 1 }}>
+              <Grid item key={post._id} xs={12} sm={6} md={4} sx={{ p: 3 }}>
                 <PostComponent
                   color="#E0115F"
                   _id={post._id}
@@ -129,11 +129,11 @@ const FavouritesPage = () => {
                   image={post.game.images[0].url}
                   alt={post.game.images[0].alt}
                   onBuyNowClick={handleBuyNowClick}
-                  onEditClick={handleEditCardClick}
+                  onEditClick={handleEditPostClick}
                   onDeleteClick={handleDeletePostClick}
                   onLikeClick={handleLikePost}
-                  isUser={userId ? post.seller.userId == userId : false}
                   isLoggedIn={true}
+                  isUser={userId ? post.seller.userId == userId : false}
                   isLike={true}
                 />
               </Grid>

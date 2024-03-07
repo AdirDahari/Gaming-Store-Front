@@ -2,12 +2,12 @@ import Grid from "@mui/material/Grid";
 import { Box, Divider, Typography } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import PostComponent from "../../components/PostComponent";
 import { useLocation, useNavigate } from "react-router-dom";
 import SortComponent from "./ui/SortComponent";
 import ROUTES from "../../routes/ROUTES.JS";
 import { useSelector } from "react-redux";
 import MyToast from "../../messages/MyToast";
+import PostComponent from "../../components/PostComponent";
 
 let initData = [];
 
@@ -119,7 +119,7 @@ const ShopPage = () => {
   const handleBuyNowClick = (_id) => {
     navigate(`${ROUTES.POST}/${_id}`);
   };
-  const handleEditCardClick = (_id) => {
+  const handleEditPostClick = (_id) => {
     navigate(`${ROUTES.EDITPOST}/${_id}`);
   };
   const handleDeletePostClick = async (_id) => {
@@ -156,9 +156,10 @@ const ShopPage = () => {
         sx={{
           minHeight: 650,
           bgcolor: "#f9f9f9",
-          p: 4,
+          pt: 4,
           pb: 4,
           mb: 4,
+          p: { xs: 0, sm: 4 },
           borderRadius: "5px",
           boxShadow: `rgba(149, 157, 165, 0.2) 0px 8px 24px`,
         }}
@@ -167,7 +168,7 @@ const ShopPage = () => {
           sx={{
             width: "80%",
             m: "0 auto",
-            p: 2,
+            p: 1,
             bgcolor: state.color,
             borderRadius: "5px",
           }}
@@ -188,7 +189,7 @@ const ShopPage = () => {
             sx={{ margin: "0 auto", p: 1, pb: 4, pt: 4 }}
           >
             {dataFromServer.map((post) => (
-              <Grid item key={post._id} xs={12} sm={6} md={4} sx={{ p: 1 }}>
+              <Grid item key={post._id} xs={12} sm={6} md={4} sx={{ p: 3 }}>
                 <PostComponent
                   color={state.color}
                   _id={post._id}
@@ -197,7 +198,7 @@ const ShopPage = () => {
                   image={post.game.images[0].url}
                   alt={post.game.images[0].alt}
                   onBuyNowClick={handleBuyNowClick}
-                  onEditClick={handleEditCardClick}
+                  onEditClick={handleEditPostClick}
                   onDeleteClick={handleDeletePostClick}
                   onLikeClick={handleLikePost}
                   isLoggedIn={loggedIn}

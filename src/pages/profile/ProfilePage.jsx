@@ -7,12 +7,12 @@ import {
   fromServerUserNormalization,
   toServerUserNormalization,
 } from "../../service/inputsNormalization";
-import PostComponent from "../../components/PostComponent";
 import UpdateProfileForm from "./ui/UpdateProfileForm";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/authSlice";
 import { validateUpdateProfile } from "../../validation/updateProfileValidation";
 import MyToast from "../../messages/MyToast";
+import PostComponent from "../../components/PostComponent";
 
 let userId = "";
 let profileImage = "";
@@ -164,7 +164,15 @@ const ProfilePage = () => {
             sx={{ margin: "0 auto", p: 1, pb: 6, pt: 6 }}
           >
             {postsData.map((post) => (
-              <Grid item key={post._id} xs={12} sm={6} md={4} p={1}>
+              <Grid
+                item
+                key={post._id}
+                xs={12}
+                sm={6}
+                md={4}
+                p={3}
+                maxWidth={1200}
+              >
                 <PostComponent
                   color="#A32CC4"
                   _id={post._id}
@@ -176,8 +184,8 @@ const ProfilePage = () => {
                   onEditClick={handleEditPostClick}
                   onDeleteClick={handleDeletePostClick}
                   onLikeClick={handleLikePost}
-                  isUser={true}
                   isLoggedIn={true}
+                  isUser={true}
                   isLike={userId ? post.likes.includes(userId) : false}
                 />
               </Grid>

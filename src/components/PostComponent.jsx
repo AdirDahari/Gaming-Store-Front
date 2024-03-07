@@ -67,10 +67,18 @@ const PostComponent = ({
             {isUser && (
               <Box className="post-two-icon">
                 <button onClick={handleEditClick} className="post-icon">
-                  <img className="post-svg" src="/assets/img/post/Edit.svg" />
+                  <img
+                    className="post-svg"
+                    src="/assets/img/post/Edit.svg"
+                    alt="Edit icon"
+                  />
                 </button>
                 <button onClick={handleClick} className="post-icon">
-                  <img className="post-svg" src="/assets/img/post/Trash.svg" />
+                  <img
+                    className="post-svg"
+                    src="/assets/img/post/Trash.svg"
+                    alt="trash icon"
+                  />
                 </button>
                 <Popover
                   open={open}
@@ -97,13 +105,18 @@ const PostComponent = ({
             )}
             {isLike ? (
               <button onClick={handleLikeClick} className="post-one-icon">
-                <img className="post-svg" src="/assets/img/post/Heart.svg" />
+                <img
+                  className="post-svg"
+                  src="/assets/img/post/Heart.svg"
+                  alt="heart icon"
+                />
               </button>
             ) : (
               <button onClick={handleLikeClick} className="post-one-icon">
                 <img
                   className="post-svg"
                   src="/assets/img/post/EmptyHeart.svg"
+                  alt="empty heart icon"
                 />
               </button>
             )}

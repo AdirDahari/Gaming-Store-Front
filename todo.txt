@@ -15,3 +15,5 @@ managment change user to admin
 readme + postman
 
 server -> redux to category option
+
+popup to postpage and rename the page

@@ -4,12 +4,14 @@ import {
   Card,
   CardContent,
   CardActions,
+  Box,
   Button,
 } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../../style/ImageScale.css";
+import "../../style/postPage.css";
 import PopupSellerDetails from "./ui/PopupSellerDetails";
 import SwiperPostImages from "./ui/SwiperPostImages";
 import MyToast from "../../messages/MyToast";
@@ -46,6 +48,9 @@ const PostPage = () => {
     <Fragment>
       {dataFromServer && (
         <Grid container spacing={2} maxWidth={1200} sx={{ p: 5, m: "0 auto" }}>
+          <Grid item sm={12} md={6} width="100%">
+            <Box>{imageList && <SwiperPostImages images={imageList} />}</Box>
+          </Grid>
           <Grid item sm={12} md={6} width="100%">
             {dataFromServer && (
               <Card
@@ -161,21 +166,6 @@ const PostPage = () => {
                 )}
               </Card>
             )}
-          </Grid>
-          <Grid item sm={12} md={6} width="100%">
-            <Card
-              sx={{
-                bgcolor: "#F8F6F4",
-                maxWidth: 600,
-                borderRadius: "15px",
-                height: 600,
-                m: "0 auto",
-              }}
-            >
-              <CardContent sx={{ height: 450 }}>
-                {imageList && <SwiperPostImages images={imageList} />}
-              </CardContent>
-            </Card>
           </Grid>
         </Grid>
       )}

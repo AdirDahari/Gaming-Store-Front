@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import PropTypes from "prop-types";
+import { Box } from "@mui/material";
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -16,7 +17,7 @@ const SwiperPostImages = ({ images }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
-    <>
+    <Box>
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
@@ -46,12 +47,12 @@ const SwiperPostImages = ({ images }) => {
       >
         {images &&
           images.map((image) => (
-            <SwiperSlide className="swiper-slideP" key={image.url}>
-              <img src={image.url} alt={image.alt} />
+            <SwiperSlide key={image.url}>
+              <img width="100%" height="100%" src={image.url} alt={image.alt} />
             </SwiperSlide>
           ))}
       </Swiper>
-    </>
+    </Box>
   );
 };
 

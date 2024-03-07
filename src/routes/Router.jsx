@@ -12,6 +12,7 @@ import ProfilePage from "../pages/profile/ProfilePage";
 import FavouritesPage from "../pages/favourites/FavouritesPage";
 import ManagementPage from "../pages/management/ManagementPage";
 import AboutPage from "../pages/about/AboutPage";
+import ItayPostPage from "../pages/post/ItayPostPage";
 import AuthGuard from "../guard/AuthGuard";
 import AdminGuard from "../guard/AdminGuard";
 
@@ -22,7 +23,7 @@ const Router = () => {
       <Route path={ROUTES.SHOP} element={<ShopPage />} />
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-      <Route path={`${ROUTES.POST}/:id`} element={<PostPage />} />
+      <Route path={`${ROUTES.POST}/:id`} element={<ItayPostPage />} />
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
 
       <Route

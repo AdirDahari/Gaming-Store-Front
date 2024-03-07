@@ -53,12 +53,12 @@ const PostComponent = ({
         className="post-card"
         sx={{
           background: `linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(0, 0, 0, 0.5) 99.15%
-    ),
-    url(${image}),
-    lightgray -13.481px -202.136px / 107.344% 188.488% no-repeat`,
+          180deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(0, 0, 0, 0.5) 99.15%
+        ),
+        url(${image}),
+        lightgray -13.481px -202.136px / 107.344% 188.488% no-repeat`,
           backgroundSize: "contain",
         }}
       >

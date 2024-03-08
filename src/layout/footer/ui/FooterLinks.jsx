@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
-import nextKey from "generate-my-key";
 import { useSelector } from "react-redux";
+import nextId from "react-id-generator";
 
 const FooterLinks = () => {
   const loggedIn = useSelector((bigPie) => bigPie.authSlice.loggedIn);
@@ -15,7 +15,7 @@ const FooterLinks = () => {
         ? ProfileMobileLink.map((myLink) => (
             <NavLink
               style={{ textDecoration: "none" }}
-              key={nextKey()}
+              key={nextId()}
               to={myLink.to}
             >
               <MenuItem
@@ -32,7 +32,7 @@ const FooterLinks = () => {
         : GuestMobileLink.map((myLink) => (
             <NavLink
               style={{ textDecoration: "none" }}
-              key={nextKey()}
+              key={nextId()}
               to={myLink.to}
             >
               <MenuItem

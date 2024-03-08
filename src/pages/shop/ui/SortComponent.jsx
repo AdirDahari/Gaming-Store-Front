@@ -14,6 +14,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import RangeSlider from "./RangeSlider";
 import PropTypes from "prop-types";
 import { Search } from "./Search";
+import nextId from "react-id-generator";
 
 const status = ["all", "new", "like new", "used"];
 
@@ -129,8 +130,8 @@ const SortComponent = ({
                   value={filterInputs ? filterInputs.categories : "all"}
                   onChange={handleOptionChange}
                 >
-                  {categoriesData.map((option, index) => (
-                    <MenuItem key={index} value={option}>
+                  {categoriesData.map((option) => (
+                    <MenuItem key={nextId()} value={option}>
                       {option}
                     </MenuItem>
                   ))}
@@ -162,8 +163,8 @@ const SortComponent = ({
                   value={filterInputs ? filterInputs.productStatus : "all"}
                   onChange={handleOptionChange}
                 >
-                  {status.map((option, index) => (
-                    <MenuItem key={index} value={option}>
+                  {status.map((option) => (
+                    <MenuItem key={nextId()} value={option}>
                       {option}
                     </MenuItem>
                   ))}

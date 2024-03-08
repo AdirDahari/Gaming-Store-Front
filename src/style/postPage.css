@@ -76,12 +76,12 @@
 .postpage-details-bottom {
   padding-left: 40px;
   padding-right: 40px;
-  min-height: 200px;
+  min-height: 150px;
 }
 .postpage-details-bottom-title {
   color: #000;
   font-family: Alata;
-  font-size: 28.432px;
+  font-size: 22.432px;
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
@@ -127,6 +127,16 @@
   font-weight: 400;
   line-height: normal;
   display: inline;
+}
+.postpage-details-product-title {
+  color: #000;
+  font-family: Alata;
+  font-size: 22.432px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  display: inline;
+  padding-right: 10px;
 }
 
 .postpage-popup-title {

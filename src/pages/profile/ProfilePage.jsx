@@ -13,6 +13,7 @@ import { authActions } from "../../store/authSlice";
 import { validateUpdateProfile } from "../../validation/updateProfileValidation";
 import MyToast from "../../messages/MyToast";
 import PostComponent from "../../components/PostComponent";
+import nextId from "react-id-generator";
 
 let userId = "";
 let profileImage = "";
@@ -166,7 +167,7 @@ const ProfilePage = () => {
             {postsData.map((post) => (
               <Grid
                 item
-                key={post._id}
+                key={nextId()}
                 xs={12}
                 sm={6}
                 md={4}

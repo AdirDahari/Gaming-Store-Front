@@ -6,6 +6,7 @@ import { Search } from "../shop/ui/Search";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES.JS";
 import MyToast from "../../messages/MyToast";
+import nextId from "react-id-generator";
 
 let initData = [];
 let userId = "";
@@ -120,7 +121,7 @@ const FavouritesPage = () => {
             sx={{ m: 2, p: 1, pt: 4, margin: "0 auto" }}
           >
             {dataFromServer.map((post) => (
-              <Grid item key={post._id} xs={12} sm={6} md={4} sx={{ p: 3 }}>
+              <Grid item key={nextId()} xs={12} sm={6} md={4} sx={{ p: 3 }}>
                 <PostComponent
                   color="#E0115F"
                   _id={post._id}

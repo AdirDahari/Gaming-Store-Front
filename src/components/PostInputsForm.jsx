@@ -1,5 +1,6 @@
 import { TextField, Grid, MenuItem } from "@mui/material";
 import PropTypes from "prop-types";
+import nextId from "react-id-generator";
 
 const PostInputsForm = ({
   gameDetails,
@@ -44,7 +45,7 @@ const PostInputsForm = ({
           }
         >
           {platforms.map((option) => (
-            <MenuItem key={option} value={option}>
+            <MenuItem key={nextId()} value={option}>
               {option}
             </MenuItem>
           ))}
@@ -68,8 +69,8 @@ const PostInputsForm = ({
               : "Please select product status"
           }
         >
-          {status.map((option, index) => (
-            <MenuItem key={index} value={option}>
+          {status.map((option) => (
+            <MenuItem key={nextId()} value={option}>
               {option}
             </MenuItem>
           ))}
@@ -88,8 +89,8 @@ const PostInputsForm = ({
           error={errorsState && errorsState.cate0 ? true : false}
           helperText={errorsState && errorsState.cate0 ? errorsState.cate0 : ""}
         >
-          {categoryOptions.map((option, index) => (
-            <MenuItem key={index} value={option}>
+          {categoryOptions.map((option) => (
+            <MenuItem key={nextId()} value={option}>
               {option}
             </MenuItem>
           ))}
@@ -105,8 +106,8 @@ const PostInputsForm = ({
           value={gameDetails.cate1}
           onChange={handleOptionChange}
         >
-          {categoryOptions.map((option, index) => (
-            <MenuItem key={index} value={option}>
+          {categoryOptions.map((option) => (
+            <MenuItem key={nextId()} value={option}>
               {option}
             </MenuItem>
           ))}
@@ -122,8 +123,8 @@ const PostInputsForm = ({
           value={gameDetails.cate2}
           onChange={handleOptionChange}
         >
-          {categoryOptions.map((option, index) => (
-            <MenuItem key={index} value={option}>
+          {categoryOptions.map((option) => (
+            <MenuItem key={nextId()} value={option}>
               {option}
             </MenuItem>
           ))}
@@ -152,6 +153,8 @@ const PostInputsForm = ({
           variant="standard"
           defaultValue={gameDetails.url1 ? gameDetails.url1 : ""}
           onChange={handleInputsChange}
+          error={errorsState && errorsState.url1 ? true : false}
+          helperText={errorsState && errorsState.url1 ? errorsState.url1 : ""}
         />
       </Grid>
       <Grid item xs={12} sm={4}>
@@ -163,6 +166,8 @@ const PostInputsForm = ({
           variant="standard"
           defaultValue={gameDetails.url2 ? gameDetails.url2 : ""}
           onChange={handleInputsChange}
+          error={errorsState && errorsState.url2 ? true : false}
+          helperText={errorsState && errorsState.url2 ? errorsState.url2 : ""}
         />
       </Grid>
       <Grid item xs={12} sm={6} sx={{ mt: 2 }}>

@@ -13,6 +13,7 @@ import axios from "axios";
 import ROUTES from "../../routes/ROUTES.JS";
 import RowPostsComponent from "./ui/RowPostsComponent";
 import MyToast from "../../messages/MyToast";
+import nextId from "react-id-generator";
 
 const ManagementPage = () => {
   const [value, setValue] = useState(1);
@@ -107,7 +108,7 @@ const ManagementPage = () => {
                 <TableBody>
                   {usersFromServer.map((user) => (
                     <RowUserComponent
-                      key={user._id}
+                      key={nextId()}
                       _id={user._id}
                       name={`${user.name.first} ${user.name.last}`}
                       email={user.email}
@@ -135,7 +136,7 @@ const ManagementPage = () => {
                 <TableBody>
                   {postsFromServer.map((post) => (
                     <RowPostsComponent
-                      _id={post._id}
+                      _id={nextId()}
                       name={post.game.name}
                       platform={post.platform}
                       price={post.game.price}

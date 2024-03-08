@@ -1,6 +1,7 @@
 import { Typography, Box, Grid, ImageList, ImageListItem } from "@mui/material";
 import { Fragment } from "react";
 import { itemData, itemDataMobile } from "./imagesList";
+import nextId from "react-id-generator";
 
 function srcset(image, size, rows = 1, cols = 1) {
   return {
@@ -77,7 +78,7 @@ const AboutPage = () => {
           >
             {itemData.map((item) => (
               <ImageListItem
-                key={item.img}
+                key={nextId()}
                 cols={item.cols || 1}
                 rows={item.rows || 1}
               >
@@ -102,7 +103,7 @@ const AboutPage = () => {
           >
             {itemDataMobile.map((item) => (
               <ImageListItem
-                key={item.img}
+                key={nextId()}
                 cols={item.cols || 1}
                 rows={item.rows || 1}
               >

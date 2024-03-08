@@ -12,6 +12,7 @@ import { createPostNormalization } from "./createPostNoramalization.js";
 import { useNavigate } from "react-router-dom";
 import ROUTE from "../../routes/ROUTES.JS";
 import MyToast from "../../messages/MyToast";
+import nextId from "react-id-generator";
 
 const steps = ["Game details", "Review your post"];
 
@@ -86,7 +87,7 @@ const CreatePostPage = () => {
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label) => (
-              <Step key={label}>
+              <Step key={nextId()}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}

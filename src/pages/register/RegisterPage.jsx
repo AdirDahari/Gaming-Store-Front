@@ -64,9 +64,10 @@ const RegisterPage = () => {
   return (
     <Box
       sx={{
-        maxWidth: 900,
+        maxWidth: 800,
         m: "0 auto",
-        pt: 8,
+        pt: 4,
+        pb: 4,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

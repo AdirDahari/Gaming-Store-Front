@@ -7,6 +7,7 @@ import {
 import { NavLink } from "react-router-dom";
 import { MenuItem, Typography } from "@mui/material";
 import PropTypes from "prop-types";
+import nextId from "react-id-generator";
 
 const MobileMenuItems = ({ loggedIn, isAdmin, onCloseNavMenu }) => {
   const handleCloseNavMenu = () => {
@@ -18,7 +19,7 @@ const MobileMenuItems = ({ loggedIn, isAdmin, onCloseNavMenu }) => {
         ProfileMobileAdminLink.map((myLink) => (
           <NavLink
             style={{ textDecoration: "none" }}
-            key={myLink.children + myLink.to}
+            key={nextId()}
             to={myLink.to}
           >
             <MenuItem onClick={handleCloseNavMenu}>
@@ -35,7 +36,7 @@ const MobileMenuItems = ({ loggedIn, isAdmin, onCloseNavMenu }) => {
             ? ProfileMobileLink.map((myLink) => (
                 <NavLink
                   style={{ textDecoration: "none" }}
-                  key={myLink.children + myLink.to}
+                  key={nextId()}
                   to={myLink.to}
                 >
                   <MenuItem onClick={handleCloseNavMenu}>
@@ -52,7 +53,7 @@ const MobileMenuItems = ({ loggedIn, isAdmin, onCloseNavMenu }) => {
             : GuestMobileLink.map((myLink) => (
                 <NavLink
                   style={{ textDecoration: "none" }}
-                  key={myLink.children + myLink.to}
+                  key={nextId()}
                   to={myLink.to}
                 >
                   <MenuItem onClick={handleCloseNavMenu}>

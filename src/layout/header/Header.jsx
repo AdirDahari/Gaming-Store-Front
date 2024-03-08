@@ -21,6 +21,7 @@ import IconMenuItems from "./ui/IconMenuItems";
 import ProfileMenuItems from "./ui/ProfileMenuItems";
 import axios from "axios";
 import MyToast from "../../messages/MyToast";
+import nextId from "react-id-generator";
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -166,7 +167,7 @@ function Header() {
                 {MainAdminLink.map((myLink) => (
                   <NavLink
                     style={{ textDecoration: "none" }}
-                    key={myLink.children + myLink.to}
+                    key={nextId()}
                     to={myLink.to}
                   >
                     <MenuItem
@@ -190,7 +191,7 @@ function Header() {
                 {MainLink.map((myLink) => (
                   <NavLink
                     style={{ textDecoration: "none" }}
-                    key={myLink.children + myLink.to}
+                    key={nextId()}
                     to={myLink.to}
                   >
                     <MenuItem

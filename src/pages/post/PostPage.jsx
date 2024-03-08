@@ -5,6 +5,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import MyToast from "../../messages/MyToast";
 import PopupSellerDetails from "./ui/PopupSellerDetails";
+import nextId from "react-id-generator";
 
 const ItayPostPage = () => {
   const { id: _id } = useParams();
@@ -42,7 +43,7 @@ const ItayPostPage = () => {
   };
 
   return (
-    <Box pt={8}>
+    <Box pt={4} pb={4}>
       <Box sx={{ maxWidth: 1200 }} className="postpage-container">
         {dataFromServer && (
           <Grid container sx={{ pb: 4, pt: 4 }}>
@@ -60,7 +61,7 @@ const ItayPostPage = () => {
             >
               <Box className="postpage-image-list">
                 {dataFromServer.game.images.map((img, index) => (
-                  <Fragment key={img.url}>
+                  <Fragment key={nextId()}>
                     <Box
                       id={index}
                       onClick={handleImageIndexChange}
@@ -100,7 +101,6 @@ const ItayPostPage = () => {
                     {dataFromServer.game.name}
                   </p>
                 </Box>
-
                 <Box className="postpage-details-price-container">
                   <p className="postpage-details-price-text">
                     ₪{dataFromServer.game.price}
@@ -112,7 +112,7 @@ const ItayPostPage = () => {
                 {dataFromServer.game.category.map((cate, index) => (
                   <p
                     className="postpage-details-cate-des"
-                    key={cate + index}
+                    key={nextId()}
                     display="inline"
                   >
                     {cate +
@@ -121,6 +121,14 @@ const ItayPostPage = () => {
                         : "")}
                   </p>
                 ))}
+                <Box sx={{ pt: 4 }}>
+                  <p className="postpage-details-product-title">
+                    Product status:
+                  </p>
+                  <p className="postpage-details-cate-des">
+                    {dataFromServer.game.productStatus}
+                  </p>
+                </Box>
               </Box>
               {dataFromServer.game.description ? (
                 <Box className="postpage-details-bottom">
@@ -130,9 +138,8 @@ const ItayPostPage = () => {
                   </p>
                 </Box>
               ) : (
-                <Box sx={{ minHeight: "200px" }}></Box>
+                <Box sx={{ minHeight: "150px" }}></Box>
               )}
-
               <Box sx={{ pr: { xs: 4, sm: 8 }, pt: 4 }}>
                 <Button
                   onClick={handlePopupOpen}

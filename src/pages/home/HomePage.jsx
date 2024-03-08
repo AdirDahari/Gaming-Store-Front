@@ -2,6 +2,7 @@ import { Box, Grid } from "@mui/material";
 import CategoryComponent from "../../components/CategoryComponent";
 import { categories } from "../../layout/myLink";
 import SwiperHomeImages from "./ui/SwiperHomeImages";
+import nextId from "react-id-generator";
 const HomePage = () => {
   return (
     <Box>
@@ -16,8 +17,8 @@ const HomePage = () => {
       </Box>
 
       <Grid container m="0 auto" maxWidth={1200} pt={8} pb={8}>
-        {categories.map((cate, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index} p={2}>
+        {categories.map((cate) => (
+          <Grid item xs={12} sm={6} md={3} key={nextId()} p={2}>
             <CategoryComponent>{cate}</CategoryComponent>
           </Grid>
         ))}

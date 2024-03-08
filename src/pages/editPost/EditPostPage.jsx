@@ -12,6 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ROUTE from "../../routes/ROUTES.JS";
 import { editPostNormalization } from "./editPostNoramalization.js";
 import MyToast from "../../messages/MyToast";
+import nextId from "react-id-generator";
 
 const steps = ["Game details", "Update your post"];
 
@@ -98,7 +99,7 @@ const EditPostPage = () => {
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label) => (
-              <Step key={label}>
+              <Step key={nextId()}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}

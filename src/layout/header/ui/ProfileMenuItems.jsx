@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { MenuItem, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import { ProfileIconLink } from "../../myLink";
+import nextId from "react-id-generator";
 
 const ProfileMenuItems = ({ loggedIn, onLogout, onCloseUserMenu }) => {
   const handleLogout = () => {
@@ -18,7 +19,7 @@ const ProfileMenuItems = ({ loggedIn, onLogout, onCloseUserMenu }) => {
         ProfileIconLink.map((myLink) => (
           <NavLink
             style={{ textDecoration: "none" }}
-            key={myLink.to + myLink.children}
+            key={nextId()}
             to={myLink.to}
           >
             <MenuItem

@@ -2,6 +2,7 @@ import Typography from "@mui/material/Typography";
 import { Grid, Box, Button, CardMedia, Divider } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import nextId from "react-id-generator";
 
 const Review = ({ handleBack, handleSubmit, userDetails, gameDetails }) => {
   const [urls, setUrls] = useState([]);
@@ -106,9 +107,9 @@ const Review = ({ handleBack, handleSubmit, userDetails, gameDetails }) => {
           </Typography>
         </Grid>
 
-        {urls.map((url, index) =>
+        {urls.map((url) =>
           url ? (
-            <Grid key={url + index} item xs={12} sm={4}>
+            <Grid key={nextId()} item xs={12} sm={4}>
               <CardMedia
                 component="img"
                 image={url}

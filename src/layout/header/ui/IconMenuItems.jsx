@@ -3,6 +3,7 @@ import { MenuItem, Typography, Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { GuestLink, ProfileLink } from "../../myLink";
 import { Fragment } from "react";
+import nextId from "react-id-generator";
 
 const IconMenuItems = ({ loggedIn }) => {
   return (
@@ -12,7 +13,7 @@ const IconMenuItems = ({ loggedIn }) => {
           {ProfileLink.map((myLink) => (
             <NavLink
               style={{ textDecoration: "none" }}
-              key={myLink.children}
+              key={nextId()}
               to={myLink.to}
             >
               <MenuItem
@@ -33,7 +34,7 @@ const IconMenuItems = ({ loggedIn }) => {
           {GuestLink.map((myLink) => (
             <NavLink
               style={{ textDecoration: "none" }}
-              key={myLink.children}
+              key={nextId()}
               to={myLink.to}
             >
               <MenuItem

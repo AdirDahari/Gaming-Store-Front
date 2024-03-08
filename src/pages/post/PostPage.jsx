@@ -1,26 +1,17 @@
-import {
-  Grid,
-  Typography,
-  Card,
-  CardContent,
-  CardActions,
-  Box,
-  Button,
-} from "@mui/material";
-import { Fragment, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import "../../style/ImageScale.css";
+import { Box, Grid, Divider, Button } from "@mui/material";
 import "../../style/postPage.css";
-import PopupSellerDetails from "./ui/PopupSellerDetails";
-import SwiperPostImages from "./ui/SwiperPostImages";
+import { Fragment, useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 import MyToast from "../../messages/MyToast";
+import PopupSellerDetails from "./ui/PopupSellerDetails";
 
-const PostPage = () => {
+const ItayPostPage = () => {
   const { id: _id } = useParams();
-  const [imageList, setImageList] = useState([]);
-  const [openPopup, setOpenPopup] = useState(false);
   const [dataFromServer, setDataFromServer] = useState(null);
+  const [imageIndex, setImageIndex] = useState(0);
+  const [mainImage, setMainImage] = useState(null);
+  const [openPopup, setOpenPopup] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -28,7 +19,7 @@ const PostPage = () => {
         const { data } = await axios.get(`/posts/${_id}`);
         console.log(data);
         setDataFromServer(data);
-        setImageList(data.game.images);
+        setMainImage(data.game.images[0].url);
         setOpenPopup(false);
       } catch (err) {
         MyToast.error("Something wrong, Please try again later");
@@ -36,6 +27,12 @@ const PostPage = () => {
       }
     })();
   }, []);
+
+  const handleImageIndexChange = (e) => {
+    console.log(e.target.id);
+    setImageIndex(e.target.id);
+    setMainImage(dataFromServer.game.images[e.target.id].url);
+  };
 
   const handleClosePopup = () => {
     setOpenPopup(false);
@@ -45,131 +42,127 @@ const PostPage = () => {
   };
 
   return (
-    <Fragment>
-      {dataFromServer && (
-        <Grid container spacing={2} maxWidth={1200} sx={{ p: 5, m: "0 auto" }}>
-          <Grid item sm={12} md={6} width="100%">
-            <Box>{imageList && <SwiperPostImages images={imageList} />}</Box>
-          </Grid>
-          <Grid item sm={12} md={6} width="100%">
-            {dataFromServer && (
-              <Card
+    <Box pt={8}>
+      <Box sx={{ maxWidth: 1200 }} className="postpage-container">
+        {dataFromServer && (
+          <Grid container sx={{ pb: 4, pt: 4 }}>
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={6}
+              sx={{
+                display: "flex",
+                minHeight: 600,
+                alignItems: "center",
+                flexDirection: { xs: "column-reverse", sm: "row" },
+              }}
+            >
+              <Box className="postpage-image-list">
+                {dataFromServer.game.images.map((img, index) => (
+                  <Fragment key={img.url}>
+                    <Box
+                      id={index}
+                      onClick={handleImageIndexChange}
+                      className="post-image-item"
+                      sx={{
+                        background:
+                          index == imageIndex
+                            ? `url(${img.url}), #fff 50%`
+                            : `linear-gradient(0deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.28) 100%), url(${img.url}), #fff 50% / cover no-repeat`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                        backgroundSize: "contain",
+                      }}
+                    ></Box>
+                    {index !== dataFromServer.game.images.length - 1 && (
+                      <Divider />
+                    )}
+                  </Fragment>
+                ))}
+              </Box>
+
+              <Box
                 sx={{
-                  bgcolor: "#F8F6F4",
-                  maxWidth: 600,
-                  borderRadius: "15px",
-                  minHeight: 600,
+                  background: `url(${mainImage}), #fff 50%`,
+                  backgroundRepeat: "no-repeat",
                   m: "0 auto",
+                  backgroundPosition: "center",
+                  backgroundSize: "contain",
                 }}
-              >
-                <CardContent sx={{ minHeight: 500 }}>
-                  <CardContent>
-                    <Typography
-                      sx={{
-                        borderRadius: "15px",
-                        boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px`,
-                      }}
-                      variant="h3"
-                      textAlign="center"
-                      fontWeight={400}
-                    >
-                      {dataFromServer.game.name}
-                    </Typography>
-                  </CardContent>
-                  <CardContent
-                    sx={{
-                      bgcolor: "#E3F4F4",
-                      borderRadius: "15px",
-                      boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px`,
-                      m: 1,
-                      mr: 2,
-                      ml: 2,
-                    }}
+                className="postpage-main-image"
+              ></Box>
+            </Grid>
+            <Grid item xs={12} sm={12} md={6} sx={{ minHeight: 600 }}>
+              <Box className="postpage-details-top">
+                <Box className="postpage-details-title">
+                  <p className="postpage-details-title-text">
+                    {dataFromServer.game.name}
+                  </p>
+                </Box>
+
+                <Box className="postpage-details-price-container">
+                  <p className="postpage-details-price-text">
+                    ₪{dataFromServer.game.price}
+                  </p>
+                </Box>
+              </Box>
+              <Box className="postpage-details-cate">
+                <p className="postpage-details-cate-title">Category:</p>
+                {dataFromServer.game.category.map((cate, index) => (
+                  <p
+                    className="postpage-details-cate-des"
+                    key={cate + index}
+                    display="inline"
                   >
-                    <Typography variant="h6" display="inline" fontWeight={500}>
-                      Categories:{" "}
-                    </Typography>
-                    {dataFromServer.game.category.map((cate, index) => (
-                      <Typography key={cate + index} display="inline">
-                        {cate +
-                          (index < dataFromServer.game.category.length - 1
-                            ? " | "
-                            : "")}
-                      </Typography>
-                    ))}
-                  </CardContent>
-                  {dataFromServer.game.description && (
-                    <CardContent
-                      sx={{
-                        bgcolor: "#E3F4F4",
-                        borderRadius: "15px",
-                        boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px`,
-                        m: 1,
-                        mr: 2,
-                        ml: 2,
-                      }}
-                    >
-                      <Typography variant="h6" fontWeight={500}>
-                        Description:{" "}
-                      </Typography>
-                      <Typography>{dataFromServer.game.description}</Typography>{" "}
-                    </CardContent>
-                  )}
-                  <CardContent
-                    sx={{
-                      bgcolor: "#E3F4F4",
-                      borderRadius: "15px",
-                      boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px`,
-                      m: 1,
-                      mr: 2,
-                      ml: 2,
-                    }}
-                  >
-                    <Typography variant="h6" display="inline" fontWeight={500}>
-                      Product status:{" "}
-                    </Typography>
-                    <Typography display="inline">
-                      {dataFromServer.game.productStatus}
-                    </Typography>
-                  </CardContent>
-                  <CardContent
-                    sx={{
-                      bgcolor: "#E3F4F4",
-                      borderRadius: "15px",
-                      boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px`,
-                      m: 1,
-                      mr: 2,
-                      ml: 2,
-                    }}
-                  >
-                    <Typography variant="h6" display="inline" fontWeight={500}>
-                      Price:{" "}
-                    </Typography>
-                    <Typography display="inline">
-                      {dataFromServer.game.price}
-                    </Typography>
-                  </CardContent>
-                </CardContent>
-                <CardActions onClick={handlePopupOpen}>
-                  <Button sx={{ m: "0 auto" }} variant="outlined">
-                    Contact seller
-                  </Button>
-                </CardActions>
-                {dataFromServer && (
-                  <PopupSellerDetails
-                    name={dataFromServer.seller.firstName}
-                    city={dataFromServer.seller.city}
-                    phone={dataFromServer.seller.phone}
-                    open={openPopup}
-                    onClose={handleClosePopup}
-                  />
-                )}
-              </Card>
-            )}
+                    {cate +
+                      (index < dataFromServer.game.category.length - 1
+                        ? " | "
+                        : "")}
+                  </p>
+                ))}
+              </Box>
+              {dataFromServer.game.description ? (
+                <Box className="postpage-details-bottom">
+                  <p className="postpage-details-bottom-title">Description</p>
+                  <p className="postpage-details-bottom-des">
+                    {dataFromServer.game.description}
+                  </p>
+                </Box>
+              ) : (
+                <Box sx={{ minHeight: "200px" }}></Box>
+              )}
+
+              <Box sx={{ pr: { xs: 4, sm: 8 }, pt: 4 }}>
+                <Button
+                  onClick={handlePopupOpen}
+                  variant="contained"
+                  sx={{
+                    float: "right",
+                    borderRadius: "50px",
+                    pr: 5,
+                    pl: 5,
+                    bgcolor: "#000",
+                    color: "#fff",
+                    boxShadow: `0px 4.739px 23.694px 0px rgba(0, 0, 0, 0.25)`,
+                  }}
+                >
+                  <p className="postpage-btn-text">Contact Seller</p>
+                </Button>
+                <PopupSellerDetails
+                  city={dataFromServer.seller.city}
+                  name={dataFromServer.seller.firstName}
+                  phone={dataFromServer.seller.phone}
+                  open={openPopup}
+                  onClose={handleClosePopup}
+                />
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      )}
-    </Fragment>
+        )}
+      </Box>
+    </Box>
   );
 };
-export default PostPage;
+
+export default ItayPostPage;

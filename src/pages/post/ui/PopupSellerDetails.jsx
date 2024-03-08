@@ -1,9 +1,20 @@
 import PropTypes from "prop-types";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Dialog from "@mui/material/Dialog";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import "../../../style/postPage.css";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: { sm: 400 },
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  borderRadius: "10px",
+  boxShadow: 24,
+  p: 4,
+};
 
 const PopupSellerDetails = ({ name, phone, city, onClose, open }) => {
   const handleClose = () => {
@@ -11,20 +22,27 @@ const PopupSellerDetails = ({ name, phone, city, onClose, open }) => {
   };
 
   return (
-    <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Contact details</DialogTitle>
-      <List>
-        <ListItem>
-          <ListItemText>Name: {name}</ListItemText>
-        </ListItem>
-        <ListItem>
-          <ListItemText>City: {city}</ListItemText>
-        </ListItem>
-        <ListItem>
-          <ListItemText>Phone: {phone}</ListItemText>
-        </ListItem>
-      </List>
-    </Dialog>
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={style}>
+        <Box sx={{ p: 1 }}>
+          <p className="postpage-popup-title">First name:</p>
+          <p className="postpage-popup-des">{name}</p>
+        </Box>
+        <Box sx={{ p: 1 }}>
+          <p className="postpage-popup-title">City:</p>
+          <p className="postpage-popup-des">{city}</p>
+        </Box>
+        <Box sx={{ p: 1 }}>
+          <p className="postpage-popup-title">Phone:</p>
+          <p className="postpage-popup-des">{phone}</p>
+        </Box>
+      </Box>
+    </Modal>
   );
 };
 

@@ -138,8 +138,9 @@ const PostComponent = ({
                 onClick={handleBuyNowClick}
                 sx={{ bgcolor: "#282C35", ":hover": { bgcolor: color } }}
                 variant="contained"
+                size="small"
               >
-                BUY NOW
+                MORE DETAILS
               </Button>
             </Box>
             <p className="post-price">₪{price}</p>

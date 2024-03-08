@@ -28,15 +28,17 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
   const loggedIn = useSelector((bigPie) => bigPie.authSlice.loggedIn);
-  const [userData, setUserData] = useState(null);
+  const userData = useSelector((bigPie) => bigPie.authSlice.userData);
+  const [userDataFromServer, setUserDataFromServer] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
       try {
         if (!loggedIn) return;
-        const { data } = await axios.get("users/my-user");
-        setUserData(data);
+        console.log(userData._id);
+        const { data } = await axios.get(`users/${userData._id}`);
+        setUserDataFromServer(data);
       } catch (err) {
         MyToast.error("Something wrong, Please try again later");
         console.log(err);
@@ -67,7 +69,7 @@ function Header() {
       sessionStorage.removeItem("token");
     } else return;
     dispatch(authActions.logout());
-    setUserData(null);
+    setUserDataFromServer(null);
     MyToast.info("You have logged out, see you soon");
     navigate(ROUTES.HOME);
   };
@@ -133,7 +135,9 @@ function Header() {
               }}
             >
               <MobileMenuItems
-                isAdmin={userData ? userData.isAdmin : false}
+                isAdmin={
+                  userDataFromServer ? userDataFromServer.isAdmin : false
+                }
                 loggedIn={loggedIn}
                 onCloseNavMenu={handleCloseNavMenu}
               />
@@ -162,7 +166,7 @@ function Header() {
             Gamming Store
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {userData && userData.isAdmin ? (
+            {userDataFromServer && userDataFromServer.isAdmin ? (
               <Fragment>
                 {MainAdminLink.map((myLink) => (
                   <NavLink
@@ -213,11 +217,14 @@ function Header() {
             )}
           </Box>
           <IconMenuItems loggedIn={loggedIn} />
-          {loggedIn && userData && (
+          {loggedIn && userDataFromServer && (
             <Box sx={{ flexGrow: 0, ml: { md: 2 } }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Profile image" src={userData.image.url} />
+                  <Avatar
+                    alt="Profile image"
+                    src={userDataFromServer.image.url}
+                  />
                 </IconButton>
               </Tooltip>
               <Menu

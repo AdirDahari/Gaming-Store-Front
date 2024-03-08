@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import ROUTE from "../../routes/ROUTES.JS";
 import MyToast from "../../messages/MyToast";
 import nextId from "react-id-generator";
+import { useSelector } from "react-redux";
 
 const steps = ["Game details", "Review your post"];
 
@@ -45,11 +46,12 @@ const CreatePostPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [userDetails, setUserDetails] = useState(null);
   const [gameDetails, setGameDetails] = useState(null);
+  const userData = useSelector((bigPie) => bigPie.authSlice.userData);
   const navigate = useNavigate();
 
   const handleNext = async (gameDetailsValues) => {
     try {
-      const { data: myUser } = await axios.get("users/my-user");
+      const { data: myUser } = await axios.get(`users/${userData._id}`);
       setUserDetails(myUser);
       setGameDetails(gameDetailsValues);
       setActiveStep(activeStep + 1);

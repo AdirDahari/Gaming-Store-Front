@@ -8,7 +8,7 @@ import {
   toServerUserNormalization,
 } from "../../service/inputsNormalization";
 import UpdateProfileForm from "./ui/UpdateProfileForm";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/authSlice";
 import { validateUpdateProfile } from "../../validation/updateProfileValidation";
 import MyToast from "../../messages/MyToast";
@@ -23,17 +23,20 @@ const ProfilePage = () => {
   const [inputsValue, setInputsValue] = useState(null);
   const [postsData, setPostsData] = useState(null);
   const dispatch = useDispatch();
+  const userData = useSelector((bigPie) => bigPie.authSlice.userData);
   const navigate = useNavigate();
   const [errorsState, setErrorsState] = useState(null);
 
   useEffect(() => {
     (async () => {
       try {
-        let { data: userDara } = await axios.get("/users/my-user");
-        userId = userDara._id;
-        profileImage = userDara.image.url;
-        email = userDara.email;
-        setInputsValue(fromServerUserNormalization(userDara));
+        let { data: userDataFromServer } = await axios.get(
+          `/users/${userData._id}`
+        );
+        userId = userDataFromServer._id;
+        profileImage = userDataFromServer.image.url;
+        email = userDataFromServer.email;
+        setInputsValue(fromServerUserNormalization(userDataFromServer));
 
         let { data: postData } = await axios.get("/posts/profile/my-posts");
         setPostsData(postData);

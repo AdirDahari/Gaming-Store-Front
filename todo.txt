@@ -2,8 +2,6 @@ clean code
 
 home page add titles?
 
-remove email from token and change to user id + change request + change router
-
 managment change user to admin
 
 readme + postman
@@ -12,6 +10,4 @@ server -> redux to category option
 
 pagination
 
-test 
-
-rename from gamming to gaming
+test sort with more posts

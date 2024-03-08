@@ -136,7 +136,7 @@ const ManagementPage = () => {
                 <TableBody>
                   {postsFromServer.map((post) => (
                     <RowPostsComponent
-                      _id={nextId()}
+                      _id={post._id}
                       name={post.game.name}
                       platform={post.platform}
                       price={post.game.price}

@@ -20,6 +20,7 @@ const ShopPage = () => {
   const [allCategories, setAllCategories] = useState(null);
   const [userId, setUserId] = useState(null);
   const loggedIn = useSelector((bigPie) => bigPie.authSlice.loggedIn);
+  const userData = useSelector((bigPie) => bigPie.authSlice.userData);
   const { state } = useLocation();
   const navigate = useNavigate();
 
@@ -31,7 +32,6 @@ const ShopPage = () => {
           `/posts/platform/${state.name}`.toLocaleLowerCase()
         );
         if (loggedIn == true) {
-          const { data: userData } = await axios.get("/users/my-user");
           setUserId(userData._id);
         }
 

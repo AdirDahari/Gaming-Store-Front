@@ -7,12 +7,14 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES.JS";
 import MyToast from "../../messages/MyToast";
 import nextId from "react-id-generator";
+import { useSelector } from "react-redux";
 
 let initData = [];
 let userId = "";
 
 const FavouritesPage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
+  const userData = useSelector((bigPie) => bigPie.authSlice.userData);
   const [txt, setTxt] = useState("");
   const navigate = useNavigate();
 
@@ -23,7 +25,6 @@ const FavouritesPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data: userData } = await axios.get("/users/my-user");
         const { data: postData } = await axios.get("/posts");
         userId = userData._id;
         initData = postData.filter((post) => post.likes.includes(userId));

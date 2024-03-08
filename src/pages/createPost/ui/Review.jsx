@@ -130,7 +130,7 @@ const Review = ({ handleBack, handleSubmit, userDetails, gameDetails }) => {
               />
             </Grid>
           ) : (
-            <></>
+            <Fragment key={nextId()}></Fragment>
           )
         )}
       </Grid>

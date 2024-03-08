@@ -1,5 +1,5 @@
 import { TableCell, TableRow } from "@mui/material";
-import OptionsButton from "./OptionsButton";
+import OptionsButtonPosts from "./OptionsButtonPosts";
 import PropTypes from "prop-types";
 
 const RowPostsComponent = ({
@@ -30,7 +30,7 @@ const RowPostsComponent = ({
       <TableCell align="left">{price}</TableCell>
       <TableCell align="left">{userId}</TableCell>
       <TableCell align="right">
-        <OptionsButton
+        <OptionsButtonPosts
           onShowPostClick={handleShowPostClick}
           onDeleteClick={handleDeleteClick}
           onEditClick={handleEditPostClick}

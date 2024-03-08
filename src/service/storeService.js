@@ -12,6 +12,15 @@ const storeToken = (token, rememberMe) => {
     }
 };
 
+const clearToken = () => {
+    let token = isLocalStorage();
+    if (token) {
+        localStorage.clear();
+    } else {
+        sessionStorage.clear()
+    }
+}
+
 const getToken = () => {
     let token = isLocalStorage();
     if (token) {
@@ -21,4 +30,4 @@ const getToken = () => {
     }
 };
 
-export { storeToken, getToken };
+export { storeToken, getToken, clearToken };

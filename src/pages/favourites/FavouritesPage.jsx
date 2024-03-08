@@ -98,19 +98,24 @@ const FavouritesPage = () => {
           sx={{
             width: "80%",
             m: "0 auto",
-            p: 1,
+            p: 2,
             bgcolor: "#E0115F",
             borderRadius: "5px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          <Typography sx={{ pl: 2 }} color="#f9f9f9" variant="h5">
-            FAVOURITES
-          </Typography>
-          <Box sx={{ display: "flex", justifyContent: "space-between", pr: 1 }}>
+          <Box sx={{ pl: 1 }}>
+            <Typography sx={{ pl: 2 }} color="#f9f9f9" variant="h5">
+              FAVOURITES
+            </Typography>
             <Typography color="#f9f9f9" sx={{ pl: 3 }}>
               find your saved posts
             </Typography>
-            <Search txt={txt} onTxtChange={handleTxtChange} />
+          </Box>
+          <Box sx={{ pr: 2 }}>
+            <Search onTxtChange={handleTxtChange} txt={txt} />
           </Box>
         </Box>
         <Divider variant="middle" sx={{ pt: 4, pb: 4 }} />

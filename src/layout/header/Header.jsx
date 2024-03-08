@@ -22,6 +22,7 @@ import ProfileMenuItems from "./ui/ProfileMenuItems";
 import axios from "axios";
 import MyToast from "../../messages/MyToast";
 import nextId from "react-id-generator";
+import { clearToken } from "../../service/storeService";
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -40,6 +41,7 @@ function Header() {
         const { data } = await axios.get(`users/${userData._id}`);
         setUserDataFromServer(data);
       } catch (err) {
+        localStorage.clear();
         MyToast.error("Something wrong, Please try again later");
         console.log(err);
       }
@@ -63,11 +65,7 @@ function Header() {
 
   const handleLogout = () => {
     setAnchorElUser(null);
-    if (localStorage.getItem("token")) {
-      localStorage.removeItem("token");
-    } else if (sessionStorage.getItem("token")) {
-      sessionStorage.removeItem("token");
-    } else return;
+    clearToken();
     dispatch(authActions.logout());
     setUserDataFromServer(null);
     MyToast.info("You have logged out, see you soon");

@@ -1,7 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/authSlice";
-import { getToken } from "../service/storeService";
+import { clearToken, getToken } from "../service/storeService";
 
 const useAutoLogin = () => {
   const dispatch = useDispatch();
@@ -11,10 +11,9 @@ const useAutoLogin = () => {
       const token = getToken();
       if (!token) return;
       const dataFromToken = jwtDecode(token);
-      console.log(dataFromToken);
       dispatch(authActions.login(dataFromToken));
     } catch (err) {
-      localStorage.clear();
+      clearToken();
     }
   };
 };

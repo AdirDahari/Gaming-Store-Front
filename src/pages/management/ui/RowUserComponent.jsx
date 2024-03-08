@@ -1,13 +1,8 @@
-import {
-  TableCell,
-  TableRow,
-  IconButton,
-  Popover,
-  Button,
-} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { TableCell, TableRow } from "@mui/material";
+
 import PropTypes from "prop-types";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
+import OptionsButtonUsers from "./OptionsButtonUsers";
 
 const RowUserComponent = ({
   _id,
@@ -16,21 +11,14 @@ const RowUserComponent = ({
   phone,
   country,
   onDeleteUser,
+  onIsAdmin,
+  isAdmin,
 }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-
   const handleDeleteClick = () => {
     onDeleteUser(_id);
+  };
+  const handleIsAdminClick = () => {
+    onIsAdmin(_id);
   };
 
   return (
@@ -44,12 +32,17 @@ const RowUserComponent = ({
         <TableCell align="left">{country}</TableCell>
         <TableCell align="left">{_id}</TableCell>
         <TableCell align="right">
-          <IconButton onClick={handleClick}>
+          <OptionsButtonUsers
+            isAdmin={isAdmin}
+            onDeleteClick={handleDeleteClick}
+            onIsAdminClick={handleIsAdminClick}
+          />
+          {/* <IconButton onClick={handleClick}>
             <DeleteIcon />
-          </IconButton>
+          </IconButton> */}
         </TableCell>
       </TableRow>
-      <Popover
+      {/* <Popover
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
@@ -65,7 +58,7 @@ const RowUserComponent = ({
         <Button onClick={handleDeleteClick} color="error" sx={{ p: 2 }}>
           Delete User
         </Button>
-      </Popover>
+      </Popover> */}
     </Fragment>
   );
 };
@@ -77,6 +70,8 @@ RowUserComponent.propTypes = {
   phone: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
   onDeleteUser: PropTypes.func.isRequired,
+  onIsAdmin: PropTypes.func.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
 };
 
 export default RowUserComponent;

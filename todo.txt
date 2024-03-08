@@ -1,13 +1,13 @@
-clean code
+clean code -> last
+
+readme + postman -> last
 
 home page add titles?
 
-managment change user to admin
-
-readme + postman
-
-server -> redux to category option
-
 pagination
 
-test sort with more posts
+test sort with more posts 
+
+all posts location pages change the function when rerander
+
+error handler in server

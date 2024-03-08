@@ -42,20 +42,37 @@ const ManagementPage = () => {
   const handleDeleteUser = async (_id) => {
     try {
       await axios.delete(`/users/${_id}`);
-      const { data: usersData } = await axios.get("/users");
-      setUsersFromServer(usersData);
+      setUsersFromServer((dataFromServerCopy) =>
+        dataFromServerCopy.filter((user) => user._id !== _id)
+      );
       MyToast.info("User Deleted!");
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
       console.log(err);
     }
   };
+  const handleIsAdmin = async (_id) => {
+    try {
+      console.log("handleIsAdmin", _id);
+      const { data } = await axios.patch(`/users/${_id}`);
+      let copyData = usersFromServer;
+      for (let user of copyData) {
+        if (user._id == _id) {
+          user.isAdmin = data.isAdmin;
+        }
+      }
+      setUsersFromServer(copyData);
+    } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
+    }
+  };
 
   const handleDeletePostClick = async (_id) => {
     try {
       await axios.delete(`/posts/${_id}`);
-      const { data: postsData } = await axios.get("/posts");
-      setPostsFromServer(postsData);
+      setPostsFromServer((dataFromServerCopy) =>
+        dataFromServerCopy.filter((post) => post._id !== _id)
+      );
       MyToast.info("Post Deleted!");
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
@@ -100,7 +117,7 @@ const ManagementPage = () => {
                   <TableCell align="left">Phone</TableCell>
                   <TableCell align="left">Country</TableCell>
                   <TableCell align="left">User id</TableCell>
-                  <TableCell align="right">Delete</TableCell>
+                  <TableCell align="right">Options</TableCell>
                 </TableRow>
               </TableHead>
 
@@ -114,7 +131,9 @@ const ManagementPage = () => {
                       email={user.email}
                       country={user.address.country}
                       phone={user.phone}
+                      isAdmin={user.isAdmin}
                       onDeleteUser={handleDeleteUser}
+                      onIsAdmin={handleIsAdmin}
                     />
                   ))}
                 </TableBody>

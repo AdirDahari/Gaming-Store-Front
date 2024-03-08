@@ -2,11 +2,12 @@ import { styled, alpha } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import EditIcon from "@mui/icons-material/Edit";
 import Divider from "@mui/material/Divider";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import ArticleIcon from "@mui/icons-material/Article";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Box from "@mui/material/Box";
+import Switch from "@mui/material/Switch";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
@@ -35,7 +36,7 @@ const StyledMenu = styled((props) => (
     boxShadow:
       "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
     "& .MuiMenu-list": {
-      padding: "4px 0",
+      padding: "8px 8px",
     },
     "& .MuiMenuItem-root": {
       "& .MuiSvgIcon-root": {
@@ -53,8 +54,9 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-const OptionsButton = ({ onDeleteClick, onEditClick, onShowPostClick }) => {
+const OptionsButtonUsers = ({ onDeleteClick, onIsAdminClick, isAdmin }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [adminSwitch, setAdminSwitch] = useState(isAdmin);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -62,17 +64,13 @@ const OptionsButton = ({ onDeleteClick, onEditClick, onShowPostClick }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleEditClick = () => {
-    setAnchorEl(null);
-    onEditClick();
+  const handleIsAdminClick = () => {
+    setAdminSwitch(!adminSwitch);
+    onIsAdminClick();
   };
   const handleDeleteClick = () => {
     setAnchorEl(null);
     onDeleteClick();
-  };
-  const handleShowPostClick = () => {
-    setAnchorEl(null);
-    onShowPostClick();
   };
 
   return (
@@ -81,29 +79,29 @@ const OptionsButton = ({ onDeleteClick, onEditClick, onShowPostClick }) => {
         <MoreVertIcon />
       </IconButton>
       <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        <MenuItem onClick={handleShowPostClick} disableRipple>
-          <ArticleIcon />
-          Show post
-        </MenuItem>
-        <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleEditClick} disableRipple>
-          <EditIcon />
-          Edit post
-        </MenuItem>
+        <Box onClick={handleIsAdminClick}>
+          <FormControlLabel
+            sx={{ pl: 1 }}
+            control={
+              <Switch checked={adminSwitch} onChange={handleIsAdminClick} />
+            }
+            label="Is Admin"
+          />
+        </Box>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={handleDeleteClick} disableRipple>
           <DeleteIcon />
-          Delete post
+          Delete User
         </MenuItem>
       </StyledMenu>
     </div>
   );
 };
 
-OptionsButton.propTypes = {
+OptionsButtonUsers.propTypes = {
   onDeleteClick: PropTypes.func.isRequired,
-  onEditClick: PropTypes.func.isRequired,
-  onShowPostClick: PropTypes.func.isRequired,
+  onIsAdminClick: PropTypes.func.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
 };
 
-export default OptionsButton;
+export default OptionsButtonUsers;

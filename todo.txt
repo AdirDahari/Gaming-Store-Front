@@ -16,4 +16,6 @@ server -> redux to category option
 
 pagination
 
+test 
+
 rename from gamming to gaming

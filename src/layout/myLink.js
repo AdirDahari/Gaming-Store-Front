@@ -50,25 +50,25 @@ const categories = [
         name: "Playstation",
         image: "/assets/img/categories/Playstation.png",
         alt: "PlayStation image",
-        color: "#0E86D4",
+        color: "#191970",
     },
     {
         name: "Xbox",
         image: "/assets/img/categories/Xbox.png",
         alt: "Xbox image",
-        color: "#56ae60",
+        color: "#3b8132",
     },
     {
         name: "Pc",
         image: "/assets/img/categories/Pc.png",
         alt: "Pc image",
-        color: "#9370DB",
+        color: "#371c4b",
     },
     {
         name: "Nintendo",
         image: "/assets/img/categories/nintendo.png",
         alt: "Pc image",
-        color: "#ED2939",
+        color: "#720606",
     },
 ];
 

@@ -15,8 +15,7 @@ import RangeSlider from "./RangeSlider";
 import PropTypes from "prop-types";
 import { Search } from "./Search";
 import nextId from "react-id-generator";
-
-const status = ["all", "new", "like new", "used"];
+import { productStatus as status } from "../../../layout/myLists";
 
 const SortComponent = ({
   onSearchChange,
@@ -163,7 +162,7 @@ const SortComponent = ({
                   value={filterInputs ? filterInputs.productStatus : "all"}
                   onChange={handleOptionChange}
                 >
-                  {status.map((option) => (
+                  {["all", ...status].map((option) => (
                     <MenuItem key={nextId()} value={option}>
                       {option}
                     </MenuItem>

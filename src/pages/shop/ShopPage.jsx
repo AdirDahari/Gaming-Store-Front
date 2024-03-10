@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid";
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography, Pagination } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import MyToast from "../../messages/MyToast";
 import PostComponent from "../../components/PostComponent";
 import nextId from "react-id-generator";
+import { categories } from "../../layout/myLists";
 
 let initData = [];
 
@@ -17,10 +18,11 @@ const ShopPage = () => {
   const [filterInputs, setFilterInputs] = useState(null);
   const [searchTxt, setSearchTxt] = useState("");
   const [maxPrice, setMaxPrice] = useState(null);
-  const [allCategories, setAllCategories] = useState(null);
   const [userId, setUserId] = useState(null);
   const loggedIn = useSelector((bigPie) => bigPie.authSlice.loggedIn);
   const userData = useSelector((bigPie) => bigPie.authSlice.userData);
+  const [numberOfPages, setNumberOfPage] = useState(null);
+  const [page, setPage] = useState(null);
   const { state } = useLocation();
   const navigate = useNavigate();
 
@@ -38,7 +40,7 @@ const ShopPage = () => {
         console.log(postData);
         initData = postData;
         findMaxPrice(postData);
-        findAllCategories(postData);
+        dataToShow();
       } catch (err) {
         MyToast.error("Something wrong, Please try again later");
         console.log(err);
@@ -96,19 +98,6 @@ const ShopPage = () => {
     setMaxPrice(max + 50);
   };
 
-  const findAllCategories = (data) => {
-    let categories = [];
-    for (let i = 0; i < data.length; i++) {
-      let tempArr = data[i].game.category;
-      for (let j = 0; j < tempArr.length; j++) {
-        if (!categories.includes(tempArr[j])) {
-          categories.push(tempArr[j]);
-        }
-      }
-    }
-    setAllCategories(categories);
-  };
-
   const filterData = (inputs) => {
     setFilterInputs(inputs);
   };
@@ -151,6 +140,16 @@ const ShopPage = () => {
     }
   };
 
+  const dataToShow = () => {
+    if (initData.length > 6) {
+      setNumberOfPage(Math.ceil(initData.length / 6));
+      setPage(1);
+    }
+  };
+  const handlePageChange = (e, value) => {
+    setPage(value);
+  };
+
   return (
     <Box maxWidth={1200} m="0 auto" sx={{ p: 1, pt: 4 }}>
       <Box
@@ -179,7 +178,7 @@ const ShopPage = () => {
             onInputsChange={filterData}
             onSearchChange={handleSearchTxt}
             priceRange={maxPrice ? [0, maxPrice] : [0, 10]}
-            categoriesData={allCategories ? ["all", ...allCategories] : ["all"]}
+            categoriesData={["all", ...categories]}
           />
         </Box>
         <Divider variant="middle" sx={{ pt: 4, pb: 4 }} />
@@ -215,6 +214,17 @@ const ShopPage = () => {
               No posts found
             </Typography>
           </Fragment>
+        )}
+        {numberOfPages && page && (
+          <Box sx={{ display: "flex", justifyContent: "center" }} p={2}>
+            <Pagination
+              count={numberOfPages}
+              variant="outlined"
+              color="primary"
+              page={page}
+              onChange={handlePageChange}
+            />
+          </Box>
         )}
       </Box>
     </Box>

@@ -3,26 +3,11 @@ import { Button, Box, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import { validateGameDetails } from "../../../validation/gameDetails";
 import PostInputsForm from "../../../components/PostInputsForm";
-
-const platforms = ["xbox", "playstation", "pc", "nintendo"];
-const status = ["new", "like new", "used"];
-const categoryOptions = [
-  "Action",
-  "Adventure",
-  "RPG",
-  "Puzzle",
-  "Racing",
-  "Simulation",
-  "Platform",
-  "MMO",
-  "Sport",
-  "Shooter",
-  "Strategy",
-  "Fighting",
-  "FPS",
-  "Survival",
-  "Other",
-];
+import {
+  categories as categoryOptions,
+  platformNames as platforms,
+  productStatus as status,
+} from "../../../layout/myLists";
 
 const GameForm = ({ handleNext }) => {
   const [gameDetails, setGameDetails] = useState({

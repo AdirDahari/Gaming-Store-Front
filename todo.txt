@@ -6,6 +6,4 @@ pagination
 
 test sort with more posts 
 
-all posts location pages change the function when rerander
-
 error handler in server

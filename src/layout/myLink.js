@@ -45,31 +45,6 @@ const ProfileIconLink = [
     { to: ROUTES.HOME, children: "Logout", icon: LogoutIcon }
 ];
 
-const categories = [
-    {
-        name: "Playstation",
-        image: "/assets/img/categories/Playstation.png",
-        alt: "PlayStation image",
-        color: "#191970",
-    },
-    {
-        name: "Xbox",
-        image: "/assets/img/categories/Xbox.png",
-        alt: "Xbox image",
-        color: "#3b8132",
-    },
-    {
-        name: "Pc",
-        image: "/assets/img/categories/Pc.png",
-        alt: "Pc image",
-        color: "#371c4b",
-    },
-    {
-        name: "Nintendo",
-        image: "/assets/img/categories/nintendo.png",
-        alt: "Pc image",
-        color: "#720606",
-    },
-];
 
-export { MainLink, GuestLink, ProfileLink, ProfileIconLink, ProfileMobileLink, GuestMobileLink, MainAdminLink, ProfileMobileAdminLink, categories };
+
+export { MainLink, GuestLink, ProfileLink, ProfileIconLink, ProfileMobileLink, GuestMobileLink, MainAdminLink, ProfileMobileAdminLink };

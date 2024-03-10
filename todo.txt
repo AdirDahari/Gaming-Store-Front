@@ -2,8 +2,6 @@ clean code -> last
 
 readme + postman -> last
 
-home page add titles?
-
 pagination
 
 test sort with more posts 

@@ -15,6 +15,7 @@ import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FooterLinks from "./ui/FooterLinks";
 import ROUTES from "../../routes/ROUTES.JS";
+import "../../style/ImageScale.css";
 
 const email = "Adir10500@gmail.com";
 
@@ -44,10 +45,10 @@ const Footer = () => {
       <Box
         sx={{
           width: "100%",
+          backgroundColor: "#282C35",
           height: "auto",
-          backgroundColor: "#ededed7",
-          paddingTop: 3,
-          paddingBottom: 3,
+          paddingTop: 1,
+          paddingBottom: 1,
         }}
       >
         <Container maxWidth="lg">
@@ -60,7 +61,7 @@ const Footer = () => {
           >
             <Grid item xs={12} sm={6}>
               <Typography
-                color="#6A6A6A"
+                color="#fff"
                 textAlign="center"
                 variant="h5"
                 fontWeight={500}
@@ -72,17 +73,20 @@ const Footer = () => {
               <Box sx={{ m: "0 auto", width: 210 }}>
                 <IconButton
                   href="https://www.linkedin.com/in/adir-dahari/"
-                  sx={{ p: 1, m: 1 }}
+                  sx={{ p: 1, m: 1, color: "#fff" }}
                 >
                   <LinkedInIcon fontSize="large" />
                 </IconButton>
                 <IconButton
                   href="https://github.com/AdirDahari"
-                  sx={{ p: 1, m: 1 }}
+                  sx={{ p: 1, m: 1, color: "#fff" }}
                 >
                   <GitHubIcon fontSize="large" />
                 </IconButton>
-                <IconButton onClick={handleClick} sx={{ p: 1, m: 1 }}>
+                <IconButton
+                  onClick={handleClick}
+                  sx={{ p: 1, m: 1, color: "#fff" }}
+                >
                   <EmailIcon fontSize="large" />
                 </IconButton>
               </Box>
@@ -126,10 +130,12 @@ const Footer = () => {
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12}>
               <Typography
+                className="imageSmallScale"
                 sx={{ cursor: "pointer" }}
                 onClick={handleHomeClick}
                 color="#E1E1E1"
                 variant="h5"
+                fontFamily="monospace"
               >
                 Gamming Store
               </Typography>

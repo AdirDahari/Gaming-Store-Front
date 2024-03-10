@@ -129,7 +129,7 @@ const FavouritesPage = () => {
             {dataFromServer.map((post) => (
               <Grid item key={nextId()} xs={12} sm={6} md={4} sx={{ p: 3 }}>
                 <PostComponent
-                  color="#E0115F"
+                  color="#FF0000"
                   _id={post._id}
                   name={post.game.name}
                   price={post.game.price}

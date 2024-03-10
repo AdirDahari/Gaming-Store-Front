@@ -41,7 +41,7 @@ function Header() {
         const { data } = await axios.get(`users/${userData._id}`);
         setUserDataFromServer(data);
       } catch (err) {
-        localStorage.clear();
+        handleLogout();
         MyToast.error("Something wrong, Please try again later");
         console.log(err);
       }

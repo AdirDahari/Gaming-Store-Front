@@ -29,18 +29,17 @@ const ShopPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        console.log("state", state);
         const { data: postData } = await axios.get(
           `/posts/platform/${state.name}`.toLocaleLowerCase()
         );
         if (loggedIn == true) {
           setUserId(userData._id);
         }
-
-        console.log(postData);
         initData = postData;
+        console.log("avav");
+        setDataFromServer(postData);
         findMaxPrice(postData);
-        dataToShow();
+        dataToShow(postData, 0, 6);
       } catch (err) {
         MyToast.error("Something wrong, Please try again later");
         console.log(err);
@@ -53,11 +52,13 @@ const ShopPage = () => {
     if (filterInputs || searchTxt.length > 1) {
       filterPostToShow();
     } else {
-      setDataFromServer(initData);
+      // dataToShow(initData, 0, 6);
+      return;
     }
   }, [filterInputs, initData, searchTxt]);
 
   const filterPostToShow = () => {
+    console.log("aaa");
     let tempData = initData;
     if (filterInputs) {
       if (filterInputs.categories && filterInputs.categories !== "all") {
@@ -86,6 +87,7 @@ const ShopPage = () => {
       }
     }
     setDataFromServer(tempData);
+    dataToShow(tempData, 0, 6);
   };
 
   const findMaxPrice = (data) => {
@@ -140,13 +142,23 @@ const ShopPage = () => {
     }
   };
 
-  const dataToShow = () => {
-    if (initData.length > 6) {
-      setNumberOfPage(Math.ceil(initData.length / 6));
+  const dataToShow = (data, fromNum, toNum) => {
+    console.log(fromNum, toNum);
+    console.log("dataFromServer", data);
+    if (data.length > 6) {
+      setNumberOfPage(Math.ceil(data.length / 6));
       setPage(1);
+      let tempData = data.slice(fromNum, toNum);
+      setDataFromServer(tempData);
     }
   };
+  // need save the filter post to pagination them
   const handlePageChange = (e, value) => {
+    let min = value * 6 - 6;
+    console.log(min);
+    let max = value * 6;
+    if (max > initData.length) max = initData.length;
+    dataToShow(initData, min, max);
     setPage(value);
   };
 

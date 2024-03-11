@@ -1,5 +1,0 @@
-clean code -> last
-
-readme + postman -> last
-
-pagination to profile and favourite?

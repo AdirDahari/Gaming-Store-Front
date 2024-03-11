@@ -90,8 +90,11 @@
 .post-title {
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding-top: 10px;
+  /* align-items: center; */
+  height: 70px;
   gap: 5.992px;
+  overflow: hidden;
 }
 .post-title-text {
   color: var(--black-700-black, #121212);
@@ -100,8 +103,8 @@
   font-size: 30px;
   font-style: normal;
   font-weight: 400;
-  line-height: 15.95px;
-  text-wrap: nowrap;
+  line-height: 35px;
+  display: contents;
 }
 .post-details {
   margin: 0 auto;

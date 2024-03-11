@@ -2,8 +2,4 @@ clean code -> last
 
 readme + postman -> last
 
-pagination
-
-test sort with more posts 
-
-error handler in server
+pagination to profile and favourite?

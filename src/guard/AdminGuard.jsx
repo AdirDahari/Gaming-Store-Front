@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 
 const AdminGuard = ({ children }) => {
   const userData = useSelector((bigPie) => bigPie.authSlice.userData);
-  console.log("userData", userData);
   if (userData && userData.isAdmin) {
     return children;
   } else {

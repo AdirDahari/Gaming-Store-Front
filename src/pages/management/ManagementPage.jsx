@@ -30,7 +30,6 @@ const ManagementPage = () => {
         setPostsFromServer(postsData);
       } catch (err) {
         MyToast.error("Something wrong, Please try again later");
-        console.log(err);
       }
     })();
   }, []);
@@ -48,12 +47,10 @@ const ManagementPage = () => {
       MyToast.info("User Deleted!");
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
-      console.log(err);
     }
   };
   const handleIsAdmin = async (_id) => {
     try {
-      console.log("handleIsAdmin", _id);
       const { data } = await axios.patch(`/users/${_id}`);
       let copyData = usersFromServer;
       for (let user of copyData) {
@@ -76,7 +73,6 @@ const ManagementPage = () => {
       MyToast.info("Post Deleted!");
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
-      console.log(err);
     }
   };
 

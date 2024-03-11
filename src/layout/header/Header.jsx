@@ -37,13 +37,11 @@ function Header() {
     (async () => {
       try {
         if (!loggedIn) return;
-        console.log(userData._id);
         const { data } = await axios.get(`users/${userData._id}`);
         setUserDataFromServer(data);
       } catch (err) {
         handleLogout();
         MyToast.error("Something wrong, Please try again later");
-        console.log(err);
       }
     })();
   }, [loggedIn]);
@@ -156,7 +154,7 @@ function Header() {
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              letterSpacing: ".2rem",
               color: "inherit",
               textDecoration: "none",
             }}

@@ -28,11 +28,9 @@ const FavouritesPage = () => {
         const { data: postData } = await axios.get("/posts");
         userId = userData._id;
         initData = postData.filter((post) => post.likes.includes(userId));
-        console.log(initData);
         setDataFromServer(initData);
       } catch (err) {
         MyToast.error("Something wrong, Please try again later");
-        console.log(err);
       }
     })();
   }, []);
@@ -66,7 +64,6 @@ const FavouritesPage = () => {
       MyToast.info("Post Deleted!");
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
-      console.log(err);
     }
   };
   const handleLikePost = async (_id) => {
@@ -77,7 +74,6 @@ const FavouritesPage = () => {
       setDataFromServer(initData);
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
-      console.log(err);
     }
   };
 
@@ -87,9 +83,10 @@ const FavouritesPage = () => {
         sx={{
           minHeight: 650,
           bgcolor: "#f9f9f9",
-          p: 4,
-          pb: 2,
+          pt: 4,
+          pb: 4,
           mb: 4,
+          p: { xs: 0, sm: 4 },
           borderRadius: "5px",
           boxShadow: `rgba(149, 157, 165, 0.2) 0px 8px 24px`,
         }}
@@ -106,7 +103,7 @@ const FavouritesPage = () => {
             alignItems: "center",
           }}
         >
-          <Box sx={{ pl: 1 }}>
+          <Box sx={{ pl: 1, display: { xs: "none", sm: "block" } }}>
             <Typography sx={{ pl: 2 }} color="#f9f9f9" variant="h5">
               FAVOURITES
             </Typography>
@@ -122,7 +119,6 @@ const FavouritesPage = () => {
         {dataFromServer.length > 0 ? (
           <Grid
             container
-            spacing={0}
             maxWidth={1200}
             sx={{ m: 2, p: 1, pt: 4, margin: "0 auto" }}
           >

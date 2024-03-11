@@ -65,13 +65,16 @@ const LoginPage = () => {
       navigate(ROUTES.HOME);
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
-      console.log("Error from Submit", err);
     }
     e.preventDefault();
   };
 
   return (
-    <Box component="main" maxWidth="sm" sx={{ pb: 4, pt: 4, m: "0 auto" }}>
+    <Box
+      component="main"
+      maxWidth="sm"
+      sx={{ pb: 4, pt: 4, p: 4, m: "0 auto" }}
+    >
       <CssBaseline />
       <Box
         sx={{

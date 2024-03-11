@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import { LinearProgress, createTheme } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { ThemeProvider } from "@emotion/react";
+import MyToast from "./messages/MyToast";
 
 function App() {
   const [doneAuth, setDoneAuth] = useState(false);
@@ -16,7 +17,7 @@ function App() {
       try {
         await autoLogin();
       } catch (err) {
-        console.log(err);
+        MyToast.error("Something wrong, Please try again later");
       } finally {
         setDoneAuth(true);
       }

@@ -42,7 +42,6 @@ const ProfilePage = () => {
         setPostsData(postData);
       } catch (err) {
         MyToast.error("Something wrong, Please try again later");
-        console.log(err);
       }
     })();
   }, []);
@@ -71,7 +70,6 @@ const ProfilePage = () => {
       MyToast.info("Post Deleted!");
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
-      console.log(err);
     }
   };
 
@@ -82,19 +80,16 @@ const ProfilePage = () => {
       const joiResponse = validateUpdateProfile(inputsValue);
       if (joiResponse) {
         setErrorsState(joiResponse);
-        console.log(joiResponse);
         return;
       }
       let request = toServerUserNormalization(inputsValue);
-      console.log("request", request);
+
       if (userId) {
-        const { data } = await axios.put(`/users/${userId}`, request);
-        console.log("data", data);
+        await axios.put(`/users/${userId}`, request);
       }
       MyToast.info("Profile Updated!");
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
-      console.log(err);
     }
   };
   const handleDeleteProfile = async () => {
@@ -110,7 +105,6 @@ const ProfilePage = () => {
       navigate(ROUTES.HOME);
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
-      console.log(err);
     }
   };
   const handleLikePost = async (_id) => {
@@ -120,7 +114,6 @@ const ProfilePage = () => {
       setPostsData(data);
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
-      console.log(err);
     }
   };
 

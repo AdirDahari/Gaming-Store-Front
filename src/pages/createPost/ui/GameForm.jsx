@@ -28,7 +28,6 @@ const GameForm = ({ handleNext }) => {
   const handleNextClick = () => {
     const joiResponse = validateGameDetails(gameDetails);
     if (joiResponse) {
-      console.log(joiResponse);
       setErrorsState(joiResponse);
       return;
     }
@@ -44,8 +43,6 @@ const GameForm = ({ handleNext }) => {
   };
 
   const handleOptionChange = (e) => {
-    console.log("e.target.name", e.target.name);
-    console.log("e.target.value", e.target.value);
     setGameDetails((currentState) => ({
       ...currentState,
       [e.target.name]: e.target.value,

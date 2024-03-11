@@ -55,12 +55,10 @@ const EditPostPage = () => {
       try {
         const { data } = await axios.get(`/posts/${_id}`);
         initData = data;
-        console.log(data.seller);
         setUserDetails(data.seller);
         setGameDetails(data);
       } catch (err) {
         MyToast.error("Something wrong, Please try again later");
-        console.log(err);
       }
     })();
   }, []);
@@ -83,7 +81,6 @@ const EditPostPage = () => {
       navigate(ROUTE.HOME);
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
-      console.log("handleSubmit", err);
     }
   };
 

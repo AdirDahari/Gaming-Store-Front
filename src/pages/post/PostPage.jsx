@@ -18,19 +18,16 @@ const ItayPostPage = () => {
     (async () => {
       try {
         const { data } = await axios.get(`/posts/${_id}`);
-        console.log(data);
         setDataFromServer(data);
         setMainImage(data.game.images[0].url);
         setOpenPopup(false);
       } catch (err) {
         MyToast.error("Something wrong, Please try again later");
-        console.log(err);
       }
     })();
   }, []);
 
   const handleImageIndexChange = (e) => {
-    console.log(e.target.id);
     setImageIndex(e.target.id);
     setMainImage(dataFromServer.game.images[e.target.id].url);
   };

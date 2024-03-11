@@ -14,7 +14,8 @@ import { categories } from "../../layout/myLists";
 let initData = [];
 
 const ShopPage = () => {
-  const [dataFromServer, setDataFromServer] = useState([]);
+  const [dataFromServer, setDataFromServer] = useState(null);
+  const [filterDataToShow, setFilterDataToShow] = useState(null);
   const [filterInputs, setFilterInputs] = useState(null);
   const [searchTxt, setSearchTxt] = useState("");
   const [maxPrice, setMaxPrice] = useState(null);
@@ -23,6 +24,8 @@ const ShopPage = () => {
   const userData = useSelector((bigPie) => bigPie.authSlice.userData);
   const [numberOfPages, setNumberOfPage] = useState(null);
   const [page, setPage] = useState(null);
+  const [minPost, setMinPost] = useState(0);
+  const [maxPost, setMaxPost] = useState(6);
   const { state } = useLocation();
   const navigate = useNavigate();
 
@@ -36,13 +39,11 @@ const ShopPage = () => {
           setUserId(userData._id);
         }
         initData = postData;
-        console.log("avav");
         setDataFromServer(postData);
         findMaxPrice(postData);
         dataToShow(postData, 0, 6);
       } catch (err) {
         MyToast.error("Something wrong, Please try again later");
-        console.log(err);
       }
     })();
   }, []);
@@ -52,13 +53,13 @@ const ShopPage = () => {
     if (filterInputs || searchTxt.length > 1) {
       filterPostToShow();
     } else {
-      // dataToShow(initData, 0, 6);
+      setFilterDataToShow(null);
+      dataToShow(initData, 0, 6);
       return;
     }
-  }, [filterInputs, initData, searchTxt]);
+  }, [filterInputs, searchTxt]);
 
-  const filterPostToShow = () => {
-    console.log("aaa");
+  const filterPostToShow = (min = 0, max = 6, page = 1) => {
     let tempData = initData;
     if (filterInputs) {
       if (filterInputs.categories && filterInputs.categories !== "all") {
@@ -86,8 +87,8 @@ const ShopPage = () => {
         );
       }
     }
-    setDataFromServer(tempData);
-    dataToShow(tempData, 0, 6);
+    setFilterDataToShow(tempData);
+    dataToShow(tempData, min, max, page);
   };
 
   const findMaxPrice = (data) => {
@@ -121,11 +122,14 @@ const ShopPage = () => {
         `/posts/platform/${state.name}`.toLocaleLowerCase()
       );
       initData = data;
-      setDataFromServer(initData);
+      if (filterInputs || searchTxt) {
+        filterPostToShow(minPost, maxPost, page);
+        return;
+      }
+      dataToShow(data, minPost, maxPost, page);
       MyToast.info("Post Deleted!");
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
-      console.log(err);
     }
   };
   const handleLikePost = async (_id) => {
@@ -135,30 +139,41 @@ const ShopPage = () => {
         `/posts/platform/${state.name}`.toLocaleLowerCase()
       );
       initData = data;
-      setDataFromServer(initData);
+      if (filterInputs || searchTxt) {
+        filterPostToShow(minPost, maxPost, page);
+        return;
+      }
+      dataToShow(data, minPost, maxPost, page);
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
-      console.log(err);
     }
   };
 
-  const dataToShow = (data, fromNum, toNum) => {
-    console.log(fromNum, toNum);
-    console.log("dataFromServer", data);
+  const dataToShow = (data, fromNum = 0, toNum = 6, page = 1) => {
+    setMaxPost(toNum);
+    setMinPost(fromNum);
     if (data.length > 6) {
       setNumberOfPage(Math.ceil(data.length / 6));
-      setPage(1);
+      setPage(page);
       let tempData = data.slice(fromNum, toNum);
       setDataFromServer(tempData);
+    } else {
+      setDataFromServer(data);
+      setNumberOfPage(null);
+      setPage(null);
     }
   };
-  // need save the filter post to pagination them
+
   const handlePageChange = (e, value) => {
     let min = value * 6 - 6;
-    console.log(min);
     let max = value * 6;
     if (max > initData.length) max = initData.length;
-    dataToShow(initData, min, max);
+    if (filterInputs || searchTxt) {
+      dataToShow(filterDataToShow, min, max);
+    } else {
+      dataToShow(initData, min, max);
+    }
+
     setPage(value);
   };
 

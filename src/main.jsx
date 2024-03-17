@@ -12,7 +12,7 @@ import { getToken } from "./service/storeService.js";
 import { Provider } from "react-redux";
 import store from "./store/bigPie";
 
-axios.defaults.baseURL = import.meta.env.REACT_APP_SERVER_URL;
+axios.defaults.baseURL = "http://localhost:8080/api/v1";
 axios.interceptors.request.use((config) => {
   const token = getToken();
   if (token) {

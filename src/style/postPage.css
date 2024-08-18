@@ -43,9 +43,6 @@
   gap: 28.432px;
   flex-shrink: 0;
 }
-.postpage-details-title {
-  /* padding-top: 30px; */
-}
 .postpage-details-title-text {
   display: inline;
   color: var(--black-700-black, #121212);
@@ -60,7 +57,6 @@
   display: flex;
   width: 90.035px;
   height: 52.126px;
-  /* padding: 0px 0.035px 0.126px 0px; */
   justify-content: center;
   align-items: center;
   flex-shrink: 0;

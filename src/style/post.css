@@ -91,7 +91,6 @@
   display: flex;
   justify-content: center;
   padding-top: 10px;
-  /* align-items: center; */
   height: 70px;
   gap: 5.992px;
   overflow: hidden;
@@ -100,10 +99,9 @@
   color: var(--black-700-black, #121212);
   font-feature-settings: "clig" off, "liga" off;
   font-family: Alata;
-  font-size: 30px;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 35px;
   display: contents;
 }
 .post-details {

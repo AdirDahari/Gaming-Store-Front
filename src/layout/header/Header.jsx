@@ -23,6 +23,7 @@ import axios from "axios";
 import MyToast from "../../messages/MyToast";
 import nextId from "react-id-generator";
 import { clearToken } from "../../service/storeService";
+import server from "../../server/server";
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);

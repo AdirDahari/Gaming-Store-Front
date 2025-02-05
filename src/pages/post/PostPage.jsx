@@ -1,11 +1,11 @@
 import { Box, Grid, Divider, Button } from "@mui/material";
 import "../../style/postPage.css";
 import { Fragment, useEffect, useState } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import MyToast from "../../messages/MyToast";
 import PopupSellerDetails from "./ui/PopupSellerDetails";
 import nextId from "react-id-generator";
+import server from "../../server/server";
 
 const ItayPostPage = () => {
   const { id: _id } = useParams();
@@ -17,7 +17,7 @@ const ItayPostPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get(`/posts/${_id}`);
+        const data = await server.posts.getPostById(_id);
         setDataFromServer(data);
         setMainImage(data.game.images[0].url);
         setOpenPopup(false);

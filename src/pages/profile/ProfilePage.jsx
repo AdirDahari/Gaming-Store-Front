@@ -1,5 +1,4 @@
 import { Box, Button, Divider, Grid, Typography } from "@mui/material";
-import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES.JS";
@@ -14,6 +13,7 @@ import { validateUpdateProfile } from "../../validation/updateProfileValidation"
 import MyToast from "../../messages/MyToast";
 import PostComponent from "../../components/PostComponent";
 import nextId from "react-id-generator";
+import server from "../../server/server";
 
 let userId = "";
 let profileImage = "";
@@ -30,15 +30,13 @@ const ProfilePage = () => {
   useEffect(() => {
     (async () => {
       try {
-        let { data: userDataFromServer } = await axios.get(
-          `/users/${userData._id}`
-        );
+        const userDataFromServer = await server.users.getUserById(userData._id);
         userId = userDataFromServer._id;
         profileImage = userDataFromServer.image.url;
         email = userDataFromServer.email;
         setInputsValue(fromServerUserNormalization(userDataFromServer));
 
-        let { data: postData } = await axios.get("/posts/profile/my-posts");
+        const postData = await server.posts.getMyPosts();
         setPostsData(postData);
       } catch (err) {
         MyToast.error("Something wrong, Please try again later");
@@ -64,8 +62,8 @@ const ProfilePage = () => {
   };
   const handleDeletePostClick = async (_id) => {
     try {
-      await axios.delete(`/posts/${_id}`);
-      let { data } = await axios.get("/posts/profile/my-posts");
+      await server.posts.deletePost(_id);
+      const data = await server.posts.getMyPosts();
       setPostsData(data);
       MyToast.info("Post Deleted!");
     } catch (err) {
@@ -85,7 +83,7 @@ const ProfilePage = () => {
       let request = toServerUserNormalization(inputsValue);
 
       if (userId) {
-        await axios.put(`/users/${userId}`, request);
+        await server.users.putUser(userId, request);
       }
       MyToast.info("Profile Updated!");
     } catch (err) {
@@ -94,7 +92,7 @@ const ProfilePage = () => {
   };
   const handleDeleteProfile = async () => {
     try {
-      await axios.delete(`/users/${userId}`);
+      await server.users.deleteUser(userId);
       if (localStorage.getItem("token")) {
         localStorage.removeItem("token");
       } else if (sessionStorage.getItem("token")) {
@@ -109,8 +107,8 @@ const ProfilePage = () => {
   };
   const handleLikePost = async (_id) => {
     try {
-      await axios.patch(`/posts/${_id}`);
-      let { data } = await axios.get("/posts/profile/my-posts");
+      await server.posts.patchLikePost(_id);
+      const data = await server.posts.getMyPosts();
       setPostsData(data);
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");

@@ -7,13 +7,13 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Typography from "@mui/material/Typography";
 import { Fragment, useState } from "react";
-import axios from "axios";
 import { createPostNormalization } from "./createPostNoramalization.js";
 import { useNavigate } from "react-router-dom";
 import ROUTE from "../../routes/ROUTES.JS";
 import MyToast from "../../messages/MyToast";
 import nextId from "react-id-generator";
 import { useSelector } from "react-redux";
+import server from "../../server/server";
 
 const steps = ["Game details", "Review your post"];
 
@@ -51,7 +51,7 @@ const CreatePostPage = () => {
 
   const handleNext = async (gameDetailsValues) => {
     try {
-      const { data: myUser } = await axios.get(`users/${userData._id}`);
+      const myUser = await server.users.getUserById(userData._id);
       setUserDetails(myUser);
       setGameDetails(gameDetailsValues);
       setActiveStep(activeStep + 1);
@@ -67,7 +67,7 @@ const CreatePostPage = () => {
   const handleSubmit = async () => {
     try {
       const request = createPostNormalization(gameDetails, userDetails);
-      await axios.post("/posts", request);
+      await server.posts.createPost(request);
       MyToast.info("Post Created!");
       navigate(ROUTE.HOME);
     } catch (err) {

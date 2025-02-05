@@ -19,7 +19,6 @@ import { authActions } from "../../store/authSlice";
 import MobileMenuItems from "./ui/MobileMenuItems";
 import IconMenuItems from "./ui/IconMenuItems";
 import ProfileMenuItems from "./ui/ProfileMenuItems";
-import axios from "axios";
 import MyToast from "../../messages/MyToast";
 import nextId from "react-id-generator";
 import { clearToken } from "../../service/storeService";
@@ -38,7 +37,7 @@ function Header() {
     (async () => {
       try {
         if (!loggedIn) return;
-        const { data } = await axios.get(`users/${userData._id}`);
+        const data = await server.users.getUserById(userData._id);
         setUserDataFromServer(data);
       } catch (err) {
         handleLogout();

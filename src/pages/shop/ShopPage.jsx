@@ -1,7 +1,6 @@
 import Grid from "@mui/material/Grid";
 import { Box, Divider, Typography, Pagination } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
-import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import SortComponent from "./ui/SortComponent";
 import ROUTES from "../../routes/ROUTES.JS";
@@ -10,6 +9,7 @@ import MyToast from "../../messages/MyToast";
 import PostComponent from "../../components/PostComponent";
 import nextId from "react-id-generator";
 import { categories } from "../../layout/myLists";
+import server from "../../server/server";
 
 let initData = [];
 
@@ -32,13 +32,14 @@ const ShopPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data: postData } = await axios.get(
-          `/posts/platform/${state.name}`.toLocaleLowerCase()
+        const postData = await server.posts.getPostPlatform(
+          state.name.toLowerCase()
         );
         if (loggedIn == true) {
           setUserId(userData._id);
         }
         initData = postData;
+
         setDataFromServer(postData);
         findMaxPrice(postData);
         dataToShow(postData, 0, 6);
@@ -117,10 +118,8 @@ const ShopPage = () => {
   };
   const handleDeletePostClick = async (_id) => {
     try {
-      await axios.delete(`/posts/${_id}`);
-      let { data } = await axios.get(
-        `/posts/platform/${state.name}`.toLocaleLowerCase()
-      );
+      await server.posts.deletePost(_id);
+      const data = await server.posts.getPostPlatform(state.name.toLowerCase());
       initData = data;
       if (filterInputs || searchTxt) {
         filterPostToShow(minPost, maxPost, page);
@@ -134,10 +133,9 @@ const ShopPage = () => {
   };
   const handleLikePost = async (_id) => {
     try {
-      await axios.patch(`/posts/${_id}`);
-      let { data } = await axios.get(
-        `/posts/platform/${state.name}`.toLocaleLowerCase()
-      );
+      await server.posts.patchLikePost(_id);
+      const data = await server.posts.getPostPlatform(state.name.toLowerCase());
+
       initData = data;
       if (filterInputs || searchTxt) {
         filterPostToShow(minPost, maxPost, page);
@@ -196,7 +194,6 @@ const ShopPage = () => {
             width: "80%",
             m: "0 auto",
             p: 1,
-            bgcolor: state.color,
             borderRadius: "5px",
           }}
         >
@@ -206,6 +203,7 @@ const ShopPage = () => {
             onSearchChange={handleSearchTxt}
             priceRange={maxPrice ? [0, maxPrice] : [0, 10]}
             categoriesData={["all", ...categories]}
+            color={state.color}
           />
         </Box>
         <Divider variant="middle" sx={{ pt: 4, pb: 4 }} />

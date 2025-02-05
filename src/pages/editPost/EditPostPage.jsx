@@ -7,12 +7,12 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Typography from "@mui/material/Typography";
 import { Fragment, useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import ROUTE from "../../routes/ROUTES.JS";
 import { editPostNormalization } from "./editPostNoramalization.js";
 import MyToast from "../../messages/MyToast";
 import nextId from "react-id-generator";
+import server from "../../server/server";
 
 const steps = ["Game details", "Update your post"];
 
@@ -53,7 +53,7 @@ const EditPostPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get(`/posts/${_id}`);
+        const data = await server.posts.getPostById(_id);
         initData = data;
         setUserDetails(data.seller);
         setGameDetails(data);
@@ -76,7 +76,7 @@ const EditPostPage = () => {
   const handleSubmit = async () => {
     try {
       const request = editPostNormalization(gameDetails);
-      await axios.put(`/posts/${_id}`, request);
+      await server.posts.putPost(_id, request);
       MyToast.info("Post Updated!");
       navigate(ROUTE.HOME);
     } catch (err) {

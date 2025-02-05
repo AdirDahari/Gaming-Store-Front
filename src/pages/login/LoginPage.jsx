@@ -11,12 +11,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import ROUTES from "../../routes/ROUTES.JS";
-import axios from "axios";
 import { validateLogin } from "../../validation/loginValidation.js";
 import { storeToken } from "../../service/storeService.js";
 import { useNavigate } from "react-router-dom";
 import useAutoLogin from "../../hooks/useAutoLogin.jsx";
 import MyToast from "../../messages/MyToast.js";
+import server from "../../server/server";
 
 const LoginPage = () => {
   const [emailValue, setEmailValue] = useState("");
@@ -47,8 +47,7 @@ const LoginPage = () => {
         setErrorsState(joiResponse);
         return;
       }
-
-      let { data } = await axios.post("/users/login", {
+      const data = await server.users.postLoginUser({
         email: emailValue,
         password: passwordValue,
       });

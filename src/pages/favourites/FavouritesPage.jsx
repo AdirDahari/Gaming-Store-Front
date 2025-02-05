@@ -105,9 +105,9 @@ const FavouritesPage = () => {
         >
           <Box sx={{ pl: 1, display: { xs: "none", sm: "block" } }}>
             <Typography sx={{ pl: 2 }} color="#f9f9f9" variant="h5">
-              FAVOURITES
+              Favourites
             </Typography>
-            <Typography color="#f9f9f9" sx={{ pl: 3 }}>
+            <Typography color="#f9f9f9" sx={{ pl: 2 }}>
               find your saved posts
             </Typography>
           </Box>

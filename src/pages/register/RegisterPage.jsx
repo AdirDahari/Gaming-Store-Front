@@ -13,7 +13,7 @@ import ROUTES from "../../routes/ROUTES.JS";
 import { validateRegister } from "../../validation/registerValidation";
 import { registerNormalization } from "./registerNormalization";
 import MyToast from "../../messages/MyToast";
-import axios from "axios";
+import server from "../../server/server";
 
 const RegisterPage = () => {
   const [inputsValue, setInputsValue] = useState({
@@ -52,7 +52,7 @@ const RegisterPage = () => {
         return;
       }
       const requestBody = registerNormalization(inputsValue);
-      await axios.post("/users", requestBody);
+      await server.users.postCreateUser(requestBody);
       MyToast.success("You have successfully registered");
       navigate(ROUTES.HOME);
     } catch (err) {

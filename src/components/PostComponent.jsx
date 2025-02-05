@@ -54,10 +54,11 @@ const PostComponent = ({
         sx={{
           backgroundImage: `url(${image})`,
           backgroundColor: "#fff",
-          backgroundSize: "contain",
-          backgroundPositionX: "center",
-          backgroundPositionY: "top",
+          backgroundSize: "cover", // Changed from 'contain' to 'cover'
+          backgroundPosition: "center", // Simplified positioning
           backgroundRepeat: "no-repeat",
+          height: "400px", // Fixed height to ensure consistent sizing
+          position: "relative", // Added to help with absolute positioning of child elements
         }}
       >
         {isLoggedIn ? (

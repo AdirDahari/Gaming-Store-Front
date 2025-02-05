@@ -23,6 +23,7 @@ const SortComponent = ({
   platform,
   categoriesData,
   priceRange,
+  color,
 }) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [txt, setTxt] = useState("");
@@ -65,11 +66,45 @@ const SortComponent = ({
     onInputsChange({ ...filterInputs, priceRange: range });
   };
 
+  const textFieldStyles = {
+    sx: {
+      "& .MuiOutlinedInput-root": {
+        color: "#f9f9f9",
+        "&:hover .MuiOutlinedInput-notchedOutline": {
+          borderColor: "white",
+        },
+        "& .MuiOutlinedInput-notchedOutline": {
+          borderColor: "#f9f9f9",
+        },
+      },
+      "& .MuiInputLabel-outlined": {
+        color: "#f9f9f9",
+      },
+      label: { color: "#f9f9f9" },
+    },
+  };
+
   return (
     <Fragment>
-      <Box position="static">
+      <Box
+        position="static"
+        sx={{
+          background: `linear-gradient(to right,${color}, #26d0ce)`,
+          borderRadius: 2,
+          boxShadow: 3,
+        }}
+      >
         <Toolbar>
-          <IconButton sx={{ p: 1, mr: 3 }} onClick={handleFilterClick}>
+          <IconButton
+            sx={{
+              p: 1,
+              mr: 3,
+              "&:hover": {
+                backgroundColor: "rgba(255,255,255,0.1)",
+              },
+            }}
+            onClick={handleFilterClick}
+          >
             {isFilterOpen ? (
               <CloseIcon sx={{ color: "#f9f9f9" }} />
             ) : (
@@ -105,21 +140,7 @@ const SortComponent = ({
             <Grid container spacing={1} sx={{ pt: 1, pb: 1 }}>
               <Grid item xs={12} sm={4} sx={{ mt: 1.5 }}>
                 <TextField
-                  sx={{
-                    // Root class for the input field
-                    "& .MuiOutlinedInput-root": {
-                      color: "#f9f9f9",
-                      // Class for the border around the input field
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "#f9f9f9",
-                      },
-                    },
-                    // Class for the label of the input field
-                    "& .MuiInputLabel-outlined": {
-                      color: "#f9f9f9",
-                    },
-                    label: { color: "#f9f9f9" },
-                  }}
+                  {...textFieldStyles}
                   size="small"
                   name="categories"
                   select
@@ -138,21 +159,7 @@ const SortComponent = ({
               </Grid>
               <Grid item xs={12} sm={4} sx={{ mt: 1.5 }}>
                 <TextField
-                  sx={{
-                    // Root class for the input field
-                    "& .MuiOutlinedInput-root": {
-                      color: "#f9f9f9",
-                      // Class for the border around the input field
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "#f9f9f9",
-                      },
-                    },
-                    // Class for the label of the input field
-                    "& .MuiInputLabel-outlined": {
-                      color: "#f9f9f9",
-                    },
-                    label: { color: "#f9f9f9" },
-                  }}
+                  {...textFieldStyles}
                   size="small"
                   name="productStatus"
                   select
@@ -191,6 +198,7 @@ SortComponent.propTypes = {
   onSearchChange: PropTypes.func.isRequired,
   categoriesData: PropTypes.array.isRequired,
   priceRange: PropTypes.array.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 export default SortComponent;

@@ -18,8 +18,7 @@ import {
     updateLikePost,
 } from "./realServer/posts";
 
-const isDevEnv = true;
-const isDemoMode = isDevEnv && import.meta.env.VITE_MODE == "demo";
+const isDemoMode = false;
 
 const server = {
     users: {
@@ -27,49 +26,49 @@ const server = {
             if (isDemoMode) {
                 console.log("getUserById", isDemoMode);
             } else {
-                await getUsers();
+                return await getUsers();
             }
         },
         getUserById: async (id) => {
             if (isDemoMode) {
                 console.log("getUserById", isDemoMode);
             } else {
-                await getUserById(id);
+                return await getUserById(id);
             }
         },
         postLoginUser: async (data) => {
             if (isDemoMode) {
                 console.log();
             } else {
-                await loginUser(data);
+                return await loginUser(data);
             }
         },
         deleteUser: async (id) => {
             if (isDemoMode) {
                 console.log();
             } else {
-                await deleteUser(id);
+                return await deleteUser(id);
             }
         },
         putUser: async (id, data) => {
             if (isDemoMode) {
                 console.log();
             } else {
-                await editUser(id, data);
+                return await editUser(id, data);
             }
         },
         pacthIsAdmin: async (id) => {
             if (isDemoMode) {
                 console.log();
             } else {
-                await updateIsAdmin(id);
+                return await updateIsAdmin(id);
             }
         },
         postCreateUser: async (data) => {
             if (isDemoMode) {
                 console.log();
             } else {
-                await createUser(data);
+                return await createUser(data);
             }
         },
     },
@@ -78,56 +77,56 @@ const server = {
             if (isDemoMode) {
                 console.log();
             } else {
-                await createPost(data);
+                return await createPost(data);
             }
         },
         getPosts: async () => {
             if (isDemoMode) {
                 console.log();
             } else {
-                await getPosts();
+                return await getPosts();
             }
         },
         putPost: async (id, data) => {
             if (isDemoMode) {
                 console.log();
             } else {
-                await editPost(id, data);
+                return await editPost(id, data);
             }
         },
         deletePost: async (id) => {
             if (isDemoMode) {
                 console.log();
             } else {
-                await deletePost(id);
+                return await deletePost(id);
             }
         },
         getPostById: async (id) => {
             if (isDemoMode) {
                 console.log();
             } else {
-                await getPostById(id);
+                return await getPostById(id);
             }
         },
         getMyPosts: async () => {
             if (isDemoMode) {
                 console.log();
             } else {
-                await getMyPosts();
+                return await getMyPosts();
             }
         },
         patchLikePost: async (id) => {
             if (isDemoMode) {
                 console.log();
             } else {
-                await updateLikePost(id);
+                return await updateLikePost(id);
             }
         },
         getPostPlatform: async (platform) => {
             if (isDemoMode) {
                 console.log();
             } else {
-                await getPostsByPlatform(platform);
+                return await getPostsByPlatform(platform);
             }
         },
     },

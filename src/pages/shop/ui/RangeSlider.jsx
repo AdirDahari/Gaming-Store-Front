@@ -18,7 +18,17 @@ const RangeSlider = ({ range, onRangeChange }) => {
   };
 
   return (
-    <Box sx={{ width: "85%", m: "0 auto" }}>
+    <Box
+      sx={{
+        width: "85%",
+        m: "0 auto",
+        "& .MuiSlider-thumb": {
+          "&:hover, &.Mui-focusVisible": {
+            boxShadow: "0 0 0 8px rgba(255,255,255,0.16)",
+          },
+        },
+      }}
+    >
       <Typography color="#f9f9f9">price:</Typography>
       {value && (
         <Slider
@@ -29,6 +39,16 @@ const RangeSlider = ({ range, onRangeChange }) => {
           onChange={handleChange}
           valueLabelDisplay="auto"
           getAriaValueText={valuetext}
+          sx={{
+            color: "#f9f9f9",
+            "& .MuiSlider-track": {
+              border: "none",
+            },
+            "& .MuiSlider-rail": {
+              opacity: 0.5,
+              backgroundColor: "rgba(255,255,255,0.5)",
+            },
+          }}
         />
       )}
     </Box>

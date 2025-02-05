@@ -9,11 +9,11 @@ import Paper from "@mui/material/Paper";
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RowUserComponent from "./ui/RowUserComponent";
-import axios from "axios";
 import ROUTES from "../../routes/ROUTES.JS";
 import RowPostsComponent from "./ui/RowPostsComponent";
 import MyToast from "../../messages/MyToast";
 import nextId from "react-id-generator";
+import server from "../../server/server";
 
 const ManagementPage = () => {
   const [value, setValue] = useState(1);
@@ -24,9 +24,9 @@ const ManagementPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data: usersData } = await axios.get("/users");
+        const usersData = await server.users.getUsers();
         setUsersFromServer(usersData);
-        const { data: postsData } = await axios.get("/posts");
+        const postsData = await server.posts.getPosts();
         setPostsFromServer(postsData);
       } catch (err) {
         MyToast.error("Something wrong, Please try again later");
@@ -40,7 +40,7 @@ const ManagementPage = () => {
 
   const handleDeleteUser = async (_id) => {
     try {
-      await axios.delete(`/users/${_id}`);
+      await server.users.deleteUser(_id);
       setUsersFromServer((dataFromServerCopy) =>
         dataFromServerCopy.filter((user) => user._id !== _id)
       );
@@ -51,7 +51,7 @@ const ManagementPage = () => {
   };
   const handleIsAdmin = async (_id) => {
     try {
-      const { data } = await axios.patch(`/users/${_id}`);
+      const data = await server.users.pacthIsAdmin(_id);
       let copyData = usersFromServer;
       for (let user of copyData) {
         if (user._id == _id) {
@@ -66,7 +66,7 @@ const ManagementPage = () => {
 
   const handleDeletePostClick = async (_id) => {
     try {
-      await axios.delete(`/posts/${_id}`);
+      await server.posts.deletePost(_id);
       setPostsFromServer((dataFromServerCopy) =>
         dataFromServerCopy.filter((post) => post._id !== _id)
       );

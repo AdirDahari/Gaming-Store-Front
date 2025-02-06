@@ -3,6 +3,8 @@ import { Box, Button, Popover } from "@mui/material";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
+const baseUrl = import.meta.env.BASE_URL;
+
 const PostComponent = ({
   _id,
   name,
@@ -68,14 +70,14 @@ const PostComponent = ({
                 <button onClick={handleEditClick} className="post-icon">
                   <img
                     className="post-svg"
-                    src="/assets/img/post/Edit.svg"
+                    src={`${baseUrl}/assets/img/post/Edit.svg`}
                     alt="Edit icon"
                   />
                 </button>
                 <button onClick={handleClick} className="post-icon">
                   <img
                     className="post-svg"
-                    src="/assets/img/post/Trash.svg"
+                    src={`${baseUrl}/assets/img/post/Trash.svg`}
                     alt="trash icon"
                   />
                 </button>
@@ -106,7 +108,7 @@ const PostComponent = ({
               <button onClick={handleLikeClick} className="post-one-icon">
                 <img
                   className="post-svg"
-                  src="/assets/img/post/Heart.svg"
+                  src={`${baseUrl}/assets/img/post/Heart.svg`}
                   alt="heart icon"
                 />
               </button>
@@ -114,7 +116,7 @@ const PostComponent = ({
               <button onClick={handleLikeClick} className="post-one-icon">
                 <img
                   className="post-svg"
-                  src="/assets/img/post/EmptyHeart.svg"
+                  src={`${baseUrl}/assets/img/post/EmptyHeart.svg`}
                   alt="empty heart icon"
                 />
               </button>

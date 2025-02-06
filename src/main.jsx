@@ -13,6 +13,7 @@ import { Provider } from "react-redux";
 import store from "./store/bigPie";
 
 const isDemoMode = import.meta.env.VITE_SERVER_MODE == "demo";
+const baseUrl = import.meta.env.BASE_URL;
 
 if (!isDemoMode) {
   axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
@@ -28,7 +29,7 @@ if (!isDemoMode) {
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename={baseUrl}>
         <App />
       </BrowserRouter>
     </Provider>

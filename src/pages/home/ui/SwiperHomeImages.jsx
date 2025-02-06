@@ -7,8 +7,8 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import "../../../style/swiperHomeImages.css";
+const baseUrl = import.meta.env.BASE_URL;
 
-// Import required Swiper modules
 import {
   EffectCoverflow,
   Pagination,
@@ -50,7 +50,7 @@ const SwiperHomeImages = () => {
       ].map((img, index) => (
         <SwiperSlide key={index}>
           <img
-            src={`/assets/img/swiper/${img}`}
+            src={`${baseUrl}/assets/img/swiper/${img}`}
             alt={`Game ${index + 1}`}
             loading="lazy"
           />

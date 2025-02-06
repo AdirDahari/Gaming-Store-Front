@@ -2,6 +2,8 @@
 
 React + Vite Project - build a website
 
+Check the demo mode here: https://adirdahari.github.io/Gaming-Store-Front/
+
 ## Table of Contents
 
 - [About](#about)

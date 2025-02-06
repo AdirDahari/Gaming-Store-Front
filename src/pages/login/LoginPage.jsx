@@ -184,8 +184,9 @@ const LoginPage = () => {
           {isDemoMode && (
             <Box>
               <Typography textAlign="center">
-                You are currently in demo mode. Please click on "Login as Demo
-                User" to continue.
+                You are currently in view-only mode. To log in, click "Login as
+                a guest" Any creations, changes, or deletions will not be saved
+                in this mode. Enjoy!
               </Typography>
               <Button
                 type="submit"
@@ -195,7 +196,7 @@ const LoginPage = () => {
                 onClick={handleDemoSubmit}
                 sx={{ mt: 3, mb: 2 }}
               >
-                Login as Demo User
+                Login as a guest
               </Button>
             </Box>
           )}

@@ -10,6 +10,7 @@ const useAutoLogin = () => {
       const token = getToken();
       if (!token) return;
       const dataFromToken = jwtDecode(token);
+
       dispatch(authActions.login(dataFromToken));
     } catch (err) {
       clearToken();

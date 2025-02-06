@@ -4,10 +4,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 import "../../../style/swiperHomeImages.css";
 
-// import required modules
+// Import required Swiper modules
 import {
   EffectCoverflow,
   Pagination,
@@ -17,53 +18,46 @@ import {
 
 const SwiperHomeImages = () => {
   return (
-    <>
-      <Swiper
-        effect={"coverflow"}
-        grabCursor={true}
-        centeredSlides={true}
-        autoplay={{
-          delay: 6000,
-          disableOnInteraction: false,
-        }}
-        slidesPerView={"auto"}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
-        }}
-        navigation={true}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}
-        className="mySwiper"
-      >
-        <SwiperSlide>
-          <img src="/assets/img/swiper/imageHomeSwiper1.jpg" />
+    <Swiper
+      effect="coverflow"
+      grabCursor={true}
+      centeredSlides={true}
+      autoplay={{
+        delay: 5000,
+        disableOnInteraction: false,
+      }}
+      slidesPerView={"auto"}
+      coverflowEffect={{
+        rotate: 30,
+        stretch: 0,
+        depth: 150,
+        modifier: 1,
+        slideShadows: true,
+      }}
+      navigation
+      pagination={{ clickable: true }}
+      modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}
+      className="mySwiper"
+    >
+      {[
+        "imageHomeSwiper1.jpg",
+        "imageHomeSwiper5.jpg",
+        "imageHomeSwiper7.jpg",
+        "imageHomeSwiper4.jpg",
+        "imageHomeSwiper3.jpg",
+        "imageHomeSwiper2.jpg",
+        "imageHomeSwiper6.jpg",
+      ].map((img, index) => (
+        <SwiperSlide key={index}>
+          <img
+            src={`/assets/img/swiper/${img}`}
+            alt={`Game ${index + 1}`}
+            loading="lazy"
+          />
         </SwiperSlide>
-        <SwiperSlide>
-          <img src="/assets/img/swiper/imageHomeSwiper5.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="/assets/img/swiper/imageHomeSwiper7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="/assets/img/swiper/imageHomeSwiper4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="/assets/img/swiper/imageHomeSwiper3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="/assets/img/swiper/imageHomeSwiper2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="/assets/img/swiper/imageHomeSwiper6.jpg" />
-        </SwiperSlide>
-      </Swiper>
-    </>
+      ))}
+    </Swiper>
   );
 };
+
 export default SwiperHomeImages;

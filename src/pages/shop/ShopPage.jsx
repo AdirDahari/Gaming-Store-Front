@@ -35,6 +35,7 @@ const ShopPage = () => {
         const postData = await server.posts.getPostPlatform(
           state.name.toLowerCase()
         );
+
         if (loggedIn == true) {
           setUserId(userData._id);
         }

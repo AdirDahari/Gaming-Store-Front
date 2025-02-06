@@ -38,6 +38,7 @@ function Header() {
       try {
         if (!loggedIn) return;
         const data = await server.users.getUserById(userData._id);
+
         setUserDataFromServer(data);
       } catch (err) {
         handleLogout();

@@ -3,9 +3,11 @@ import CategoryComponent from "../../components/CategoryComponent";
 import { platforms } from "../../layout/myLists";
 import SwiperHomeImages from "./ui/SwiperHomeImages";
 import nextId from "react-id-generator";
+
 const HomePage = () => {
   return (
     <Box>
+      {/* Hero Swiper Section */}
       <Box
         sx={{
           position: "relative",
@@ -15,35 +17,34 @@ const HomePage = () => {
       >
         <SwiperHomeImages />
       </Box>
-      <Box sx={{ m: "0 auto", pt: 4 }}>
-        <Typography
-          fontFamily="alata"
-          textAlign="center"
-          variant="h4"
-          component="h1"
-        >
+
+      {/* Welcome Text Section */}
+      <Box sx={{ m: "0 auto", pt: 4, textAlign: "center", px: 2 }}>
+        <Typography fontFamily="alata" variant="h4" component="h1" gutterBottom>
           Welcome to Gaming Store
         </Typography>
-        <Typography
-          fontFamily="alata"
-          textAlign="center"
-          variant="h6"
-          component="p"
-        >
-          Here you can find second hand games and login to trade your games,
+        <Typography fontFamily="alata" variant="h6" component="p" gutterBottom>
+          Find second-hand games & trade your old ones!
         </Typography>
-        <Typography
-          fontFamily="alata"
-          textAlign="center"
-          variant="h6"
-          component="p"
-        >
-          Choose your platform
+        <Typography fontFamily="alata" variant="h6" component="p">
+          Choose your platform:
         </Typography>
       </Box>
-      <Grid container m="0 auto" maxWidth={1200} pt={8} pb={8}>
+
+      {/* Category Section */}
+      <Grid
+        container
+        spacing={3}
+        sx={{
+          maxWidth: 1200,
+          mx: "auto",
+          pt: 6,
+          pb: 8,
+          px: 2,
+        }}
+      >
         {platforms.map((plat) => (
-          <Grid item xs={12} sm={6} md={3} key={nextId()} p={2}>
+          <Grid item xs={12} sm={6} md={4} lg={3} key={nextId()}>
             <CategoryComponent>{plat}</CategoryComponent>
           </Grid>
         ))}
@@ -51,4 +52,5 @@ const HomePage = () => {
     </Box>
   );
 };
+
 export default HomePage;

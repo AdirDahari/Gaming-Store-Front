@@ -1,13 +1,13 @@
 import { Fragment, useEffect, useState } from "react";
 import { Box, Typography, Divider, Grid } from "@mui/material";
 import PostComponent from "../../components/PostComponent";
-import axios from "axios";
 import { Search } from "../shop/ui/Search";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES.JS";
 import MyToast from "../../messages/MyToast";
 import nextId from "react-id-generator";
 import { useSelector } from "react-redux";
+import server from "../../server/server";
 
 let initData = [];
 let userId = "";
@@ -25,7 +25,7 @@ const FavouritesPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data: postData } = await axios.get("/posts");
+        const postData = await server.posts.getPosts();
         userId = userData._id;
         initData = postData.filter((post) => post.likes.includes(userId));
         setDataFromServer(initData);
@@ -57,8 +57,8 @@ const FavouritesPage = () => {
   };
   const handleDeletePostClick = async (_id) => {
     try {
-      await axios.delete(`/posts/${_id}`);
-      const { data: postData } = await axios.get("/posts");
+      await server.posts.deletePost(_id);
+      const postData = await server.posts.getPosts();
       initData = postData.filter((post) => post.likes.includes(userId));
       setDataFromServer(initData);
       MyToast.info("Post Deleted!");
@@ -68,8 +68,8 @@ const FavouritesPage = () => {
   };
   const handleLikePost = async (_id) => {
     try {
-      await axios.patch(`/posts/${_id}`);
-      const { data: postData } = await axios.get("/posts");
+      await server.posts.patchLikePost(_id);
+      const postData = await server.posts.getPosts();
       initData = postData.filter((post) => post.likes.includes(userId));
       setDataFromServer(initData);
     } catch (err) {

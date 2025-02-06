@@ -12,14 +12,18 @@ import { getToken } from "./service/storeService.js";
 import { Provider } from "react-redux";
 import store from "./store/bigPie";
 
-axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
-axios.interceptors.request.use((config) => {
-  const token = getToken();
-  if (token) {
-    config.headers.Authorization = `bearer ${token}`;
-  }
-  return config;
-});
+const isDemoMode = import.meta.env.VITE_SERVER_MODE == "demo";
+
+if (!isDemoMode) {
+  axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
+  axios.interceptors.request.use((config) => {
+    const token = getToken();
+    if (token) {
+      config.headers.Authorization = `bearer ${token}`;
+    }
+    return config;
+  });
+}
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

@@ -1,132 +1,144 @@
 import {
-    createUser,
-    deleteUser,
-    editUser,
-    getUserById,
-    getUsers,
-    loginUser,
-    updateIsAdmin,
+    createUser as createUserReal,
+    deleteUser as deleteUserReal,
+    editUser as editUserReal,
+    getUserById as getUserByIdReal,
+    getUsers as getUsersReal,
+    loginUser as loginUserReal,
+    updateIsAdmin as updateIsAdminReal,
 } from "./realServer/users";
 import {
-    createPost,
-    deletePost,
-    editPost,
-    getMyPosts,
-    getPostById,
-    getPosts,
-    getPostsByPlatform,
-    updateLikePost,
+    createPost as createPostReal,
+    deletePost as deletePostReal,
+    editPost as editPostReal,
+    getMyPosts as getMyPostsReal,
+    getPostById as getPostByIdReal,
+    getPosts as getPostsReal,
+    getPostsByPlatform as getPostsByPlatformReal,
+    updateLikePost as updateLikePostReal,
 } from "./realServer/posts";
+import {
+    getUserById as getUserByIdDemo,
+    getUsers as getUsersDemo,
+    loginUser as loginUserDemo,
+} from "./demoServer/users";
+import {
+    getMyPosts as getMyPostsDemo,
+    getPostById as getPostByIdDemo,
+    getPosts as getPostsDemo,
+    getPostsByPlatform as getPostsByPlatformDemo,
+    updateLikePost as updateLikePostDemo,
+} from "./demoServer/posts";
 
-const isDemoMode = false;
+const isDemoMode = import.meta.env.VITE_SERVER_MODE == "demo";
 
 const server = {
     users: {
         getUsers: async () => {
             if (isDemoMode) {
-                console.log("getUserById", isDemoMode);
+                return getUsersDemo();
             } else {
-                return await getUsers();
+                return await getUsersReal();
             }
         },
         getUserById: async (id) => {
             if (isDemoMode) {
-                console.log("getUserById", isDemoMode);
+                return getUserByIdDemo(id);
             } else {
-                return await getUserById(id);
+                return await getUserByIdReal(id);
             }
         },
         postLoginUser: async (data) => {
             if (isDemoMode) {
-                console.log();
+                return loginUserDemo(data);
             } else {
-                return await loginUser(data);
+                return await loginUserReal(data);
             }
         },
         deleteUser: async (id) => {
             if (isDemoMode) {
-                console.log();
+                return;
             } else {
-                return await deleteUser(id);
+                return await deleteUserReal(id);
             }
         },
         putUser: async (id, data) => {
             if (isDemoMode) {
-                console.log();
+                return;
             } else {
-                return await editUser(id, data);
+                return await editUserReal(id, data);
             }
         },
         pacthIsAdmin: async (id) => {
             if (isDemoMode) {
-                console.log();
+                return;
             } else {
-                return await updateIsAdmin(id);
+                return await updateIsAdminReal(id);
             }
         },
         postCreateUser: async (data) => {
             if (isDemoMode) {
-                console.log();
+                return;
             } else {
-                return await createUser(data);
+                return await createUserReal(data);
             }
         },
     },
     posts: {
         createPost: async (data) => {
             if (isDemoMode) {
-                console.log();
+                return;
             } else {
-                return await createPost(data);
+                return await createPostReal(data);
             }
         },
         getPosts: async () => {
             if (isDemoMode) {
-                console.log();
+                return getPostsDemo();
             } else {
-                return await getPosts();
+                return await getPostsReal();
             }
         },
         putPost: async (id, data) => {
             if (isDemoMode) {
-                console.log();
+                return;
             } else {
-                return await editPost(id, data);
+                return await editPostReal(id, data);
             }
         },
         deletePost: async (id) => {
             if (isDemoMode) {
-                console.log();
+                return;
             } else {
-                return await deletePost(id);
+                return await deletePostReal(id);
             }
         },
         getPostById: async (id) => {
             if (isDemoMode) {
-                console.log();
+                return getPostByIdDemo(id);
             } else {
-                return await getPostById(id);
+                return await getPostByIdReal(id);
             }
         },
         getMyPosts: async () => {
             if (isDemoMode) {
-                console.log();
+                return getMyPostsDemo();
             } else {
-                return await getMyPosts();
+                return await getMyPostsReal();
             }
         },
         patchLikePost: async (id) => {
             if (isDemoMode) {
-                console.log();
+                return updateLikePostDemo(id);
             } else {
-                return await updateLikePost(id);
+                return await updateLikePostReal(id);
             }
         },
         getPostPlatform: async (platform) => {
             if (isDemoMode) {
-                console.log();
+                return getPostsByPlatformDemo(platform);
             } else {
-                return await getPostsByPlatform(platform);
+                return await getPostsByPlatformReal(platform);
             }
         },
     },

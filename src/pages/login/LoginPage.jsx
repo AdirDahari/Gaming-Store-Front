@@ -18,6 +18,8 @@ import useAutoLogin from "../../hooks/useAutoLogin.jsx";
 import MyToast from "../../messages/MyToast.js";
 import server from "../../server/server";
 
+const isDemoMode = import.meta.env.VITE_SERVER_MODE == "demo";
+
 const LoginPage = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
@@ -51,6 +53,7 @@ const LoginPage = () => {
         email: emailValue,
         password: passwordValue,
       });
+
       if (!data.jwt) {
         setErrorsState({
           invalid: "Email or Password Invalid",
@@ -65,7 +68,31 @@ const LoginPage = () => {
     } catch (err) {
       MyToast.error("Something wrong, Please try again later");
     }
-    e.preventDefault();
+  };
+
+  const handleDemoSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      const data = await server.users.postLoginUser({
+        email: "test@gmail.com",
+        password: "Abc123456!",
+      });
+
+      if (!data.jwt) {
+        setErrorsState({
+          invalid: "Email or Password Invalid",
+        });
+        MyToast.warning("Email or Password Invalid");
+        return;
+      }
+      storeToken(data.jwt, rememberMe);
+      await autoLogin();
+      MyToast.success("You've logged in successfully");
+      navigate(ROUTES.HOME);
+    } catch (err) {
+      MyToast.error("Something wrong, Please try again later");
+    }
   };
 
   return (
@@ -147,12 +174,32 @@ const LoginPage = () => {
           <Button
             type="submit"
             fullWidth
+            disabled={isDemoMode}
             variant="contained"
             onClick={handleSubmit}
             sx={{ mt: 3, mb: 2 }}
           >
             Sign In
           </Button>
+          {isDemoMode && (
+            <Box>
+              <Typography textAlign="center">
+                You are currently in demo mode. Please click on "Login as Demo
+                User" to continue.
+              </Typography>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="success"
+                onClick={handleDemoSubmit}
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Login as Demo User
+              </Button>
+            </Box>
+          )}
+
           <Grid container>
             <Grid item>
               <Link href={ROUTES.REGISTER} variant="body2">
